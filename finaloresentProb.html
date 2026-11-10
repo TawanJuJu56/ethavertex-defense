@@ -88,9 +88,9 @@ body {
   align-items: center;
   gap: 5px;
   padding: 3px 9px;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
-  border-radius: 6px;
+  border-radius: 99px;
   line-height: 1.35;
   white-space: nowrap;
 }
@@ -115,7 +115,7 @@ body {
   border: 1px solid var(--border);
 }
 
-/* Top Masthead */
+/* Top Masthead — Fixed Mobile Stacking so text never squishes */
 header.masthead {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
@@ -129,15 +129,16 @@ header.masthead {
   margin: 0 auto;
   padding: 12px 16px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .brand-wrap {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  width: 100%;
 }
 
 .brand-mark {
@@ -156,8 +157,13 @@ header.masthead {
   flex-shrink: 0;
 }
 
+.brand-text-col {
+  min-width: 0;
+  flex: 1;
+}
+
 .brand-title {
-  font-size: 16.5px;
+  font-size: 15.5px;
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -165,39 +171,18 @@ header.masthead {
 }
 
 .brand-tagline {
-  font-size: 12.5px;
+  font-size: 12px;
   color: var(--ink-muted);
   font-weight: 500;
+  line-height: 1.35;
+  margin-top: 2px;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.btn-action {
-  padding: 8px 14px;
-  font-size: 13px;
-  font-weight: 600;
-  font-family: inherit;
-  background: var(--surface);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm);
-  color: var(--ink-secondary);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.15s ease;
-}
-.btn-action:hover {
-  background: var(--surface-hover);
-  color: var(--ink);
-}
-.btn-action:focus-visible {
-  outline: 2px solid var(--brand);
-  outline-offset: 2px;
+  padding-left: 46px;
 }
 
 /* Primary Navigation Tabs */
@@ -321,7 +306,7 @@ nav.tab-nav {
 }
 
 .kpi-value {
-  font-size: 18px;
+  font-size: 17.5px;
   font-weight: 800;
   color: var(--ink);
   line-height: 1.25;
@@ -374,15 +359,15 @@ main.content-area {
 
 .section-header h1,
 .section-header h2 {
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 700;
   color: var(--ink);
   letter-spacing: -0.01em;
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
 .section-header p {
-  font-size: 14px;
+  font-size: 13.5px;
   color: var(--ink-secondary);
   max-width: 820px;
 }
@@ -396,19 +381,20 @@ main.content-area {
   position: relative;
 }
 
+/* Larger, easy-to-tap floating 1–12 rail on the right */
 .dossier-sidebar {
   position: fixed;
-  right: 2px;
-  top: 50%;
+  right: 4px;
+  top: 52%;
   transform: translateY(-50%);
   z-index: 140;
   background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--border-strong);
   border-radius: 999px;
-  padding: 4px 2px;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+  padding: 6px 4px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.14);
 }
 
 .dossier-sidebar-title {
@@ -419,18 +405,18 @@ main.content-area {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
 }
 
 .rail-item {
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   border: 1px solid transparent;
   background: transparent;
   color: var(--ink-secondary);
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 11.5px;
   font-weight: 700;
   cursor: pointer;
   display: flex;
@@ -451,12 +437,12 @@ main.content-area {
   background: var(--brand);
   color: #FFFFFF;
   border-color: var(--brand);
-  box-shadow: 0 2px 5px rgba(15, 106, 72, 0.28);
+  box-shadow: 0 2px 6px rgba(15, 106, 72, 0.32);
 }
 
 .rail-num {
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 11.5px;
   font-weight: 700;
   line-height: 1;
 }
@@ -481,7 +467,7 @@ main.content-area {
   border: none;
   border-bottom: 1px solid var(--border);
   border-radius: 0;
-  padding: 28px 24px;
+  padding: 24px 32px 24px 20px;
   box-shadow: none;
   scroll-margin-top: 126px;
 }
@@ -494,7 +480,7 @@ main.content-area {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   padding: 0 0 12px 0;
   margin-bottom: 14px;
   background: transparent;
@@ -504,7 +490,7 @@ main.content-area {
 .slide-badge-group {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
@@ -512,36 +498,36 @@ main.content-area {
   background: var(--brand);
   color: #FFFFFF;
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 700;
-  padding: 4px 11px;
+  padding: 4px 10px;
   border-radius: 6px;
   letter-spacing: 0.03em;
 }
 
 .slide-topic-tag {
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 700;
   color: var(--ink);
   letter-spacing: -0.01em;
 }
 
 .slide-speaker-pill {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--brand);
   background: var(--brand-soft);
   border: 1px solid var(--brand-border);
-  padding: 4px 12px;
+  padding: 4px 11px;
   border-radius: 99px;
 }
 
 .slide-title {
-  font-size: 18.5px;
+  font-size: 17.5px;
   font-weight: 700;
   color: var(--ink);
   line-height: 1.5;
-  margin: 0 0 18px 0;
+  margin: 0 0 16px 0;
   padding: 12px 16px;
   background: var(--surface-subtle);
   border-left: 4px solid var(--brand);
@@ -589,7 +575,7 @@ main.content-area {
 }
 
 .param-v {
-  font-size: 17px;
+  font-size: 16.5px;
   font-weight: 800;
   color: var(--ink);
   line-height: 1.35;
@@ -1138,8 +1124,23 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
   height: 250px;
 }
 
-/* Tablet / iPad Breakpoint (>= 768px) */
-@media (min-width: 768px) {
+/* Tablet / iPad Breakpoint (>= 680px) */
+@media (min-width: 680px) {
+  .header-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+  }
+
+  .brand-wrap {
+    width: auto;
+  }
+
+  .header-actions {
+    padding-left: 0;
+  }
+
   main.content-area {
     padding: 0 20px;
   }
@@ -1149,14 +1150,22 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
   }
 
   .dossier-sidebar {
-    right: 4px;
-    padding: 4px 2.5px;
+    right: 6px;
+    padding: 7px 5px;
   }
 
   .rail-item {
-    width: 21px;
-    height: 21px;
-    font-size: 10px;
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+
+  .rail-num {
+    font-size: 12px;
+  }
+
+  .slide-card {
+    padding: 28px 36px 28px 24px;
   }
 }
 
@@ -1172,6 +1181,10 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
 
   .brand-title {
     font-size: 18px;
+  }
+
+  .brand-tagline {
+    font-size: 12.5px;
   }
 
   /* Move Navigation to Sticky Top Bar below Masthead */
@@ -1226,19 +1239,23 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
     padding: 0 24px;
   }
 
-  #panel-dossier {
-    padding-right: 0;
-  }
-
   .dossier-sidebar {
-    right: 4px;
-    padding: 5px 3px;
+    right: 8px;
+    padding: 8px 6px;
   }
 
   .rail-item {
-    width: 22px;
-    height: 22px;
-    font-size: 10.5px;
+    width: 32px;
+    height: 32px;
+    font-size: 12.5px;
+  }
+
+  .rail-num {
+    font-size: 12.5px;
+  }
+
+  .slide-card {
+    padding: 28px 40px 28px 24px;
   }
 
   .slide-param-grid {
@@ -1272,7 +1289,7 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
 
 /* Print Layout */
 @media print {
-  header.masthead, nav.tab-nav, .filter-bar, .slide-nav-bar, .header-actions {
+  header.masthead, nav.tab-nav, .filter-bar, .dossier-sidebar, .header-actions {
     display: none !important;
   }
   body {
@@ -1295,7 +1312,7 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
   <div class="header-inner">
     <div class="brand-wrap">
       <div class="brand-mark">EV</div>
-      <div>
+      <div class="brand-text-col">
         <div class="brand-title">ETHAVERTEX &middot; Oral Defense Companion</div>
         <div class="brand-tagline">Group 2C | Chulalongkorn University Chemical Engineering Capstone AY2026</div>
       </div>
@@ -1798,18 +1815,18 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
   ];
 
   const SLIDES = [
-    {"slide": 1, "short": "Dual-Product", "topic": "Executive Rationale & Dual-Product Model", "speaker": "ธนโชติ (0:00–0:32)", "headline": "เพิ่มมูลค่าชีวเอทานอล 3.6 เท่า สู่ H₂ เซลล์เชื้อเพลิง 7,650 ตัน/ปี + Food-Grade Liquid CO₂ 69,600 ตัน/ปี", "params": [["รายรับรวม (Gross Income)", "1,008.63 ล้านบาท/ปี", "H₂ 765.03 MB (75.8%) + Liquid CO₂ 243.60 MB (24.2%)"], ["ต้นทุนวัตถุดิบ (Raw Material)", "280.00 ล้านบาท/ปี", "ชีวเอทานอล 95 vol% จำนวน 40,000 ตัน/ปี @ 7.00 ฿/กก. (~5.64 ฿/ลิตร)"], ["ความคุ้มค่าของการอัปเกรด (Value Uplift)", "3.60 เท่า", "อัตราส่วน Gross Income ต่อยอดซื้อวัตถุดิบ (1,008.63 / 280.00)"], ["ที่ตั้งและขนาดที่ดิน", "11.0 ไร่ นิคมฯ มาบตาพุด", "แปลงสี่เหลี่ยม 160 × 110 ม. โซน EEC ใกล้โรงกลั่นและโรงงานเครื่องดื่ม"]], "ref": "รายงานบทที่ 4 (Executive Summary) และ บทที่ 5 (Economic Evaluation ตาราง 5.1 & 5.6)"},
-    {"slide": 2, "short": "Thermodynamics", "topic": "Process Synthesis & Carlson Thermodynamics", "speaker": "ธนโชติ (0:32–1:05)", "headline": "สถาปัตยกรรม 4 โซน 35 ยูนิต คัดเลือก Fluid Package อุณหพลศาสตร์ตาม Carlson (1996)", "params": [["โซน 1 (Reforming Feed)", "NRTL (Non-Random Two-Liquid)", "จับพฤติกรรม Non-ideal ของสารผสม Ethanol-Water ที่มีขั้วสูง"], ["โซน 2 (Syngas & WGS)", "Peng-Robinson (PR)", "คำนวณสมบัติก๊าซผสม H₂, CO, CO₂, CH₄ ที่ความดันสูงได้อย่างแม่นยำ"], ["โซน 3 (CO₂ Absorption)", "Electrolyte NRTL (eNRTL)", "คำนวณปฏิกิริยาแตกตัวทางเคมีของไอออน MEA-H₂O-CO₂ ในสารละลาย"], ["โซน 4 (CO₂ Liquefaction)", "Peng-Robinson Cryogenic", "ทำนายจุดกลั่นตัวของก๊าซ CO₂ บริสุทธิ์ที่อุณหภูมิต่ำจัด -25 °C, 20 bar"], ["ความคลาดเคลื่อนในการตัดสตรีม", "Error < 0.01%", "Aspen HYSYS V15 Convergence สมดุลมวลและพลังงาน 100.00%"]], "ref": "รายงานบทที่ 6 (Process Synthesis) และ บทที่ 7 (Database Assembly & Fluid Packages)"},
-    {"slide": 3, "short": "R-101 & LSTN 650", "topic": "Reaction Engineering & Perovskite LSTN 650", "speaker": "ธนชาติ (1:05–2:10)", "headline": "เตาปฏิกรณ์ท่อไฟ R-101 ตัวเร่งปฏิกิริยานวัตกรรม LSTN 650 ปฏิรูปชีวเอทานอลสมบูรณ์ที่ S/E = 3.0:1.0", "params": [["สูตรตัวเร่งปฏิกิริยา", "La₀.₇Sr₀.₃Ti₀.₉₅Ni₀.₀₅O₃₋δ (LSTN 650)", "โครงสร้าง Perovskite มีเสถียรภาพสูง เหนี่ยวนำ In-situ Ni Exsolution"], ["อัตราการเกิดเขม่าคาร์บอน (Coking)", "7.37 mg C / g_cat·h", "ต่ำกว่าตัวเร่งทั่วไป 10 เท่า ปราศจากการอุดตันแม้ทำงานที่ S/E ต่ำ 3.0"], ["อัตราส่วนไอน้ำต่อเอทานอล (S/E)", "S/E = 3.0:1.0 (S/C = 1.50)", "เอทานอล 1 โมล มีคาร์บอน 2 อะตอม ประหยัดความร้อนต้มระเหยน้ำได้ 66.7%"], ["สเปกทางกลเตาปฏิกรณ์ R-101", "45 ท่อไฟ, Inconel 625", "ID 100 มม., L 8.0 ม., บรรจุตัวเร่ง 3,623 กก., WHSV 3.0 h⁻¹, Duty 5,994 kW"], ["สภาวะและ Conversion", "650 °C, 1.0 bar (Atmospheric)", "Conversion เอทานอลสมบูรณ์ 100%, ผลได้ H₂ 4.04 mol/mol-EtOH"]], "ref": "รายงานบทที่ 7 (Kinetics & Catalysis) และ บทที่ 11 (Reactor Sizing R-101 หน้า 110–125)"},
-    {"slide": 4, "short": "HT-WGS & Recycle", "topic": "Water-Gas Shift & Process Water Closed-Loop", "speaker": "ธนชาติ (2:10–3:15)", "headline": "เครื่องปฏิกรณ์ R-102 (HT-WGS) แปลงผัน CO 90.0% และปิดวงจรน้ำรีไซเคิล 100% สู่ Zero Discharge", "params": [["เครื่องปฏิกรณ์ R-102 (HT-WGS)", "Adiabatic Fixed-Bed, V = 6.19 m³", "เส้นผ่านศูนย์กลาง 1.38 ม. สูง 4.14 ม., บรรจุตัวเร่ง Fe-Cr 8,200 kg"], ["การแปลงผันและสภาวะ", "CO Conversion = 90.0%", "350 °C เข้าสู่ 366.4 °C ขาออก, เพิ่มผลผลิต H₂ จาก 438 เป็น 558 kmol/h (+27.3%)"], ["ถังดักน้ำควบแน่น S-101", "Knock-out Drum V = 9.65 m³", "แยกน้ำกระบวนการ 958.5 kg/h (30 °C, 0.9 bar) ป้อนกลับเข้า M-101 เต็ม 100%"], ["การลดการใช้น้ำเติม (Makeup Water)", "ประหยัดน้ำดี 16.3%", "ลดภาระน้ำหล่อเย็นและบรรลุมาตรฐาน Zero Process Wastewater Discharge"]], "ref": "รายงานบทที่ 9 (Process Description) และ บทที่ 10 (Material & Energy Balance)"},
-    {"slide": 5, "short": "K-100 & PSA", "topic": "Syngas Compression Train & Dynamic PSA", "speaker": "ชลิดา (3:15–4:15)", "headline": "ระบบอัดก๊าซ 3 สเตจ K-100 สู่ 20.4 bar และหน่วยแยกสกัด PSA 4-Bed Duplex บริสุทธิ์ ≥ 99.99%", "params": [["คอมเพรสเซอร์ K-100 (API 617)", "3-Stage Centrifugal, Power 2,579 kW", "แรงดัน 0.90 สู่ 20.4 bar (CR = 2.73/stage) พร้อม Intercooler E-103A/B/C"], ["วัสดุใบพัดและตัวเรือน", "Cast CS Casing, 17-4PH Impellers", "ทนทานต่อก๊าซไฮโดรเจนชื้น ป้องกัน Hydrogen Embrittlement ตาม NACE MR0175"], ["หน่วยสกัดไฮโดรเจน PS-101", "4-Bed Duplex (8 หอคู่ขนาน)", "บรรจุสารดูดซับ 9,091 กก./สคิด (Active Carbon 40% + Zeolite 13X 60%)"], ["คุณภาพและอัตราการผลิต H₂", "956.3 kg/h (≥ 99.99% Purity)", "CO < 0.2 ppm ตามมาตรฐาน ISO 14687-2 Grade D สำหรับรถยนต์ FCEV"], ["ก๊าซทิ้งท้ายระบบ (PSA Tail Gas)", "Stream 8 = 8,952.3 kg/h (1.3 bar)", "เป็นก๊าซเชื้อเพลิงหลักให้เตา F-101 ครอบคลุมภาระความร้อนถึง 73.7%"]], "ref": "รายงานบทที่ 9 (PSA Purification System) และ บทที่ 11 (Compressor & PSA Skid Specs)"},
-    {"slide": 6, "short": "Flue Gas CCU", "topic": "Flue Gas CCU & Food-Grade Liquefaction", "speaker": "ชลิดา (4:15–5:00)", "headline": "ดักจับ CO₂ ด้วย 30 wt% MEA และทำความเย็นจัดสู่ของเหลว -25 °C, 20 bar (EIGA Food-Grade)", "params": [["หอดูดซับก๊าซ C-202", "D = 2.1 m, H = 24.0 m, Mellapak 250Y", "ดักจับ CO₂ ได้ 91.19% (Stream 10 = 8,700 kg/h หรือ 69,600 t/y)"], ["หอสกัดฟื้นสภาพ C-203", "D = 1.5 m, H = 18.0 m, SS316L", "Reboiler E-201 Duty 9.18 MW ใช้ไอน้ำความดันต่ำ LP Steam 3.5 bar"], ["ระบบทำความเย็นจัด E-206", "Chiller Evaporator (Duty 0.68 MW)", "ควบแน่น CO₂ บริสุทธิ์กลายเป็นของเหลวที่ความดัน 20 bar อุณหภูมิ -25 °C"], ["ถังเก็บทรงแคปซูล TK-202", "V = 220 m³, D = 4.0 m, L = 17.5 m", "ฉนวนสุญญากาศ 2 ชั้น (Double-walled Vacuum), สำรองก๊าซเหลวได้ 24 ชั่วโมง"]], "ref": "รายงานบทที่ 9 (CCU Plant) และ บทที่ 11 (Columns, Reboiler & Cryogenic Storage)"},
-    {"slide": 7, "short": "HEN & Exergy", "topic": "HEN Pinch Integration & Exergy Analysis", "speaker": "ชวนากร (5:00–5:25)", "headline": "โครงข่ายแลกเปลี่ยนความร้อน HEN กู้คืนพลังงาน 12.14 MW และบรรลุ Exergy Efficiency 96.9%", "params": [["พินช์พอยต์ของระบบ (Pinch Point)", "ΔT_min = 10 °C (Hot 105 °C, Cold 95 °C)", "แบ่งขอบเขตอุณหพลศาสตร์อย่างชัดเจน ห้ามแลกเปลี่ยนความร้อนข้ามพินช์"], ["ภาระความร้อนที่นำกลับมาใช้ (Heat Recovery)", "12.14 MW (HEN Network)", "นำความร้อนจาก Syngas ร้อนไปอุ่นและต้มระเหยสารผสมป้อนเข้า E-100"], ["การลดการใช้พลังงานภายนอก", "Hot Utility ลด 73.7%, Cold ลด 85.2%", "ประหยัดเชื้อเพลิงก๊าซธรรมชาติและน้ำหล่อเย็นมูลค่ามหาศาลต่อปี"], ["ประสิทธิภาพทางเอ็กเซอร์จี (Exergy Efficiency)", "96.9% (Overall Plant)", "สูญเสีย Exergy รวมเพียง 4,554.8 kW (จุดสูญเสียสูงสุดอยู่ที่เตาเผา F-101)"]], "ref": "รายงานบทที่ 10 (Heat Exchanger Network Synthesis & Exergy Analysis)"},
-    {"slide": 8, "short": "Process Control", "topic": "Process Control & Dynamic Resiliency", "speaker": "ชวนากร (5:25–5:45)", "headline": "โครงสร้างควบคุม 7 ลูปหลักและกลยุทธ์ฟีดฟอร์เวิร์ดรับมือความผันแปรอัตราป้อน ±20%", "params": [["การคุมอัตราส่วนไอน้ำต่อเอทานอล", "Ratio Control (FIC-101 / FIC-102)", "ล็อกค่าโมลาร์ S/E = 3.0:1.0 เสมอเพื่อตัดความเสี่ยงการเกิดเขม่าคาร์บอน"], ["การคุมอุณหภูมิทางออกเตาปฏิกรณ์", "TIC-101 ควบคุมวาล์วเชื้อเพลิงเตา F-101", "รักษาอุณหภูมิก๊าซขาออก 650 ± 2 °C ป้องกันความเสียหายต่อโลหะท่อ Inconel 625"], ["การคุมแรงดันดูดซับ PSA Skid", "PIC-101 ควบคุมวาล์วบายพาสและแบ็กเพรชเชอร์", "คุมแรงดันทำงานคงที่ 20.0 ± 0.2 bar เพื่อความเสถียรของหน้าคลื่นการดูดซับ"], ["ระบบ Safety Interlock (SIS)", "SIL-2 Architecture ตาม IEC 61511", "ทริปวาล์วตัดแยกระบบเชื้อเพลิงฉุกเฉิน XV-101 ภายใน 1.5 วินาทีเมื่ออุณหภูมิเกินพิกัด"]], "ref": "รายงานบทที่ 9 (Instrumentation & Process Control Architecture)"},
-    {"slide": 9, "short": "CAPEX 35 Units", "topic": "Equipment Roster & Capital Expenditure (CAPEX)", "speaker": "ชวนากร (5:45–6:15)", "headline": "ประเมินต้นทุนเครื่องจักร 35 ยูนิตตามวิธี Turton (2024 Basis): FCI = 1,096.12 MB, TCI = 1,289.55 MB", "params": [["ต้นทุนเครื่องจักรเปล่า Train 100", "Σ C_BM (Core H₂) = 652.80 MB", "18 ยูนิต (Top: R-101 184.20 MB, K-100 145.80 MB, PS-101 128.50 MB)"], ["ต้นทุนเครื่องจักรเปล่า Train 200", "Σ C_BM (CCU) = 276.12 MB", "17 ยูนิต (Top: K-201 61.20 MB, C-202 45.93 MB, C-203 31.18 MB)"], ["รวมต้นทุน Bare Module ทั้งโรงงาน", "Σ C_BM,total = 928.92 MB", "คำนวณผ่าน Cost Correlation Log-polynomial และ CEPCI ปรับปี 2024"], ["เงินลงทุนคงที่ (Fixed Capital, FCI)", "FCI = C_TM = 1,096.12 MB", "FCI = 1.18 × Σ C_BM (รวมงานโยธา ระบบท่อ ระบบไฟฟ้า และ Contingency 18%)"], ["เงินลงทุนรวมทั้งโครงการ (TCI)", "TCI = 1,289.55 MB", "FCI 1,096.12 MB + เงินทุนหมุนเวียน (Working Capital, WC 15% TCI) 193.43 MB"]], "ref": "รายงานบทที่ 11 (Equipment Costing) และ บทที่ 12 (CAPEX Estimation ตาราง 12.1–12.4)"},
-    {"slide": 10, "short": "20-Yr DCF", "topic": "20-Year DCF & Profitability Dashboard", "speaker": "ชวนากร (6:15–6:45)", "headline": "การวิเคราะห์กระแสเงินสดคิดลด 20 ปี: IRR Base 31.06% / BOI 37.34%, คืนทุนจริง 4.14 ปี", "params": [["ต้นทุนการผลิตต่อปี (COM)", "COM = 574.55 ล้านบาท/ปี", "DMC 441.22 MB + FMC 107.01 MB + GE 26.31 MB (หักค่าเสื่อม Cash COM 519.74 MB)"], ["กำไรก่อนหักดอกเบี้ยและภาษี (EBIT)", "+434.09 ล้านบาท/ปี", "EBIT Margin = 43.04% สะท้อนมาร์จิ้นธุรกิจเคมีภัณฑ์เกรดสูง"], ["อัตราผลตอบแทนภายใน (IRR)", "31.06% (Base) / 37.34% (BOI)", "เทียบกับเกณฑ์ตัดสินใจ MARR 10.0% ผ่านเกณฑ์การลงทุนอย่างเด็ดขาด"], ["มูลค่าปัจจุบันสุทธิ (NPV @ 10%)", "+2,162.31 MB (Base) / +2,625.48 MB (BOI)", "สร้างมูลค่าเพิ่มมหาศาลตลอดอายุโครงการ 20 ปี"], ["ระยะเวลาคืนทุนจริง (Realistic PBP)", "4.14 ปี (BOI) / 4.71 ปี (Base)", "นับรวมระยะเวลาก่อสร้าง EPC 1.5 ปีแล้ว (Simple PBP บน FCI เพียง 2.24 ปี)"], ["จุดคุ้มทุน (Break-Even Capacity)", "3,396.49 ตัน/ปี (44.40%)", "Margin of Safety สูงถึง 55.60% ทนทานต่อความผันผวนของตลาด"]], "ref": "รายงานบทที่ 12 (20-Yr Discounted Cash Flow Analysis ล็อกตาม newCalMemo5Tawan.xlsx)"},
-    {"slide": 11, "short": "HAZOP & SIL-2", "topic": "HAZOP Safety, SIL-2 Interlocks & Plot Plan", "speaker": "อัสนา (6:45–7:15)", "headline": "ระบบความปลอดภัย 4 ลูปตัดตอนฉุกเฉิน SIL-2 และผังโรงงาน 11 ไร่ตามมาตรฐานระยะร่นสากล", "params": [["ลูป 1 (Reformer F-101 / R-101)", "TI-101 > 820 °C (2oo3 Voting)", "ตัดเชื้อเพลิงเตาเผา F-101 ภายใน 2 วินาที และฉีดไอน้ำ Purge ฉุกเฉิน"], ["ลูป 2 (Syngas Compressor K-100)", "PDI-102 < 1.5 bar (Dry Gas Seal)", "ทริปมอเตอร์ K-100 อัตโนมัติและระบายก๊าซเข้าสู่ Flare Header ทันที"], ["ลูป 3 (CO₂ Absorber C-202)", "PDI-201 > 45 kPa (Foaming Prevention)", "ตรวจจับโฟมในหอดูดซับ ฉีดสาร Anti-foam อัตโนมัติป้องกัน Carryover"], ["ลูป 4 (H₂ & CO₂ Storage Tank)", "GD-101 > 20% LEL & UV/IR Optical", "สั่งการระบบม่านน้ำ Deluge Water Spray ระบายความร้อนและเจือจางก๊าซทันที"], ["ผังโรงงาน (Plot Plan 11 ไร่)", "NFPA 2, ASME B31.12 & พ.ร.บ. โรงงาน", "กำแพงกันไฟ Blast Wall ห่างอาคารควบคุม 30.5 ม., ถนนหลักกว้าง 8 ม."]], "ref": "รายงานบทที่ 13 (HAZOP & Safety SIL-2) และ บทที่ 14 (Plot Plan & Engineering Codes)"},
-    {"slide": 12, "short": "Net-Zero & FEED", "topic": "Net-Zero Balance, Environmental Impact & FEED", "speaker": "อัสนา (7:15–7:45)", "headline": "คาร์บอนฟุตพริ้นท์สุทธิติดลบ -61,740 tCO₂e/yr ผ่านเกณฑ์ EU RED II มติพร้อมเข้าสู่งาน FEED", "params": [["การดูดซับชีวภาพ (Biogenic Carbon)", "76,500 ตัน CO₂e/ปี", "ก๊าซคาร์บอนไดออกไซด์ที่หมุนเวียนจากไร่อ้อย/มันสำปะหลัง (Carbon-neutral)"], ["การดักจับเป็นผลิตภัณฑ์ (CCU Capture)", "-69,600 ตัน CO₂e/ปี", "ดักจับ 91.19% ส่งขายโรงงานอาหาร เครื่องดื่ม และอุตสาหกรรมแปรรูป"], ["การปล่อยทางตรง (Scope 1 Fossil)", "+7,860 ตัน CO₂e/ปี", "เกิดจากการเผาไหม้เชื้อเพลิงก๊าซธรรมชาติเสริมในเตา F-101 และระบบสาธารณูปโภค"], ["การปลดปล่อยสุทธิ (Net Carbon)", "-61,740 ตัน CO₂e/ปี (Carbon-Negative)", "ความเข้มข้นคาร์บอน 1.82–2.02 kg CO₂e / kg H₂ ต่ำกว่า Fossil SMR (10.30) ถึง 5 เท่า"], ["แผนงานวิศวกรรมขั้นละเอียด (FEED)", "3 เฟสการดำเนินงาน (18 เดือน)", "เฟส 1 ทดสอบ Pilot ตัวเร่ง 1:100 (6 ด.), เฟส 2 สำรวจพื้นที่และ P&ID, เฟส 3 จัดซื้อจัดจ้าง EPC"]], "ref": "รายงานบทที่ 13 (Environmental Impact & Net Carbon Balance) และ บทที่ 15 (FEED Roadmap)"}
+    {"slide": 1, "short": "Dual-Product", "topic": "Executive Rationale & Dual-Product Model", "speaker": "ธนโชติ (0:00–0:32)", "headline": "เพิ่มมูลค่าชีวเอทานอล 3.6 เท่า สู่ H₂ เซลล์เชื้อเพลิง 7,650 ตัน/ปี + Food-Grade Liquid CO₂ 69,600 ตัน/ปี", "params": [["รายรับรวม (Gross Income)", "1,008.63 ล้านบาท/ปี", "H₂ 765.03 MB (75.8%) + Liquid CO₂ 243.60 MB (24.2%)"], ["ต้นทุนวัตถุดิบ (Raw Material)", "280.00 ล้านบาท/ปี", "ชีวเอทานอล 95 vol% จำนวน 40,000 ตัน/ปี @ 7.00 ฿/กก. (~5.64 ฿/ลิตร)"], ["ความคุ้มค่าของการอัปเกรด (Value Uplift)", "3.60 เท่า", "อัตราส่วน Gross Income ต่อยอดซื้อวัตถุดิบ (1,008.63 / 280.00)"], ["ที่ตั้งและขนาดที่ดิน", "11.0 ไร่ นิคมฯ มาบตาพุด", "แปลงสี่เหลี่ยม 160 × 110 ม. โซน EEC ใกล้โรงกลั่นและโรงงานเครื่องดื่ม"]]},
+    {"slide": 2, "short": "Thermodynamics", "topic": "Process Synthesis & Carlson Thermodynamics", "speaker": "ธนโชติ (0:32–1:05)", "headline": "สถาปัตยกรรม 4 โซน 35 ยูนิต คัดเลือก Fluid Package อุณหพลศาสตร์ตาม Carlson (1996)", "params": [["โซน 1 (Reforming Feed)", "NRTL (Non-Random Two-Liquid)", "จับพฤติกรรม Non-ideal ของสารผสม Ethanol-Water ที่มีขั้วสูง"], ["โซน 2 (Syngas & WGS)", "Peng-Robinson (PR)", "คำนวณสมบัติก๊าซผสม H₂, CO, CO₂, CH₄ ที่ความดันสูงได้อย่างแม่นยำ"], ["โซน 3 (CO₂ Absorption)", "Electrolyte NRTL (eNRTL)", "คำนวณปฏิกิริยาแตกตัวทางเคมีของไอออน MEA-H₂O-CO₂ ในสารละลาย"], ["โซน 4 (CO₂ Liquefaction)", "Peng-Robinson Cryogenic", "ทำนายจุดกลั่นตัวของก๊าซ CO₂ บริสุทธิ์ที่อุณหภูมิต่ำจัด -25 °C, 20 bar"], ["ความคลาดเคลื่อนในการตัดสตรีม", "Error < 0.01%", "Aspen HYSYS V15 Convergence สมดุลมวลและพลังงาน 100.00%"]]},
+    {"slide": 3, "short": "R-101 & LSTN 650", "topic": "Reaction Engineering & Perovskite LSTN 650", "speaker": "ธนชาติ (1:05–2:10)", "headline": "เตาปฏิกรณ์ท่อไฟ R-101 ตัวเร่งปฏิกิริยานวัตกรรม LSTN 650 ปฏิรูปชีวเอทานอลสมบูรณ์ที่ S/E = 3.0:1.0", "params": [["สูตรตัวเร่งปฏิกิริยา", "La₀.₇Sr₀.₃Ti₀.₉₅Ni₀.₀₅O₃₋δ (LSTN 650)", "โครงสร้าง Perovskite มีเสถียรภาพสูง เหนี่ยวนำ In-situ Ni Exsolution"], ["อัตราการเกิดเขม่าคาร์บอน (Coking)", "7.37 mg C / g_cat·h", "ต่ำกว่าตัวเร่งทั่วไป 10 เท่า ปราศจากการอุดตันแม้ทำงานที่ S/E ต่ำ 3.0"], ["อัตราส่วนไอน้ำต่อเอทานอล (S/E)", "S/E = 3.0:1.0 (S/C = 1.50)", "เอทานอล 1 โมล มีคาร์บอน 2 อะตอม ประหยัดความร้อนต้มระเหยน้ำได้ 66.7%"], ["สเปกทางกลเตาปฏิกรณ์ R-101", "45 ท่อไฟ, Inconel 625", "ID 100 มม., L 8.0 ม., บรรจุตัวเร่ง 3,623 กก., WHSV 3.0 h⁻¹, Duty 5,994 kW"], ["สภาวะและ Conversion", "650 °C, 1.0 bar (Atmospheric)", "Conversion เอทานอลสมบูรณ์ 100%, ผลได้ H₂ 4.04 mol/mol-EtOH"]]},
+    {"slide": 4, "short": "HT-WGS & Recycle", "topic": "Water-Gas Shift & Process Water Closed-Loop", "speaker": "ธนชาติ (2:10–3:15)", "headline": "เครื่องปฏิกรณ์ R-102 (HT-WGS) แปลงผัน CO 90.0% และปิดวงจรน้ำรีไซเคิล 100% สู่ Zero Discharge", "params": [["เครื่องปฏิกรณ์ R-102 (HT-WGS)", "Adiabatic Fixed-Bed, V = 6.19 m³", "เส้นผ่านศูนย์กลาง 1.38 ม. สูง 4.14 ม., บรรจุตัวเร่ง Fe-Cr 8,200 kg"], ["การแปลงผันและสภาวะ", "CO Conversion = 90.0%", "350 °C เข้าสู่ 366.4 °C ขาออก, เพิ่มผลผลิต H₂ จาก 438 เป็น 558 kmol/h (+27.3%)"], ["ถังดักน้ำควบแน่น S-101", "Knock-out Drum V = 9.65 m³", "แยกน้ำกระบวนการ 958.5 kg/h (30 °C, 0.9 bar) ป้อนกลับเข้า M-101 เต็ม 100%"], ["การลดการใช้น้ำเติม (Makeup Water)", "ประหยัดน้ำดี 16.3%", "ลดภาระน้ำหล่อเย็นและบรรลุมาตรฐาน Zero Process Wastewater Discharge"]]},
+    {"slide": 5, "short": "K-100 & PSA", "topic": "Syngas Compression Train & Dynamic PSA", "speaker": "ชลิดา (3:15–4:15)", "headline": "ระบบอัดก๊าซ 3 สเตจ K-100 สู่ 20.4 bar และหน่วยแยกสกัด PSA 4-Bed Duplex บริสุทธิ์ ≥ 99.99%", "params": [["คอมเพรสเซอร์ K-100 (API 617)", "3-Stage Centrifugal, Power 2,579 kW", "แรงดัน 0.90 สู่ 20.4 bar (CR = 2.73/stage) พร้อม Intercooler E-103A/B/C"], ["วัสดุใบพัดและตัวเรือน", "Cast CS Casing, 17-4PH Impellers", "ทนทานต่อก๊าซไฮโดรเจนชื้น ป้องกัน Hydrogen Embrittlement ตาม NACE MR0175"], ["หน่วยสกัดไฮโดรเจน PS-101", "4-Bed Duplex (8 หอคู่ขนาน)", "บรรจุสารดูดซับ 9,091 กก./สคิด (Active Carbon 40% + Zeolite 13X 60%)"], ["คุณภาพและอัตราการผลิต H₂", "956.3 kg/h (≥ 99.99% Purity)", "CO < 0.2 ppm ตามมาตรฐาน ISO 14687-2 Grade D สำหรับรถยนต์ FCEV"], ["ก๊าซทิ้งท้ายระบบ (PSA Tail Gas)", "Stream 8 = 8,952.3 kg/h (1.3 bar)", "เป็นก๊าซเชื้อเพลิงหลักให้เตา F-101 ครอบคลุมภาระความร้อนถึง 73.7%"]]},
+    {"slide": 6, "short": "Flue Gas CCU", "topic": "Flue Gas CCU & Food-Grade Liquefaction", "speaker": "ชลิดา (4:15–5:00)", "headline": "ดักจับ CO₂ ด้วย 30 wt% MEA และทำความเย็นจัดสู่ของเหลว -25 °C, 20 bar (EIGA Food-Grade)", "params": [["หอดูดซับก๊าซ C-202", "D = 2.1 m, H = 24.0 m, Mellapak 250Y", "ดักจับ CO₂ ได้ 91.19% (Stream 10 = 8,700 kg/h หรือ 69,600 t/y)"], ["หอสกัดฟื้นสภาพ C-203", "D = 1.5 m, H = 18.0 m, SS316L", "Reboiler E-201 Duty 9.18 MW ใช้ไอน้ำความดันต่ำ LP Steam 3.5 bar"], ["ระบบทำความเย็นจัด E-206", "Chiller Evaporator (Duty 0.68 MW)", "ควบแน่น CO₂ บริสุทธิ์กลายเป็นของเหลวที่ความดัน 20 bar อุณหภูมิ -25 °C"], ["ถังเก็บทรงแคปซูล TK-202", "V = 220 m³, D = 4.0 m, L = 17.5 m", "ฉนวนสุญญากาศ 2 ชั้น (Double-walled Vacuum), สำรองก๊าซเหลวได้ 24 ชั่วโมง"]]},
+    {"slide": 7, "short": "HEN & Exergy", "topic": "HEN Pinch Integration & Exergy Analysis", "speaker": "ชวนากร (5:00–5:25)", "headline": "โครงข่ายแลกเปลี่ยนความร้อน HEN กู้คืนพลังงาน 12.14 MW และบรรลุ Exergy Efficiency 96.9%", "params": [["พินช์พอยต์ของระบบ (Pinch Point)", "ΔT_min = 10 °C (Hot 105 °C, Cold 95 °C)", "แบ่งขอบเขตอุณหพลศาสตร์อย่างชัดเจน ห้ามแลกเปลี่ยนความร้อนข้ามพินช์"], ["ภาระความร้อนที่นำกลับมาใช้ (Heat Recovery)", "12.14 MW (HEN Network)", "นำความร้อนจาก Syngas ร้อนไปอุ่นและต้มระเหยสารผสมป้อนเข้า E-100"], ["การลดการใช้พลังงานภายนอก", "Hot Utility ลด 73.7%, Cold ลด 85.2%", "ประหยัดเชื้อเพลิงก๊าซธรรมชาติและน้ำหล่อเย็นมูลค่ามหาศาลต่อปี"], ["ประสิทธิภาพทางเอ็กเซอร์จี (Exergy Efficiency)", "96.9% (Overall Plant)", "สูญเสีย Exergy รวมเพียง 4,554.8 kW (จุดสูญเสียสูงสุดอยู่ที่เตาเผา F-101)"]]},
+    {"slide": 8, "short": "Process Control", "topic": "Process Control & Dynamic Resiliency", "speaker": "ชวนากร (5:25–5:45)", "headline": "โครงสร้างควบคุม 7 ลูปหลักและกลยุทธ์ฟีดฟอร์เวิร์ดรับมือความผันแปรอัตราป้อน ±20%", "params": [["การคุมอัตราส่วนไอน้ำต่อเอทานอล", "Ratio Control (FIC-101 / FIC-102)", "ล็อกค่าโมลาร์ S/E = 3.0:1.0 เสมอเพื่อตัดความเสี่ยงการเกิดเขม่าคาร์บอน"], ["การคุมอุณหภูมิทางออกเตาปฏิกรณ์", "TIC-101 ควบคุมวาล์วเชื้อเพลิงเตา F-101", "รักษาอุณหภูมิก๊าซขาออก 650 ± 2 °C ป้องกันความเสียหายต่อโลหะท่อ Inconel 625"], ["การคุมแรงดันดูดซับ PSA Skid", "PIC-101 ควบคุมวาล์วบายพาสและแบ็กเพรชเชอร์", "คุมแรงดันทำงานคงที่ 20.0 ± 0.2 bar เพื่อความเสถียรของหน้าคลื่นการดูดซับ"], ["ระบบ Safety Interlock (SIS)", "SIL-2 Architecture ตาม IEC 61511", "ทริปวาล์วตัดแยกระบบเชื้อเพลิงฉุกเฉิน XV-101 ภายใน 1.5 วินาทีเมื่ออุณหภูมิเกินพิกัด"]]},
+    {"slide": 9, "short": "CAPEX 35 Units", "topic": "Equipment Roster & Capital Expenditure (CAPEX)", "speaker": "ชวนากร (5:45–6:15)", "headline": "ประเมินต้นทุนเครื่องจักร 35 ยูนิตตามวิธี Turton (2024 Basis): FCI = 1,096.12 MB, TCI = 1,289.55 MB", "params": [["ต้นทุนเครื่องจักรเปล่า Train 100", "Σ C_BM (Core H₂) = 652.80 MB", "18 ยูนิต (Top: R-101 184.20 MB, K-100 145.80 MB, PS-101 128.50 MB)"], ["ต้นทุนเครื่องจักรเปล่า Train 200", "Σ C_BM (CCU) = 276.12 MB", "17 ยูนิต (Top: K-201 61.20 MB, C-202 45.93 MB, C-203 31.18 MB)"], ["รวมต้นทุน Bare Module ทั้งโรงงาน", "Σ C_BM,total = 928.92 MB", "คำนวณผ่าน Cost Correlation Log-polynomial และ CEPCI ปรับปี 2024"], ["เงินลงทุนคงที่ (Fixed Capital, FCI)", "FCI = C_TM = 1,096.12 MB", "FCI = 1.18 × Σ C_BM (รวมงานโยธา ระบบท่อ ระบบไฟฟ้า และ Contingency 18%)"], ["เงินลงทุนรวมทั้งโครงการ (TCI)", "TCI = 1,289.55 MB", "FCI 1,096.12 MB + เงินทุนหมุนเวียน (Working Capital, WC 15% TCI) 193.43 MB"]]},
+    {"slide": 10, "short": "20-Yr DCF", "topic": "20-Year DCF & Profitability Dashboard", "speaker": "ชวนากร (6:15–6:45)", "headline": "การวิเคราะห์กระแสเงินสดคิดลด 20 ปี: IRR Base 31.06% / BOI 37.34%, คืนทุนจริง 4.14 ปี", "params": [["ต้นทุนการผลิตต่อปี (COM)", "COM = 574.55 ล้านบาท/ปี", "DMC 441.22 MB + FMC 107.01 MB + GE 26.31 MB (หักค่าเสื่อม Cash COM 519.74 MB)"], ["กำไรก่อนหักดอกเบี้ยและภาษี (EBIT)", "+434.09 ล้านบาท/ปี", "EBIT Margin = 43.04% สะท้อนมาร์จิ้นธุรกิจเคมีภัณฑ์เกรดสูง"], ["อัตราผลตอบแทนภายใน (IRR)", "31.06% (Base) / 37.34% (BOI)", "เทียบกับเกณฑ์ตัดสินใจ MARR 10.0% ผ่านเกณฑ์การลงทุนอย่างเด็ดขาด"], ["มูลค่าปัจจุบันสุทธิ (NPV @ 10%)", "+2,162.31 MB (Base) / +2,625.48 MB (BOI)", "สร้างมูลค่าเพิ่มมหาศาลตลอดอายุโครงการ 20 ปี"], ["ระยะเวลาคืนทุนจริง (Realistic PBP)", "4.14 ปี (BOI) / 4.71 ปี (Base)", "นับรวมระยะเวลาก่อสร้าง EPC 1.5 ปีแล้ว (Simple PBP บน FCI เพียง 2.24 ปี)"], ["จุดคุ้มทุน (Break-Even Capacity)", "3,396.49 ตัน/ปี (44.40%)", "Margin of Safety สูงถึง 55.60% ทนทานต่อความผันผวนของตลาด"]]},
+    {"slide": 11, "short": "HAZOP & SIL-2", "topic": "HAZOP Safety, SIL-2 Interlocks & Plot Plan", "speaker": "อัสนา (6:45–7:15)", "headline": "ระบบความปลอดภัย 4 ลูปตัดตอนฉุกเฉิน SIL-2 และผังโรงงาน 11 ไร่ตามมาตรฐานระยะร่นสากล", "params": [["ลูป 1 (Reformer F-101 / R-101)", "TI-101 > 820 °C (2oo3 Voting)", "ตัดเชื้อเพลิงเตาเผา F-101 ภายใน 2 วินาที และฉีดไอน้ำ Purge ฉุกเฉิน"], ["ลูป 2 (Syngas Compressor K-100)", "PDI-102 < 1.5 bar (Dry Gas Seal)", "ทริปมอเตอร์ K-100 อัตโนมัติและระบายก๊าซเข้าสู่ Flare Header ทันที"], ["ลูป 3 (CO₂ Absorber C-202)", "PDI-201 > 45 kPa (Foaming Prevention)", "ตรวจจับโฟมในหอดูดซับ ฉีดสาร Anti-foam อัตโนมัติป้องกัน Carryover"], ["ลูป 4 (H₂ & CO₂ Storage Tank)", "GD-101 > 20% LEL & UV/IR Optical", "สั่งการระบบม่านน้ำ Deluge Water Spray ระบายความร้อนและเจือจางก๊าซทันที"], ["ผังโรงงาน (Plot Plan 11 ไร่)", "NFPA 2, ASME B31.12 & พ.ร.บ. โรงงาน", "กำแพงกันไฟ Blast Wall ห่างอาคารควบคุม 30.5 ม., ถนนหลักกว้าง 8 ม."]]},
+    {"slide": 12, "short": "Net-Zero & FEED", "topic": "Net-Zero Balance, Environmental Impact & FEED", "speaker": "อัสนา (7:15–7:45)", "headline": "คาร์บอนฟุตพริ้นท์สุทธิติดลบ -61,740 tCO₂e/yr ผ่านเกณฑ์ EU RED II มติพร้อมเข้าสู่งาน FEED", "params": [["การดูดซับชีวภาพ (Biogenic Carbon)", "76,500 ตัน CO₂e/ปี", "ก๊าซคาร์บอนไดออกไซด์ที่หมุนเวียนจากไร่อ้อย/มันสำปะหลัง (Carbon-neutral)"], ["การดักจับเป็นผลิตภัณฑ์ (CCU Capture)", "-69,600 ตัน CO₂e/ปี", "ดักจับ 91.19% ส่งขายโรงงานอาหาร เครื่องดื่ม และอุตสาหกรรมแปรรูป"], ["การปล่อยทางตรง (Scope 1 Fossil)", "+7,860 ตัน CO₂e/ปี", "เกิดจากการเผาไหม้เชื้อเพลิงก๊าซธรรมชาติเสริมในเตา F-101 และระบบสาธารณูปโภค"], ["การปลดปล่อยสุทธิ (Net Carbon)", "-61,740 ตัน CO₂e/ปี (Carbon-Negative)", "ความเข้มข้นคาร์บอน 1.82–2.02 kg CO₂e / kg H₂ ต่ำกว่า Fossil SMR (10.30) ถึง 5 เท่า"], ["แผนงานวิศวกรรมขั้นละเอียด (FEED)", "3 เฟสการดำเนินงาน (18 เดือน)", "เฟส 1 ทดสอบ Pilot ตัวเร่ง 1:100 (6 ด.), เฟส 2 สำรวจพื้นที่และ P&ID, เฟส 3 จัดซื้อจัดจ้าง EPC"]]}
   ];
 
   const BASELINE = {
@@ -1852,7 +1869,7 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
     });
   });
 
-  // 3. Render Module 1: Slide Dossiers (Unified Box + Sticky Side Navigation Rail, No References)
+  // 3. Render Module 1: Slide Dossiers (Unified Box + Larger Floating Right Rail 1–12)
   const slideContainer = document.getElementById('slide-container');
   const slideRail = document.getElementById('slide-rail');
 
@@ -1863,7 +1880,6 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
     SLIDES.forEach((s, idx) => {
       const numPad = String(s.slide).padStart(2, '0');
 
-      // Side rail navigation item
       if (slideRail) {
         const railBtn = document.createElement('button');
         railBtn.type = 'button';
@@ -1911,7 +1927,6 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
 
   renderSlides();
 
-  // Scroll spy to highlight current slide in the side rail
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1971,7 +1986,6 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
         count++;
         sumCbm += eq.c_bm;
 
-        // Desktop Row
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td class="mono" style="font-weight:700;color:var(--brand)">${eq.tag}</td>
@@ -1986,7 +2000,6 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
         `;
         eqTbody.appendChild(tr);
 
-        // Mobile Card (All fields clearly visible without needing nested clicks)
         const card = document.createElement('div');
         card.className = 'm-card';
         card.innerHTML = `
@@ -2045,7 +2058,7 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
 
   renderEquipment();
 
-  // 5. Render Module 3: 15-Stream HMB Table with Search & Phase Filter
+  // 5. Render Module 3: 15-Stream HMB Table
   const streamTbody = document.getElementById('stream-tbody');
   const streamCardList = document.getElementById('stream-card-list');
   const streamSearch = document.getElementById('stream-search');
@@ -2077,7 +2090,6 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
 
       const badgeCls = getPhaseBadgeClass(st.phase);
 
-      // Desktop Row
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td class="center mono" style="font-weight:700;color:var(--brand)">#${st.id}</td>
@@ -2092,7 +2104,6 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
       `;
       streamTbody.appendChild(tr);
 
-      // Mobile Stream Card
       const card = document.createElement('div');
       card.className = 'm-card';
       card.innerHTML = `
@@ -2233,41 +2244,33 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
         </linearGradient>
       </defs>
 
-      <!-- Horizontal Grid Lines -->
       <line x1="${padL}" y1="${getY(4000)}" x2="${width - padR}" y2="${getY(4000)}" stroke="#E2E8F0" stroke-width="1"/>
       <line x1="${padL}" y1="${getY(2000)}" x2="${width - padR}" y2="${getY(2000)}" stroke="#E2E8F0" stroke-width="1"/>
       <line x1="${padL}" y1="${getY(-1289.55)}" x2="${width - padR}" y2="${getY(-1289.55)}" stroke="#E2E8F0" stroke-width="1"/>
 
-      <!-- Break-Even Zero Line -->
       <line x1="${padL}" y1="${zeroY}" x2="${width - padR}" y2="${zeroY}" stroke="#B91C1C" stroke-width="1.5" stroke-dasharray="5 4"/>
       <text x="${padL + 8}" y="${zeroY - 6}" font-size="11" font-weight="700" fill="#B91C1C">ระดับจุดคุ้มทุน Break-Even (0 MB)</text>
 
-      <!-- Axes -->
       <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${height - padB}" stroke="#CBD5E1" stroke-width="1.5"/>
       <line x1="${padL}" y1="${height - padB}" x2="${width - padR}" y2="${height - padB}" stroke="#CBD5E1" stroke-width="1.5"/>
 
-      <!-- Y-axis Labels -->
       <text x="${padL - 8}" y="${zeroY + 4}" font-size="10.5" text-anchor="end" fill="#64748B">0</text>
       <text x="${padL - 8}" y="${getY(-1289.55) + 4}" font-size="10.5" text-anchor="end" fill="#64748B">-1,290</text>
       <text x="${padL - 8}" y="${getY(2000) + 4}" font-size="10.5" text-anchor="end" fill="#64748B">+2,000</text>
       <text x="${padL - 8}" y="${getY(4000) + 4}" font-size="10.5" text-anchor="end" fill="#64748B">+4,000</text>
 
-      <!-- X-axis Labels -->
       <text x="${getX(0)}" y="${height - 12}" font-size="11" text-anchor="middle" fill="#475569">ปี 0</text>
       <text x="${getX(5)}" y="${height - 12}" font-size="11" text-anchor="middle" fill="#475569">ปี 5</text>
       <text x="${getX(10)}" y="${height - 12}" font-size="11" text-anchor="middle" fill="#475569">ปี 10</text>
       <text x="${getX(15)}" y="${height - 12}" font-size="11" text-anchor="middle" fill="#475569">ปี 15</text>
       <text x="${getX(20)}" y="${height - 12}" font-size="11" text-anchor="middle" fill="#475569">ปี 20</text>
 
-      <!-- Shaded Area & Cumulative Curve -->
       <path d="${areaD}" fill="url(#cfAreaGrad)"/>
       <path d="${pathD}" fill="none" stroke="#0F6A48" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 
-      <!-- Payback Marker -->
       <circle cx="${pbpX}" cy="${zeroY}" r="6" fill="#B45309" stroke="#FFFFFF" stroke-width="2"/>
       <text x="${pbpX}" y="${zeroY + 20}" font-size="11.5" font-weight="700" fill="#B45309" text-anchor="middle">คืนทุนจริง ${pbpValue.toFixed(2)} ปี</text>
 
-      <!-- Year 20 Terminal Marker -->
       <circle cx="${getX(20)}" cy="${getY(cumFlows[20])}" r="5" fill="#0F6A48" stroke="#FFFFFF" stroke-width="2"/>
       <text x="${getX(20) - 6}" y="${getY(cumFlows[20]) - 10}" font-size="11.5" font-weight="700" fill="#0F6A48" text-anchor="end">+${cumFlows[20].toLocaleString(undefined, {maximumFractionDigits: 0})} MB</text>
     `;
@@ -2311,7 +2314,6 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
     cfTbody.innerHTML = '';
     let cumDCF = -tci;
 
-    // Add Year 0 row
     const tr0 = document.createElement('tr');
     tr0.innerHTML = `
       <td class="tabular mono" style="font-weight:700">ปีที่ 0 (EPC)</td>
