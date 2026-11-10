@@ -1,0 +1,2411 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<title>ETHAVERTEX — Capstone Oral Defense Companion</title>
+<meta name="description" content="ETHAVERTEX Group 2C Chemical Engineering Capstone Companion. 35 Equipment Units, 15 Stream HMB, 20-Year DCF Sensitivity Simulator, 12 Slide Dossiers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F4F5F7;
+  --surface: #FFFFFF;
+  --surface-subtle: #F8FAFC;
+  --surface-hover: #F1F5F9;
+  --ink: #0F172A;
+  --ink-secondary: #334155;
+  --ink-muted: #64748B;
+  --border: #E2E8F0;
+  --border-strong: #CBD5E1;
+
+  --brand: #0F6A48;
+  --brand-hover: #0B5237;
+  --brand-soft: #ECFDF5;
+  --brand-border: #A7F3D0;
+
+  --blue: #1D4ED8;
+  --blue-soft: #EFF6FF;
+  --blue-border: #BFDBFE;
+
+  --amber: #B45309;
+  --amber-soft: #FFFBEB;
+  --amber-border: #FDE68A;
+
+  --red: #B91C1C;
+  --red-soft: #FEF2F2;
+  --red-border: #FECACA;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.06);
+
+  --font-sans: "IBM Plex Sans Thai", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --bottom-nav-h: 64px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  font-size: 15px;
+  padding-bottom: calc(var(--bottom-nav-h) + 28px);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography & Utility Classes */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+.right { text-align: right; }
+.center { text-align: center; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 6px;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+.badge-green {
+  background: var(--brand-soft);
+  color: var(--brand);
+  border: 1px solid var(--brand-border);
+}
+.badge-blue {
+  background: var(--blue-soft);
+  color: var(--blue);
+  border: 1px solid var(--blue-border);
+}
+.badge-amber {
+  background: var(--amber-soft);
+  color: var(--amber);
+  border: 1px solid var(--amber-border);
+}
+.badge-gray {
+  background: var(--surface-subtle);
+  color: var(--ink-secondary);
+  border: 1px solid var(--border);
+}
+
+/* Top Masthead */
+header.masthead {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 120;
+}
+
+.header-inner {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--brand);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.03em;
+  flex-shrink: 0;
+}
+
+.brand-title {
+  font-size: 16.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.brand-tagline {
+  font-size: 12.5px;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-action {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--ink-secondary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+.btn-action:hover {
+  background: var(--surface-hover);
+  color: var(--ink);
+}
+.btn-action:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* Primary Navigation Tabs */
+nav.tab-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--bottom-nav-h);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  z-index: 150;
+  box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.06);
+}
+
+.nav-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+}
+
+.tab-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-top: 3px solid transparent;
+  color: var(--ink-muted);
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 4px 6px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.tab-btn:hover {
+  color: var(--ink);
+  background: var(--surface-subtle);
+}
+
+.tab-btn.active {
+  color: var(--brand);
+  border-top-color: var(--brand);
+  font-weight: 700;
+  background: rgba(15, 106, 72, 0.03);
+}
+
+.tab-btn .tab-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.tab-btn .tab-label-desktop { display: none; }
+.tab-btn .tab-label-mobile { display: block; }
+.tab-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 99px;
+  background: var(--surface-hover);
+  color: var(--ink-secondary);
+  margin-left: 6px;
+}
+.tab-btn.active .tab-count {
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+
+/* Executive KPI Ribbon */
+.kpi-strip {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.kpi-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 12px 16px;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.kpi-item {
+  background: var(--surface-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.kpi-item.highlight-green {
+  background: #F4FBF7;
+  border-color: var(--brand-border);
+}
+
+.kpi-item.highlight-amber {
+  background: #FFFDF5;
+  border-color: var(--amber-border);
+}
+
+.kpi-label {
+  font-size: 11.5px;
+  color: var(--ink-muted);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.kpi-value {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.25;
+  margin-top: 4px;
+  letter-spacing: -0.01em;
+}
+
+.kpi-unit {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-secondary);
+}
+
+.kpi-sub {
+  font-size: 11.5px;
+  color: var(--ink-secondary);
+  margin-top: 3px;
+  line-height: 1.3;
+}
+
+/* Main Content Wrapper */
+main.content-area {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.tab-panel {
+  display: none;
+}
+.tab-panel.active {
+  display: block;
+}
+
+/* Section Header */
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.section-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.section-header h1,
+.section-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.section-header p {
+  font-size: 14px;
+  color: var(--ink-secondary);
+  max-width: 820px;
+}
+
+/* ================= MODULE 1: SLIDE DOSSIERS ================= */
+#panel-dossier {
+  padding-right: 0;
+}
+
+.dossier-layout {
+  position: relative;
+}
+
+.dossier-sidebar {
+  position: fixed;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 140;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 4px 2px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+}
+
+.dossier-sidebar-title {
+  display: none;
+}
+
+.slide-rail-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.rail-item {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ink-secondary);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.rail-item:hover {
+  background: var(--brand-soft);
+  color: var(--brand);
+  border-color: var(--brand-border);
+}
+
+.rail-item.active {
+  background: var(--brand);
+  color: #FFFFFF;
+  border-color: var(--brand);
+  box-shadow: 0 2px 5px rgba(15, 106, 72, 0.28);
+}
+
+.rail-num {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.rail-text {
+  display: none;
+}
+
+.slide-list {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.slide-card {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  padding: 28px 24px;
+  box-shadow: none;
+  scroll-margin-top: 126px;
+}
+.slide-card:last-child {
+  border-bottom: none;
+}
+
+.slide-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 0 0 12px 0;
+  margin-bottom: 14px;
+  background: transparent;
+  border-bottom: 1px solid var(--border);
+}
+
+.slide-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.slide-num-pill {
+  background: var(--brand);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 4px 11px;
+  border-radius: 6px;
+  letter-spacing: 0.03em;
+}
+
+.slide-topic-tag {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.slide-speaker-pill {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand);
+  background: var(--brand-soft);
+  border: 1px solid var(--brand-border);
+  padding: 4px 12px;
+  border-radius: 99px;
+}
+
+.slide-title {
+  font-size: 18.5px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.5;
+  margin: 0 0 18px 0;
+  padding: 12px 16px;
+  background: var(--surface-subtle);
+  border-left: 4px solid var(--brand);
+  border-radius: 0 10px 10px 0;
+}
+
+.slide-param-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  padding: 0;
+}
+
+.param-card {
+  background: var(--surface-subtle);
+  border: 1px solid var(--border);
+  padding: 14px 16px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.param-card:hover {
+  border-color: var(--brand-border);
+  background: #FFFFFF;
+}
+
+.param-k {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--brand);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.param-k::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand);
+  flex-shrink: 0;
+}
+
+.param-v {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  padding-bottom: 5px;
+  border-bottom: 1px dashed var(--border);
+}
+
+.param-desc {
+  font-size: 13.5px;
+  color: var(--ink-secondary);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
+/* ================= MODULE 2: EQUIPMENT EXPLORER ================= */
+.cost-breakdown-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.cost-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.cost-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* Stacked Horizontal Bar + Interactive Legend */
+.stacked-bar-track {
+  width: 100%;
+  height: 16px;
+  border-radius: 99px;
+  overflow: hidden;
+  display: flex;
+  background: var(--surface-subtle);
+  margin-bottom: 14px;
+  gap: 2px;
+}
+
+.stacked-segment {
+  height: 100%;
+  transition: opacity 0.2s ease;
+}
+
+.cost-legend-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 14px;
+}
+
+.cost-legend-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12.5px;
+  padding: 6px 10px;
+  background: var(--surface-subtle);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.legend-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--ink-secondary);
+}
+
+.legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.legend-right {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* Filter Bar */
+.filter-bar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.search-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-input-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 240px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-muted);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 36px 10px 38px;
+  font-size: 14px;
+  font-family: inherit;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface-subtle);
+  color: var(--ink);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.search-input:focus {
+  outline: none;
+  border-color: var(--brand);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(15, 106, 72, 0.12);
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--ink-muted);
+  cursor: pointer;
+  padding: 4px;
+  display: none;
+}
+
+.filter-groups-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-pills {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pill-btn {
+  padding: 7px 13px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  background: var(--surface-subtle);
+  color: var(--ink-secondary);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+.pill-btn:hover {
+  border-color: var(--border-strong);
+  color: var(--ink);
+}
+.pill-btn.active {
+  background: var(--brand);
+  color: #FFFFFF;
+  border-color: var(--brand);
+}
+
+/* Mobile Cards vs Desktop Table */
+.desktop-table-view { display: none; }
+.mobile-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.m-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.m-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.m-card-tag {
+  font-weight: 700;
+  color: var(--brand);
+  font-size: 15px;
+  background: var(--brand-soft);
+  padding: 2px 8px;
+  border-radius: 5px;
+  border: 1px solid var(--brand-border);
+}
+
+.m-card-cost {
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.m-card-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.m-card-badges {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.m-card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  font-size: 13px;
+  background: var(--surface-subtle);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.m-card-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.m-card-row .lbl {
+  color: var(--ink-muted);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.m-card-row .val {
+  color: var(--ink);
+  font-weight: 500;
+  text-align: right;
+}
+
+/* Desktop Data Table */
+.table-wrapper {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 24px;
+}
+
+table.eng-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  text-align: left;
+}
+
+table.eng-table th {
+  background: var(--surface-subtle);
+  color: var(--ink-secondary);
+  font-weight: 700;
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+  user-select: none;
+}
+
+table.eng-table th.sortable {
+  cursor: pointer;
+}
+table.eng-table th.sortable:hover {
+  color: var(--ink);
+  background: var(--surface-hover);
+}
+
+table.eng-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink);
+  vertical-align: middle;
+}
+
+table.eng-table tbody tr:hover td {
+  background: #F8FAFC;
+}
+
+table.eng-table tfoot td {
+  background: var(--surface-subtle);
+  font-weight: 700;
+  padding: 12px 14px;
+  border-top: 2px solid var(--border-strong);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 36px 20px;
+  color: var(--ink-muted);
+  font-size: 14px;
+}
+
+/* ================= MODULE 4: 20-YR DCF SIMULATOR ================= */
+.sim-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sim-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.sim-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sim-panel-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.sim-group {
+  margin-bottom: 18px;
+}
+
+.sim-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+  gap: 8px;
+}
+
+.sim-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.sim-val-badge {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--brand);
+  background: var(--brand-soft);
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--brand-border);
+}
+
+input[type="range"].sim-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 99px;
+  background: var(--border-strong);
+  outline: none;
+  cursor: pointer;
+  margin: 6px 0;
+}
+
+input[type="range"].sim-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--brand);
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.sim-scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: var(--ink-muted);
+}
+
+.boi-switch-box {
+  background: var(--surface-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.toggle-btn {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--ink-secondary);
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.toggle-btn.active {
+  background: var(--brand);
+  color: #FFFFFF;
+  border-color: var(--brand);
+}
+
+.reset-btn {
+  width: 100%;
+  margin-top: 14px;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: inherit;
+  background: var(--surface-subtle);
+  color: var(--ink-secondary);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.reset-btn:hover {
+  background: var(--surface-hover);
+  color: var(--ink);
+}
+
+/* DCF Output KPI Grid */
+.sim-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.res-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  border-top: 3.5px solid var(--brand);
+  box-shadow: var(--shadow-sm);
+}
+.res-card.amber { border-top-color: var(--amber); }
+.res-card.blue { border-top-color: var(--blue); }
+
+.res-card .lbl {
+  font-size: 12px;
+  color: var(--ink-muted);
+  font-weight: 600;
+}
+.res-card .val {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-top: 4px;
+  line-height: 1.2;
+}
+.res-card .sub {
+  font-size: 12px;
+  color: var(--ink-secondary);
+  margin-top: 4px;
+}
+
+/* Chart Card */
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.chart-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.chart-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.chart-svg-container {
+  width: 100%;
+  height: 250px;
+}
+
+/* Tablet / iPad Breakpoint (>= 768px) */
+@media (min-width: 768px) {
+  main.content-area {
+    padding: 0 20px;
+  }
+
+  .slide-param-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dossier-sidebar {
+    right: 4px;
+    padding: 4px 2.5px;
+  }
+
+  .rail-item {
+    width: 21px;
+    height: 21px;
+    font-size: 10px;
+  }
+}
+
+/* Desktop Breakpoint (>= 920px) */
+@media (min-width: 920px) {
+  body {
+    padding-bottom: 48px;
+  }
+
+  .header-inner {
+    padding: 14px 24px;
+  }
+
+  .brand-title {
+    font-size: 18px;
+  }
+
+  /* Move Navigation to Sticky Top Bar below Masthead */
+  nav.tab-nav {
+    position: sticky;
+    top: 65px;
+    bottom: auto;
+    height: 50px;
+    border-top: none;
+    border-bottom: 1px solid var(--border);
+    box-shadow: none;
+  }
+
+  .nav-container {
+    justify-content: flex-start;
+    padding: 0 24px;
+    gap: 8px;
+  }
+
+  .tab-btn {
+    flex: 0 0 auto;
+    flex-direction: row;
+    border-top: none;
+    border-bottom: 3px solid transparent;
+    padding: 0 18px;
+    font-size: 14px;
+    gap: 8px;
+  }
+
+  .tab-btn.active {
+    border-bottom-color: var(--brand);
+    border-top-color: transparent;
+  }
+
+  .tab-btn .tab-label-desktop { display: inline; }
+  .tab-btn .tab-label-mobile { display: none; }
+
+  .kpi-container {
+    padding: 14px 24px;
+  }
+
+  .kpi-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+  }
+
+  .kpi-value {
+    font-size: 19px;
+  }
+
+  main.content-area {
+    padding: 0 24px;
+  }
+
+  #panel-dossier {
+    padding-right: 0;
+  }
+
+  .dossier-sidebar {
+    right: 4px;
+    padding: 5px 3px;
+  }
+
+  .rail-item {
+    width: 22px;
+    height: 22px;
+    font-size: 10.5px;
+  }
+
+  .slide-param-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cost-legend-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .desktop-table-view { display: block; }
+  .mobile-card-list { display: none; }
+
+  .sim-layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    align-items: start;
+    gap: 24px;
+  }
+
+  .sim-card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .slide-param-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Print Layout */
+@media print {
+  header.masthead, nav.tab-nav, .filter-bar, .slide-nav-bar, .header-actions {
+    display: none !important;
+  }
+  body {
+    background: #FFFFFF;
+    padding: 0;
+  }
+  .tab-panel {
+    display: block !important;
+    margin-bottom: 32px;
+  }
+  .desktop-table-view { display: block !important; }
+  .mobile-card-list { display: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top Masthead -->
+<header class="masthead">
+  <div class="header-inner">
+    <div class="brand-wrap">
+      <div class="brand-mark">EV</div>
+      <div>
+        <div class="brand-title">ETHAVERTEX &middot; Oral Defense Companion</div>
+        <div class="brand-tagline">Group 2C | Chulalongkorn University Chemical Engineering Capstone AY2026</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <span class="badge badge-green">Fuel-Cell H₂ + Food-Grade CO₂</span>
+    </div>
+  </div>
+</header>
+
+<!-- Navigation Bar (Sticky Top on Desktop, Fixed Bottom on Mobile) -->
+<nav class="tab-nav" aria-label="Main Navigation">
+  <div class="nav-container">
+    <button class="tab-btn active" data-tab="dossier" type="button">
+      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+      <span class="tab-label-mobile">สไลด์ (12)</span>
+      <span class="tab-label-desktop">สไลด์บรรยาย (Slide Dossier)<span class="tab-count">12</span></span>
+    </button>
+    <button class="tab-btn" data-tab="equipment" type="button">
+      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+      <span class="tab-label-mobile">เครื่องจักร (35)</span>
+      <span class="tab-label-desktop">ทะเบียนเครื่องจักร (Equipment)<span class="tab-count">35</span></span>
+    </button>
+    <button class="tab-btn" data-tab="hmb" type="button">
+      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+      <span class="tab-label-mobile">สตรีม HMB (15)</span>
+      <span class="tab-label-desktop">สมดุลมวลสาร (HMB Streams)<span class="tab-count">15</span></span>
+    </button>
+    <button class="tab-btn" data-tab="simulator" type="button">
+      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+      <span class="tab-label-mobile">จำลอง DCF</span>
+      <span class="tab-label-desktop">จำลองเศรษฐศาสตร์ 20 ปี (DCF Simulator)</span>
+    </button>
+  </div>
+</nav>
+
+<!-- Executive Summary KPI Ribbon -->
+<section class="kpi-strip" aria-label="Key Project Metrics">
+  <div class="kpi-container">
+    <div class="kpi-grid">
+      <div class="kpi-item highlight-green">
+        <div class="kpi-label">กำลังการผลิต H₂ (99.99%)</div>
+        <div class="kpi-value tabular">7,650.35 <span class="kpi-unit">t/y</span></div>
+        <div class="kpi-sub">956.3 kg/h (ISO 14687-2)</div>
+      </div>
+      <div class="kpi-item highlight-green">
+        <div class="kpi-label">กำลังผลิต Liquid CO₂</div>
+        <div class="kpi-value tabular">69,600.00 <span class="kpi-unit">t/y</span></div>
+        <div class="kpi-sub">8,700 kg/h @ -25 °C, 20 bar</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-label">เงินลงทุนรวม (TCI)</div>
+        <div class="kpi-value tabular">1,289.55 <span class="kpi-unit">MB</span></div>
+        <div class="kpi-sub">FCI 1,096.12 + WC 193.43 MB</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-label">รายรับรวม (Gross Income)</div>
+        <div class="kpi-value tabular">1,008.63 <span class="kpi-unit">MB/yr</span></div>
+        <div class="kpi-sub">H₂ 765.03 + CO₂ 243.60 MB</div>
+      </div>
+      <div class="kpi-item highlight-amber">
+        <div class="kpi-label">IRR (BOI / Base Case)</div>
+        <div class="kpi-value tabular">37.34% <span class="kpi-unit">/ 31.06%</span></div>
+        <div class="kpi-sub">MARR 10.0% | คืนทุนจริง 4.14 ปี</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-label">NPV @ 10% (BOI / Base)</div>
+        <div class="kpi-value tabular">+2,625.48 <span class="kpi-unit">MB</span></div>
+        <div class="kpi-sub">Base Case: +2,162.31 MB</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main Content Area -->
+<main class="content-area">
+
+  <!-- ================= TAB 1: 12-SLIDE COMPANION DOSSIER ================= -->
+  <section class="tab-panel active" id="panel-dossier" data-tab="dossier">
+    <div class="section-header">
+      <div class="section-title-row">
+        <div>
+          <h2>แฟ้มข้อมูลประกอบสไลด์นำเสนอ 12 หน้า (Oral Defense Slide Dossier)</h2>
+          <p>สรุปตัวเลขวิศวกรรมและสมการออกแบบตรงตามลำดับสไลด์นำเสนอ</p>
+        </div>
+        <span class="badge badge-green" id="slide-count-badge">แสดงครบ 12 สไลด์</span>
+      </div>
+    </div>
+
+    <div class="dossier-layout">
+      <aside class="dossier-sidebar" aria-label="Slide Navigation">
+        <div class="dossier-sidebar-title">สารบัญสไลด์ (1–12)</div>
+        <div class="slide-rail-list" id="slide-rail">
+          <!-- Populated by JS -->
+        </div>
+      </aside>
+
+      <div class="slide-list" id="slide-container">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TAB 2: 35-EQUIPMENT MASTER INDEX ================= -->
+  <section class="tab-panel" id="panel-equipment" data-tab="equipment">
+    <div class="section-header">
+      <div class="section-title-row">
+        <div>
+          <h2>ทะเบียนสเปกและต้นทุนเครื่องจักร 35 ยูนิต (Equipment Roster)</h2>
+          <p>ประเมินต้นทุนตามวิธี Turton Bare Module (2024 Basis): รวม Σ C_BM = 928.92 ล้านบาท และ FCI = 1,096.12 ล้านบาท</p>
+        </div>
+        <span class="badge badge-green" id="equipment-counter">แสดง 35 จาก 35 รายการ | 928.92 MB</span>
+      </div>
+    </div>
+
+    <!-- Clean Stacked Proportion Bar & Cost Breakdown -->
+    <div class="cost-breakdown-card">
+      <div class="cost-card-header">
+        <span class="cost-card-title">สัดส่วนต้นทุนเครื่องจักร Bare Module Cost (Σ C_BM = 928.92 MB)</span>
+        <span style="font-size:12.5px; color:var(--ink-muted)">Train 100 (Core H₂): 652.80 MB &bull; Train 200 (CCU): 276.12 MB</span>
+      </div>
+      <div class="stacked-bar-track" role="img" aria-label="C_BM Cost Distribution">
+        <div class="stacked-segment" style="width:24.42%; background:#0F6A48" title="Reactor: 226.80 MB (24.4%)"></div>
+        <div class="stacked-segment" style="width:22.28%; background:#1D4ED8" title="Compressor: 207.00 MB (22.3%)"></div>
+        <div class="stacked-segment" style="width:14.36%; background:#059669" title="Separation Skid: 133.37 MB (14.4%)"></div>
+        <div class="stacked-segment" style="width:11.86%; background:#D97706" title="Heat Exchanger: 110.17 MB (11.9%)"></div>
+        <div class="stacked-segment" style="width:9.28%; background:#7C3AED" title="Column / Tower: 86.16 MB (9.3%)"></div>
+        <div class="stacked-segment" style="width:7.15%; background:#0891B2" title="Cryogenic Tank: 66.41 MB (7.1%)"></div>
+        <div class="stacked-segment" style="width:10.65%; background:#64748B" title="Vessel/Furnace/Pump: 99.01 MB (10.6%)"></div>
+      </div>
+      <div class="cost-legend-grid">
+        <div class="cost-legend-item">
+          <span class="legend-left"><span class="legend-swatch" style="background:#0F6A48"></span>Reactor (2)</span>
+          <span class="legend-right tabular">226.80 MB (24.4%)</span>
+        </div>
+        <div class="cost-legend-item">
+          <span class="legend-left"><span class="legend-swatch" style="background:#1D4ED8"></span>Compressor (3)</span>
+          <span class="legend-right tabular">207.00 MB (22.3%)</span>
+        </div>
+        <div class="cost-legend-item">
+          <span class="legend-left"><span class="legend-swatch" style="background:#059669"></span>PSA &amp; Dryer (2)</span>
+          <span class="legend-right tabular">133.37 MB (14.4%)</span>
+        </div>
+        <div class="cost-legend-item">
+          <span class="legend-left"><span class="legend-swatch" style="background:#D97706"></span>Exchanger (10)</span>
+          <span class="legend-right tabular">110.17 MB (11.9%)</span>
+        </div>
+        <div class="cost-legend-item">
+          <span class="legend-left"><span class="legend-swatch" style="background:#7C3AED"></span>Column (3)</span>
+          <span class="legend-right tabular">86.16 MB (9.3%)</span>
+        </div>
+        <div class="cost-legend-item">
+          <span class="legend-left"><span class="legend-swatch" style="background:#0891B2"></span>Cryo Tank (1)</span>
+          <span class="legend-right tabular">66.41 MB (7.1%)</span>
+        </div>
+        <div class="cost-legend-item">
+          <span class="legend-left"><span class="legend-swatch" style="background:#64748B"></span>Furnace/Vessel/Pump (14)</span>
+          <span class="legend-right tabular">99.01 MB (10.7%)</span>
+        </div>
+        <div class="cost-legend-item" style="background:var(--brand-soft); border-color:var(--brand-border)">
+          <span class="legend-left" style="color:var(--brand)">รวม Σ C_BM ทั้งหมด</span>
+          <span class="legend-right tabular" style="color:var(--brand)">928.92 MB (100%)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter & Search Controls -->
+    <div class="filter-bar">
+      <div class="search-row">
+        <div class="search-input-wrap">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="eq-search" class="search-input" placeholder="ค้นหา Tag (เช่น R-101, K-100), ชื่อเครื่องจักร, สเปกขนาด หรือวัสดุ MOC...">
+          <button type="button" class="clear-search-btn" id="eq-clear-search" title="ล้างคำค้นหา">&times;</button>
+        </div>
+        <div class="filter-pills" id="eq-train-pills">
+          <button class="pill-btn active" data-train="all" type="button">ทุกสายการผลิต (35)</button>
+          <button class="pill-btn" data-train="100" type="button">Train 100: Core H₂ (18)</button>
+          <button class="pill-btn" data-train="200" type="button">Train 200: CCU (17)</button>
+        </div>
+      </div>
+      <div class="filter-groups-row">
+        <div class="filter-pills" id="eq-cat-pills">
+          <button class="pill-btn active" data-cat="all" type="button">ทุกประเภท</button>
+          <button class="pill-btn" data-cat="Reactor" type="button">Reactor</button>
+          <button class="pill-btn" data-cat="Compressor" type="button">Compressor</button>
+          <button class="pill-btn" data-cat="Separation Skid" type="button">Separation Skid</button>
+          <button class="pill-btn" data-cat="Column" type="button">Column</button>
+          <button class="pill-btn" data-cat="Heat Exchanger" type="button">Heat Exchanger</button>
+          <button class="pill-btn" data-cat="Vessel" type="button">Vessel / Tank</button>
+          <button class="pill-btn" data-cat="Pump" type="button">Pump</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile View: Cards -->
+    <div class="mobile-card-list" id="eq-card-list"></div>
+
+    <!-- Desktop View: Table -->
+    <div class="desktop-table-view">
+      <div class="table-wrapper">
+        <table class="eng-table" id="equipment-table">
+          <thead>
+            <tr>
+              <th style="width:85px">Tag</th>
+              <th style="width:220px">ชื่ออุปกรณ์ (Equipment Name)</th>
+              <th style="width:140px">ประเภท</th>
+              <th>ขนาดออกแบบ (Sizing Specification)</th>
+              <th style="width:175px">สภาวะดำเนินงาน</th>
+              <th style="width:150px">วัสดุ (MOC)</th>
+              <th class="right" style="width:105px">C_p0 (USD)</th>
+              <th class="right" style="width:70px">F_BM</th>
+              <th class="right" style="width:115px">C_BM (MB)</th>
+            </tr>
+          </thead>
+          <tbody id="eq-tbody"></tbody>
+          <tfoot>
+            <tr>
+              <td colspan="8" class="right">รวมต้นทุน Bare Module Cost (Σ C_BM ของรายการที่แสดง):</td>
+              <td class="right tabular" id="eq-sum-cell" style="color:var(--brand); font-size:14.5px">928.92 MB</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TAB 3: 15-STREAM HMB TABLE ================= -->
+  <section class="tab-panel" id="panel-hmb" data-tab="hmb">
+    <div class="section-header">
+      <div class="section-title-row">
+        <div>
+          <h2>ตารางสมดุลมวลสารและพลังงาน 15 สตรีมหลัก (Heat &amp; Material Balance)</h2>
+          <p>ข้อมูลจำลองกระบวนการจาก Aspen HYSYS V15 (สมดุลมวลสารและพลังงาน 100.00%, ความคลาดเคลื่อน &lt; 0.01%)</p>
+        </div>
+        <span class="badge badge-blue" id="stream-counter">แสดง 15 จาก 15 สตรีม</span>
+      </div>
+    </div>
+
+    <!-- Stream Filter Bar -->
+    <div class="filter-bar">
+      <div class="search-row">
+        <div class="search-input-wrap">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="stream-search" class="search-input" placeholder="ค้นหาหมายเลขสตรีม (#1–#15), ชื่อสตรีม หรือองค์ประกอบสารเคมี (เช่น H2, CO2, MEA)...">
+        </div>
+        <div class="filter-pills" id="stream-phase-pills">
+          <button class="pill-btn active" data-phase="all" type="button">ทุกสถานะ (15)</button>
+          <button class="pill-btn" data-phase="Liquid" type="button">Liquid (6)</button>
+          <button class="pill-btn" data-phase="Vapor" type="button">Vapor (5)</button>
+          <button class="pill-btn" data-phase="Gas" type="button">Gas (4)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile View: Stream Cards -->
+    <div class="mobile-card-list" id="stream-card-list"></div>
+
+    <!-- Desktop View: HMB Table -->
+    <div class="desktop-table-view">
+      <div class="table-wrapper">
+        <table class="eng-table" id="stream-table">
+          <thead>
+            <tr>
+              <th class="center" style="width:65px">สตรีม</th>
+              <th style="width:230px">คำอธิบายสตรีม (Stream Description)</th>
+              <th class="center" style="width:90px">สถานะ</th>
+              <th class="right" style="width:85px">T (°C)</th>
+              <th class="right" style="width:85px">P (bar)</th>
+              <th class="right" style="width:120px">อัตราไหล (kg/h)</th>
+              <th class="right" style="width:120px">โมล (kmol/h)</th>
+              <th class="right" style="width:75px">MW</th>
+              <th>องค์ประกอบทางเคมีสำคัญ (Composition)</th>
+            </tr>
+          </thead>
+          <tbody id="stream-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TAB 4: 20-YEAR DCF SIMULATOR ================= -->
+  <section class="tab-panel" id="panel-simulator" data-tab="simulator">
+    <div class="section-header">
+      <div class="section-title-row">
+        <div>
+          <h2>จำลองเศรษฐศาสตร์และวิเคราะห์ความอ่อนไหว 20 ปี (20-Yr DCF Sensitivity Simulator)</h2>
+          <p>ปรับตัวแปรราคาวัตถุดิบ ราคาจำหน่ายผลิตภัณฑ์ และสิทธิประโยชน์ทางภาษี BOI เพื่อประเมินความทนทานทางการเงินแบบเรียลไทม์</p>
+        </div>
+        <span class="badge badge-amber">MARR Benchmark: 10.0%</span>
+      </div>
+    </div>
+
+    <div class="sim-layout">
+      <!-- Left Column: Sensitivity Sliders -->
+      <div class="sim-panel">
+        <div class="sim-panel-header">
+          <span class="sim-panel-title">ตัวแปรวิเคราะห์ความอ่อนไหว (&plusmn;30%)</span>
+          <span class="badge badge-gray">Turton Cost Model</span>
+        </div>
+
+        <!-- Slider 1: Bioethanol Price -->
+        <div class="sim-group">
+          <div class="sim-label-row">
+            <span class="sim-label">ราคาซื้อชีวเอทานอลป้อนเข้า</span>
+            <span class="sim-val-badge tabular" id="val-eth-price">7.00 ฿/กก. (0%)</span>
+          </div>
+          <input type="range" class="sim-slider" id="slider-eth" min="-30" max="30" value="0" step="1">
+          <div class="sim-scale-labels">
+            <span>-30% (4.90 ฿)</span>
+            <span>ฐาน 7.00 ฿ (280 MB/yr)</span>
+            <span>+30% (9.10 ฿)</span>
+          </div>
+        </div>
+
+        <!-- Slider 2: Hydrogen Selling Price -->
+        <div class="sim-group">
+          <div class="sim-label-row">
+            <span class="sim-label">ราคาขายก๊าซไฮโดรเจน (H₂)</span>
+            <span class="sim-val-badge tabular" id="val-h2-price">100.00 ฿/กก. (0%)</span>
+          </div>
+          <input type="range" class="sim-slider" id="slider-h2" min="-30" max="30" value="0" step="1">
+          <div class="sim-scale-labels">
+            <span>-30% (70 ฿)</span>
+            <span>ฐาน 100 ฿ (765.03 MB/yr)</span>
+            <span>+30% (130 ฿)</span>
+          </div>
+        </div>
+
+        <!-- Slider 3: Liquid CO2 Price -->
+        <div class="sim-group">
+          <div class="sim-label-row">
+            <span class="sim-label">ราคาขาย Liquid CO₂</span>
+            <span class="sim-val-badge tabular" id="val-co2-price">3.50 ฿/กก. (0%)</span>
+          </div>
+          <input type="range" class="sim-slider" id="slider-co2" min="-30" max="30" value="0" step="1">
+          <div class="sim-scale-labels">
+            <span>-30% (2.45 ฿)</span>
+            <span>ฐาน 3.50 ฿ (243.60 MB/yr)</span>
+            <span>+30% (4.55 ฿)</span>
+          </div>
+        </div>
+
+        <!-- Slider 4: Utility Tariff -->
+        <div class="sim-group">
+          <div class="sim-label-row">
+            <span class="sim-label">ค่าไฟฟ้าและสาธารณูปโภค</span>
+            <span class="sim-val-badge tabular" id="val-ut-price">3.80 ฿/kWh (0%)</span>
+          </div>
+          <input type="range" class="sim-slider" id="slider-ut" min="-30" max="30" value="0" step="1">
+          <div class="sim-scale-labels">
+            <span>-30%</span>
+            <span>ฐาน 104.47 MB/yr</span>
+            <span>+30%</span>
+          </div>
+        </div>
+
+        <!-- BOI Tax Holiday Toggle -->
+        <div class="boi-switch-box">
+          <div>
+            <div style="font-size:13.5px; font-weight:700; color:var(--ink)">สิทธิประโยชน์ BOI (ยกเว้นภาษี 8 ปี)</div>
+            <div style="font-size:12px; color:var(--ink-muted)">CIT 0% (ปี 1–8) และ 20% (ปี 9–20)</div>
+          </div>
+          <button class="toggle-btn active" id="btn-boi-toggle" type="button">เปิด BOI</button>
+        </div>
+
+        <button class="reset-btn" id="btn-reset-sim" type="button">รีเซ็ตกลับเป็นค่าฐาน (Reset to Baseline)</button>
+      </div>
+
+      <!-- Right Column: Dynamic Outputs, Chart & Cash Flow Table -->
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <!-- KPI Cards -->
+        <div class="sim-card-grid">
+          <div class="res-card">
+            <div class="lbl">รายรับรวม (Gross Income)</div>
+            <div class="val tabular"><span id="res-gi">1,008.63</span> <span style="font-size:13px;font-weight:600">MB/yr</span></div>
+            <div class="sub" id="res-gi-delta">&plusmn;0.00 MB/yr จากกรณีฐาน</div>
+          </div>
+          <div class="res-card blue">
+            <div class="lbl">ต้นทุนการผลิตรวม (COM)</div>
+            <div class="val tabular"><span id="res-com">574.55</span> <span style="font-size:13px;font-weight:600">MB/yr</span></div>
+            <div class="sub" id="res-com-delta">&plusmn;0.00 MB/yr (Cash COM: 519.74)</div>
+          </div>
+          <div class="res-card">
+            <div class="lbl">กำไรจากการดำเนินงาน (EBIT)</div>
+            <div class="val tabular"><span id="res-ebit">434.09</span> <span style="font-size:13px;font-weight:600">MB/yr</span></div>
+            <div class="sub" id="res-margin">EBIT Margin: 43.04%</div>
+          </div>
+          <div class="res-card amber">
+            <div class="lbl">อัตราผลตอบแทนภายใน (IRR)</div>
+            <div class="val tabular" id="res-irr" style="color:var(--amber)">37.34%</div>
+            <div class="sub">เกณฑ์ขั้นต่ำ MARR: 10.00%</div>
+          </div>
+          <div class="res-card">
+            <div class="lbl">มูลค่าปัจจุบันสุทธิ (NPV @ 10%)</div>
+            <div class="val tabular"><span id="res-npv">+2,625.48</span> <span style="font-size:13px;font-weight:600">MB</span></div>
+            <div class="sub">ตลอดอายุโครงการ 20 ปี</div>
+          </div>
+          <div class="res-card amber">
+            <div class="lbl">ระยะเวลาคืนทุนจริง (Realistic PBP)</div>
+            <div class="val tabular"><span id="res-pbp">4.14</span> <span style="font-size:13px;font-weight:600">ปี</span></div>
+            <div class="sub">นับรวมเวลาก่อสร้าง EPC 1.5 ปี</div>
+          </div>
+        </div>
+
+        <!-- Cumulative Cash Flow Chart -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <span class="chart-title">กราฟกระแสเงินสดสะสม 20 ปี และจุดคุ้มทุน (Cumulative Cash Flow Curve)</span>
+            <span class="badge badge-amber" id="chart-pbp-badge">จุดคุ้มทุน ~4.14 ปี</span>
+          </div>
+          <div class="chart-svg-container">
+            <svg id="dcf-chart-svg" width="100%" height="100%" viewBox="0 0 640 250" preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+        </div>
+
+        <!-- Cash Flow Milestone Table -->
+        <div class="table-wrapper" style="margin-bottom:0">
+          <div style="padding:14px 16px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center">
+            <span style="font-size:14.5px; font-weight:700; color:var(--ink)">ตารางกระแสเงินสดรายปี (Cash Flow Milestone Breakdown)</span>
+            <span style="font-size:12px; color:var(--ink-muted)">หน่วย: ล้านบาท (MB)</span>
+          </div>
+          <table class="eng-table" id="cf-table">
+            <thead>
+              <tr>
+                <th>ปีโครงการ</th>
+                <th>สถานะการดำเนินงานและภาษี</th>
+                <th class="right">รายรับ (GI)</th>
+                <th class="right">Cash COM</th>
+                <th class="right">ภาษี CIT</th>
+                <th class="right">NCF สุทธิ</th>
+                <th class="right">กระแสเงินสดสะสม</th>
+              </tr>
+            </thead>
+            <tbody id="cf-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function() {
+  // 1. Complete Verified Engineering Dataset
+  const EQUIPMENT = [
+    {"tag": "TK-101", "name": "Bioethanol Storage Tank", "train": 100, "category": "Vessel / Tank", "sizing": "V = 2,000 m³ (15 days buffer)", "conditions": "Ambient, 1.0 bar", "moc": "Carbon Steel (API 650)", "c_bm": 12.45, "c_p0_usd": 105000, "f_bm": 3.65},
+    {"tag": "TK-102", "name": "Demineralized Water Tank", "train": 100, "category": "Vessel / Tank", "sizing": "V = 1,000 m³ (7 days buffer)", "conditions": "Ambient, 1.0 bar", "moc": "SS304 (API 650)", "c_bm": 8.2, "c_p0_usd": 68000, "f_bm": 3.7},
+    {"tag": "P-101", "name": "Bioethanol Feed Pump", "train": 100, "category": "Pump", "sizing": "Q = 6.3 m³/h, Head = 30 m, 5.5 kW", "conditions": "25 °C, 1.0 → 3.0 bar", "moc": "SS316L (API 610)", "c_bm": 1.85, "c_p0_usd": 15000, "f_bm": 3.8},
+    {"tag": "P-102", "name": "Water Makeup & Recycle Pump", "train": 100, "category": "Pump", "sizing": "Q = 5.9 m³/h, Head = 30 m, 5.5 kW", "conditions": "25 °C, 1.0 → 3.0 bar", "moc": "SS316L (API 610)", "c_bm": 1.8, "c_p0_usd": 14500, "f_bm": 3.82},
+    {"tag": "E-100", "name": "Feed Vaporizer Preheater", "train": 100, "category": "Heat Exchanger", "sizing": "Duty = 8.42 MW, A = 480 m²", "conditions": "25 → 500 °C, 1.0 bar", "moc": "SS316L (TEMA R)", "c_bm": 26.42, "c_p0_usd": 132000, "f_bm": 6.16},
+    {"tag": "R-101", "name": "Steam Reformer Reactor (45 Tubes)", "train": 100, "category": "Reactor", "sizing": "Duty = 5,994 kW, LSTN 650 cat (3,623 kg)", "conditions": "650 °C, 1.0 bar, WHSV 3.0 h⁻¹", "moc": "Inconel 625 (API 560)", "c_bm": 184.2, "c_p0_usd": 654558, "f_bm": 5.47},
+    {"tag": "E-101", "name": "Syngas High-Temp Cooler", "train": 100, "category": "Heat Exchanger", "sizing": "Duty = 3.65 MW, A = 210 m²", "conditions": "650 → 350 °C, BFW heat recovery", "moc": "SS316L (TEMA R)", "c_bm": 18.5, "c_p0_usd": 92000, "f_bm": 6.19},
+    {"tag": "R-102", "name": "HT-WGS Shift Reactor", "train": 100, "category": "Reactor", "sizing": "V = 6.19 m³, Fe-Cr cat (8,200 kg)", "conditions": "350 °C, 0.9 bar, 90% CO Conv.", "moc": "Cr-Mo Steel (ASME VIII)", "c_bm": 42.6, "c_p0_usd": 168000, "f_bm": 5.16},
+    {"tag": "E-102", "name": "Syngas Quench Cooler", "train": 100, "category": "Heat Exchanger", "sizing": "Duty = 2.10 MW, A = 145 m²", "conditions": "350 → 30 °C, CW cooled", "moc": "CS Shell / SS Tube", "c_bm": 12.4, "c_p0_usd": 65000, "f_bm": 5.86},
+    {"tag": "S-101", "name": "Process Condensate KO Drum", "train": 100, "category": "Vessel / Tank", "sizing": "V = 9.65 m³, 958.5 kg/h condensate", "conditions": "30 °C, 0.9 bar", "moc": "Carbon Steel / SS mesh", "c_bm": 6.1, "c_p0_usd": 38000, "f_bm": 4.93},
+    {"tag": "K-100", "name": "Syngas Compressor (3-Stage)", "train": 100, "category": "Compressor", "sizing": "Shaft Power = 2,579 kW (API 617)", "conditions": "0.90 → 20.4 bar", "moc": "Cast CS / 17-4PH Impeller", "c_bm": 145.8, "c_p0_usd": 543798, "f_bm": 3.92},
+    {"tag": "E-103A", "name": "Compressor Stage-1 Intercooler", "train": 100, "category": "Heat Exchanger", "sizing": "Duty = 385 kW, A = 42 m²", "conditions": "135 → 40 °C, CW", "moc": "CS Shell / SS Tube", "c_bm": 4.73, "c_p0_usd": 24000, "f_bm": 6.07},
+    {"tag": "E-103B", "name": "Compressor Stage-2 Intercooler", "train": 100, "category": "Heat Exchanger", "sizing": "Duty = 380 kW, A = 40 m²", "conditions": "132 → 40 °C, CW", "moc": "CS Shell / SS Tube", "c_bm": 4.73, "c_p0_usd": 24000, "f_bm": 6.07},
+    {"tag": "E-103C", "name": "Compressor Stage-3 Aftercooler", "train": 100, "category": "Heat Exchanger", "sizing": "Duty = 385 kW, A = 43 m²", "conditions": "134 → 40 °C, CW", "moc": "CS Shell / SS Tube", "c_bm": 4.74, "c_p0_usd": 24200, "f_bm": 6.06},
+    {"tag": "S-102", "name": "Compressor Knock-out Drum", "train": 100, "category": "Vessel / Tank", "sizing": "V = 4.20 m³, moisture catchpot", "conditions": "20.0 bar, 40 °C", "moc": "CS (ASME VIII Div 1)", "c_bm": 5.8, "c_p0_usd": 29000, "f_bm": 6.15},
+    {"tag": "PS-101", "name": "4-Bed Duplex PSA Skid", "train": 100, "category": "Separation Skid", "sizing": "8 Beds, Zeolite 13X + Carbon (9,091 kg)", "conditions": "20 bar, 85% H2 rec, 956.3 kg/h H2", "moc": "Carbon Steel (20 bar)", "c_bm": 128.5, "c_p0_usd": 680000, "f_bm": 5.82},
+    {"tag": "F-101", "name": "Reformer Fired Furnace", "train": 100, "category": "Furnace", "sizing": "12.8 MW heat release (API 560)", "conditions": "Radiant box, 73.7% PSA tail gas", "moc": "Refractory / CS Casing", "c_bm": 37.02, "c_p0_usd": 210000, "f_bm": 5.42},
+    {"tag": "CT-101", "name": "Cooling Tower Package & Pump", "train": 100, "category": "Utility Package", "sizing": "90.5 m³/h circulation, Duty 1,052 kW", "conditions": "Water 32 → 28 °C, 22 kW motor", "moc": "FRP Structure / SS pump", "c_bm": 6.96, "c_p0_usd": 52000, "f_bm": 2.5},
+    {"tag": "B-201", "name": "Flue Gas Draft Blower", "train": 200, "category": "Compressor / Fan", "sizing": "42,500 kg/h, ΔP = 0.25 bar, 95 kW", "conditions": "120 °C, 1.0 bar (API 673)", "moc": "Carbon Steel", "c_bm": 7.2, "c_p0_usd": 38400, "f_bm": 2.8},
+    {"tag": "C-201", "name": "Direct Contact Cooler (DCC)", "train": 200, "category": "Column / Tower", "sizing": "D = 1.80 m, H = 8.50 m, V = 21.6 m³", "conditions": "120 → 40 °C, knocks 4,300 kg/h H2O", "moc": "CS + SS316L Packing", "c_bm": 9.05, "c_p0_usd": 32500, "f_bm": 4.16},
+    {"tag": "C-202", "name": "CO2 Absorber Column", "train": 200, "category": "Column / Tower", "sizing": "D = 2.10 m, H = 24.0 m, Mellapak 250Y", "conditions": "40–50 °C, 1.1 bar, 30 wt% MEA", "moc": "CS Epoxy Clad / SS316", "c_bm": 45.93, "c_p0_usd": 165000, "f_bm": 4.16},
+    {"tag": "C-203", "name": "Amine Stripper Column", "train": 200, "category": "Column / Tower", "sizing": "D = 1.50 m, H = 18.0 m, Structured Pack", "conditions": "110–120 °C, 1.8 bar", "moc": "SS316L (ASME VIII)", "c_bm": 31.18, "c_p0_usd": 112000, "f_bm": 4.16},
+    {"tag": "E-201", "name": "Stripper Reboiler", "train": 200, "category": "Heat Exchanger", "sizing": "Duty = 9.18 MW, A = 480 m² (Kettle)", "conditions": "120 °C, 1.8 bar, heated by LP steam", "moc": "SS316L Tubes / CS Shell", "c_bm": 12.46, "c_p0_usd": 58200, "f_bm": 3.2},
+    {"tag": "E-202", "name": "Stripper Overhead Condenser", "train": 200, "category": "Heat Exchanger", "sizing": "Duty = 4.20 MW, A = 190 m²", "conditions": "105 → 40 °C, CW cooled", "moc": "SS316L Tubes / CS Shell", "c_bm": 6.72, "c_p0_usd": 31400, "f_bm": 3.2},
+    {"tag": "E-203", "name": "Lean/Rich Plate Heat Exchanger", "train": 200, "category": "Heat Exchanger", "sizing": "Duty = 5.80 MW, A = 340 m²", "conditions": "Lean 118→65 °C, Rich 50→100 °C", "moc": "SS316L Plates", "c_bm": 13.73, "c_p0_usd": 54000, "f_bm": 3.8},
+    {"tag": "E-204", "name": "Lean Amine Trim Cooler", "train": 200, "category": "Heat Exchanger", "sizing": "Duty = 1.45 MW, A = 145 m²", "conditions": "55 → 40 °C, CW cooled", "moc": "SS316L Tubes / CS Shell", "c_bm": 5.74, "c_p0_usd": 26800, "f_bm": 3.2},
+    {"tag": "P-201A", "name": "Rich Amine Pump (Run)", "train": 200, "category": "Pump", "sizing": "Q = 58 m³/h, Head = 35 m, 11 kW", "conditions": "50 °C, 1.2 → 3.5 bar", "moc": "SS316L (API 610)", "c_bm": 1.6, "c_p0_usd": 7250, "f_bm": 3.3},
+    {"tag": "P-201B", "name": "Rich Amine Pump (Standby)", "train": 200, "category": "Pump", "sizing": "Q = 58 m³/h, Head = 35 m, 11 kW", "conditions": "50 °C, 1.2 → 3.5 bar", "moc": "SS316L (API 610)", "c_bm": 1.6, "c_p0_usd": 7250, "f_bm": 3.3},
+    {"tag": "P-202A", "name": "Lean Amine Pump (Run)", "train": 200, "category": "Pump", "sizing": "Q = 53 m³/h, Head = 40 m, 11 kW", "conditions": "40 °C, 1.5 → 4.5 bar", "moc": "SS316L (API 610)", "c_bm": 1.79, "c_p0_usd": 8100, "f_bm": 3.3},
+    {"tag": "P-202B", "name": "Lean Amine Pump (Standby)", "train": 200, "category": "Pump", "sizing": "Q = 53 m³/h, Head = 40 m, 11 kW", "conditions": "40 °C, 1.5 → 4.5 bar", "moc": "SS316L (API 610)", "c_bm": 1.79, "c_p0_usd": 8100, "f_bm": 3.3},
+    {"tag": "V-201", "name": "Stripper Reflux Drum", "train": 200, "category": "Vessel / Tank", "sizing": "D = 1.20 m, L = 2.80 m, V = 3.17 m³", "conditions": "40 °C, 1.5 bar", "moc": "SS316L (ASME VIII)", "c_bm": 2.53, "c_p0_usd": 12400, "f_bm": 3.05},
+    {"tag": "TK-201", "name": "Amine Makeup Storage Tank", "train": 200, "category": "Vessel / Tank", "sizing": "V = 32.4 m³ (30 days MEA inventory)", "conditions": "Ambient, 1.0 bar", "moc": "Carbon Steel (API 650)", "c_bm": 2.32, "c_p0_usd": 21000, "f_bm": 1.65},
+    {"tag": "K-201", "name": "CO2 Liquefaction Compressor", "train": 200, "category": "Compressor", "sizing": "3-Stage Reciprocating, 680 kW motor", "conditions": "1.5 → 75 bar, 8,700 kg/h CO2", "moc": "CS Casing / SS Trim", "c_bm": 61.2, "c_p0_usd": 295000, "f_bm": 2.87},
+    {"tag": "D-201", "name": "CO2 Dehydration Twin Bed", "train": 200, "category": "Separation Skid", "sizing": "2 Beds, Molecular Sieve 4A (3.56 m³)", "conditions": "30 °C, 75 bar, H2O < 10 ppm wt", "moc": "Carbon Steel (High Pressure)", "c_bm": 4.87, "c_p0_usd": 28000, "f_bm": 2.6},
+    {"tag": "TK-202", "name": "Liquid CO2 Cryogenic Bullet Tank", "train": 200, "category": "Cryogenic Tank", "sizing": "V = 220 m³, D = 4.0 m, L = 17.5 m", "conditions": "-25 °C, 20 bar (24 hr buffer)", "moc": "Inner: SS304 / Outer: CS", "c_bm": 66.41, "c_p0_usd": 245000, "f_bm": 4.05}
+  ];
+
+  const STREAMS = [
+    {"id": 1, "name": "Bioethanol Raw Feed", "phase": "Liquid", "temp": 25.0, "press": 1.0, "mass_flow": 5000.0, "mole_flow": 108.53, "mw": 46.07, "comp": "EtOH 95.0 vol% (92.4 wt%), H2O 7.6 wt%"},
+    {"id": 2, "name": "Demineralized Water Makeup", "phase": "Liquid", "temp": 25.0, "press": 1.0, "mass_flow": 4908.6, "mole_flow": 272.48, "mw": 18.02, "comp": "H2O 100.0 wt%"},
+    {"id": 3, "name": "Recycled Process Condensate", "phase": "Liquid", "temp": 30.0, "press": 1.0, "mass_flow": 958.5, "mole_flow": 53.19, "mw": 18.02, "comp": "H2O 99.8 wt% (Recycled to Mixer M-101)"},
+    {"id": 4, "name": "Superheated Mixed Feed to R-101", "phase": "Vapor", "temp": 500.0, "press": 1.0, "mass_flow": 10867.1, "mole_flow": 434.2, "mw": 25.03, "comp": "H2O/EtOH = 3.0:1.0 (Molar S/C = 1.50)"},
+    {"id": 5, "name": "Reformed Syngas (R-101 Out)", "phase": "Vapor", "temp": 650.0, "press": 1.0, "mass_flow": 10867.1, "mole_flow": 606.5, "mw": 17.92, "comp": "H2 64.2%, CO 17.5%, CO2 8.3%, CH4 1.2%, H2O 8.8%"},
+    {"id": 6, "name": "Shifted Syngas (R-102 Out)", "phase": "Vapor", "temp": 350.0, "press": 0.9, "mass_flow": 10867.1, "mole_flow": 558.09, "mw": 19.47, "comp": "H2 72.8%, CO2 23.5%, CO 1.8%, H2O 1.9%"},
+    {"id": 7, "name": "Fuel-Cell H2 Product (PS-101 Out)", "phase": "Gas", "temp": 40.0, "press": 20.0, "mass_flow": 956.3, "mole_flow": 474.38, "mw": 2.02, "comp": "H2 ≥ 99.99% (CO < 0.2 ppm, ISO 14687-2)"},
+    {"id": 8, "name": "PSA Tail Gas Fuel to F-101", "phase": "Gas", "temp": 35.0, "press": 1.3, "mass_flow": 8952.3, "mole_flow": 300.8, "mw": 29.76, "comp": "CO2 43.6%, H2O 40.0%, H2 10.9%, CO 3.3%, CH4 2.2%"},
+    {"id": 9, "name": "Flue Gas from Furnace F-101", "phase": "Gas", "temp": 120.0, "press": 1.0, "mass_flow": 42500.0, "mole_flow": 1420.0, "mw": 29.93, "comp": "N2 68.0%, CO2 19.5%, H2O 9.5%, O2 3.0%"},
+    {"id": 10, "name": "Food-Grade Liquid CO2 Product", "phase": "Liquid", "temp": -25.0, "press": 20.0, "mass_flow": 8700.0, "mole_flow": 197.68, "mw": 44.01, "comp": "CO2 ≥ 99.9% (EIGA Food-Grade Standard)"},
+    {"id": 11, "name": "Cooled Flue Gas (C-201 to C-202)", "phase": "Vapor", "temp": 40.0, "press": 1.0, "mass_flow": 38200.0, "mole_flow": 1210.0, "mw": 31.57, "comp": "N2 75.6%, CO2 21.7%, H2O 2.7%"},
+    {"id": 12, "name": "Rich Amine Solution (C-202 Out)", "phase": "Liquid", "temp": 50.0, "press": 1.2, "mass_flow": 115000.0, "mole_flow": 4250.0, "mw": 27.06, "comp": "MEA 30 wt%, H2O 62 wt%, CO2 8 wt% (Loading 0.37)"},
+    {"id": 13, "name": "Preheated Rich Amine to C-203", "phase": "Liquid", "temp": 100.0, "press": 2.0, "mass_flow": 115000.0, "mole_flow": 4250.0, "mw": 27.06, "comp": "MEA 30 wt%, H2O 62 wt%, CO2 8 wt%"},
+    {"id": 14, "name": "Stripper Overhead to E-202", "phase": "Vapor", "temp": 105.0, "press": 1.8, "mass_flow": 11200.0, "mole_flow": 336.5, "mw": 33.28, "comp": "CO2 77.7 wt% (59.0 mol%), H2O 22.3 wt% (41.0 mol%)"},
+    {"id": 15, "name": "Dry CO2 to Compressor K-201", "phase": "Gas", "temp": 30.0, "press": 1.5, "mass_flow": 8700.0, "mole_flow": 197.68, "mw": 44.01, "comp": "CO2 ≥ 99.5%, H2O < 10 ppm wt (Post-D-201)"}
+  ];
+
+  const SLIDES = [
+    {"slide": 1, "short": "Dual-Product", "topic": "Executive Rationale & Dual-Product Model", "speaker": "ธนโชติ (0:00–0:32)", "headline": "เพิ่มมูลค่าชีวเอทานอล 3.6 เท่า สู่ H₂ เซลล์เชื้อเพลิง 7,650 ตัน/ปี + Food-Grade Liquid CO₂ 69,600 ตัน/ปี", "params": [["รายรับรวม (Gross Income)", "1,008.63 ล้านบาท/ปี", "H₂ 765.03 MB (75.8%) + Liquid CO₂ 243.60 MB (24.2%)"], ["ต้นทุนวัตถุดิบ (Raw Material)", "280.00 ล้านบาท/ปี", "ชีวเอทานอล 95 vol% จำนวน 40,000 ตัน/ปี @ 7.00 ฿/กก. (~5.64 ฿/ลิตร)"], ["ความคุ้มค่าของการอัปเกรด (Value Uplift)", "3.60 เท่า", "อัตราส่วน Gross Income ต่อยอดซื้อวัตถุดิบ (1,008.63 / 280.00)"], ["ที่ตั้งและขนาดที่ดิน", "11.0 ไร่ นิคมฯ มาบตาพุด", "แปลงสี่เหลี่ยม 160 × 110 ม. โซน EEC ใกล้โรงกลั่นและโรงงานเครื่องดื่ม"]], "ref": "รายงานบทที่ 4 (Executive Summary) และ บทที่ 5 (Economic Evaluation ตาราง 5.1 & 5.6)"},
+    {"slide": 2, "short": "Thermodynamics", "topic": "Process Synthesis & Carlson Thermodynamics", "speaker": "ธนโชติ (0:32–1:05)", "headline": "สถาปัตยกรรม 4 โซน 35 ยูนิต คัดเลือก Fluid Package อุณหพลศาสตร์ตาม Carlson (1996)", "params": [["โซน 1 (Reforming Feed)", "NRTL (Non-Random Two-Liquid)", "จับพฤติกรรม Non-ideal ของสารผสม Ethanol-Water ที่มีขั้วสูง"], ["โซน 2 (Syngas & WGS)", "Peng-Robinson (PR)", "คำนวณสมบัติก๊าซผสม H₂, CO, CO₂, CH₄ ที่ความดันสูงได้อย่างแม่นยำ"], ["โซน 3 (CO₂ Absorption)", "Electrolyte NRTL (eNRTL)", "คำนวณปฏิกิริยาแตกตัวทางเคมีของไอออน MEA-H₂O-CO₂ ในสารละลาย"], ["โซน 4 (CO₂ Liquefaction)", "Peng-Robinson Cryogenic", "ทำนายจุดกลั่นตัวของก๊าซ CO₂ บริสุทธิ์ที่อุณหภูมิต่ำจัด -25 °C, 20 bar"], ["ความคลาดเคลื่อนในการตัดสตรีม", "Error < 0.01%", "Aspen HYSYS V15 Convergence สมดุลมวลและพลังงาน 100.00%"]], "ref": "รายงานบทที่ 6 (Process Synthesis) และ บทที่ 7 (Database Assembly & Fluid Packages)"},
+    {"slide": 3, "short": "R-101 & LSTN 650", "topic": "Reaction Engineering & Perovskite LSTN 650", "speaker": "ธนชาติ (1:05–2:10)", "headline": "เตาปฏิกรณ์ท่อไฟ R-101 ตัวเร่งปฏิกิริยานวัตกรรม LSTN 650 ปฏิรูปชีวเอทานอลสมบูรณ์ที่ S/E = 3.0:1.0", "params": [["สูตรตัวเร่งปฏิกิริยา", "La₀.₇Sr₀.₃Ti₀.₉₅Ni₀.₀₅O₃₋δ (LSTN 650)", "โครงสร้าง Perovskite มีเสถียรภาพสูง เหนี่ยวนำ In-situ Ni Exsolution"], ["อัตราการเกิดเขม่าคาร์บอน (Coking)", "7.37 mg C / g_cat·h", "ต่ำกว่าตัวเร่งทั่วไป 10 เท่า ปราศจากการอุดตันแม้ทำงานที่ S/E ต่ำ 3.0"], ["อัตราส่วนไอน้ำต่อเอทานอล (S/E)", "S/E = 3.0:1.0 (S/C = 1.50)", "เอทานอล 1 โมล มีคาร์บอน 2 อะตอม ประหยัดความร้อนต้มระเหยน้ำได้ 66.7%"], ["สเปกทางกลเตาปฏิกรณ์ R-101", "45 ท่อไฟ, Inconel 625", "ID 100 มม., L 8.0 ม., บรรจุตัวเร่ง 3,623 กก., WHSV 3.0 h⁻¹, Duty 5,994 kW"], ["สภาวะและ Conversion", "650 °C, 1.0 bar (Atmospheric)", "Conversion เอทานอลสมบูรณ์ 100%, ผลได้ H₂ 4.04 mol/mol-EtOH"]], "ref": "รายงานบทที่ 7 (Kinetics & Catalysis) และ บทที่ 11 (Reactor Sizing R-101 หน้า 110–125)"},
+    {"slide": 4, "short": "HT-WGS & Recycle", "topic": "Water-Gas Shift & Process Water Closed-Loop", "speaker": "ธนชาติ (2:10–3:15)", "headline": "เครื่องปฏิกรณ์ R-102 (HT-WGS) แปลงผัน CO 90.0% และปิดวงจรน้ำรีไซเคิล 100% สู่ Zero Discharge", "params": [["เครื่องปฏิกรณ์ R-102 (HT-WGS)", "Adiabatic Fixed-Bed, V = 6.19 m³", "เส้นผ่านศูนย์กลาง 1.38 ม. สูง 4.14 ม., บรรจุตัวเร่ง Fe-Cr 8,200 kg"], ["การแปลงผันและสภาวะ", "CO Conversion = 90.0%", "350 °C เข้าสู่ 366.4 °C ขาออก, เพิ่มผลผลิต H₂ จาก 438 เป็น 558 kmol/h (+27.3%)"], ["ถังดักน้ำควบแน่น S-101", "Knock-out Drum V = 9.65 m³", "แยกน้ำกระบวนการ 958.5 kg/h (30 °C, 0.9 bar) ป้อนกลับเข้า M-101 เต็ม 100%"], ["การลดการใช้น้ำเติม (Makeup Water)", "ประหยัดน้ำดี 16.3%", "ลดภาระน้ำหล่อเย็นและบรรลุมาตรฐาน Zero Process Wastewater Discharge"]], "ref": "รายงานบทที่ 9 (Process Description) และ บทที่ 10 (Material & Energy Balance)"},
+    {"slide": 5, "short": "K-100 & PSA", "topic": "Syngas Compression Train & Dynamic PSA", "speaker": "ชลิดา (3:15–4:15)", "headline": "ระบบอัดก๊าซ 3 สเตจ K-100 สู่ 20.4 bar และหน่วยแยกสกัด PSA 4-Bed Duplex บริสุทธิ์ ≥ 99.99%", "params": [["คอมเพรสเซอร์ K-100 (API 617)", "3-Stage Centrifugal, Power 2,579 kW", "แรงดัน 0.90 สู่ 20.4 bar (CR = 2.73/stage) พร้อม Intercooler E-103A/B/C"], ["วัสดุใบพัดและตัวเรือน", "Cast CS Casing, 17-4PH Impellers", "ทนทานต่อก๊าซไฮโดรเจนชื้น ป้องกัน Hydrogen Embrittlement ตาม NACE MR0175"], ["หน่วยสกัดไฮโดรเจน PS-101", "4-Bed Duplex (8 หอคู่ขนาน)", "บรรจุสารดูดซับ 9,091 กก./สคิด (Active Carbon 40% + Zeolite 13X 60%)"], ["คุณภาพและอัตราการผลิต H₂", "956.3 kg/h (≥ 99.99% Purity)", "CO < 0.2 ppm ตามมาตรฐาน ISO 14687-2 Grade D สำหรับรถยนต์ FCEV"], ["ก๊าซทิ้งท้ายระบบ (PSA Tail Gas)", "Stream 8 = 8,952.3 kg/h (1.3 bar)", "เป็นก๊าซเชื้อเพลิงหลักให้เตา F-101 ครอบคลุมภาระความร้อนถึง 73.7%"]], "ref": "รายงานบทที่ 9 (PSA Purification System) และ บทที่ 11 (Compressor & PSA Skid Specs)"},
+    {"slide": 6, "short": "Flue Gas CCU", "topic": "Flue Gas CCU & Food-Grade Liquefaction", "speaker": "ชลิดา (4:15–5:00)", "headline": "ดักจับ CO₂ ด้วย 30 wt% MEA และทำความเย็นจัดสู่ของเหลว -25 °C, 20 bar (EIGA Food-Grade)", "params": [["หอดูดซับก๊าซ C-202", "D = 2.1 m, H = 24.0 m, Mellapak 250Y", "ดักจับ CO₂ ได้ 91.19% (Stream 10 = 8,700 kg/h หรือ 69,600 t/y)"], ["หอสกัดฟื้นสภาพ C-203", "D = 1.5 m, H = 18.0 m, SS316L", "Reboiler E-201 Duty 9.18 MW ใช้ไอน้ำความดันต่ำ LP Steam 3.5 bar"], ["ระบบทำความเย็นจัด E-206", "Chiller Evaporator (Duty 0.68 MW)", "ควบแน่น CO₂ บริสุทธิ์กลายเป็นของเหลวที่ความดัน 20 bar อุณหภูมิ -25 °C"], ["ถังเก็บทรงแคปซูล TK-202", "V = 220 m³, D = 4.0 m, L = 17.5 m", "ฉนวนสุญญากาศ 2 ชั้น (Double-walled Vacuum), สำรองก๊าซเหลวได้ 24 ชั่วโมง"]], "ref": "รายงานบทที่ 9 (CCU Plant) และ บทที่ 11 (Columns, Reboiler & Cryogenic Storage)"},
+    {"slide": 7, "short": "HEN & Exergy", "topic": "HEN Pinch Integration & Exergy Analysis", "speaker": "ชวนากร (5:00–5:25)", "headline": "โครงข่ายแลกเปลี่ยนความร้อน HEN กู้คืนพลังงาน 12.14 MW และบรรลุ Exergy Efficiency 96.9%", "params": [["พินช์พอยต์ของระบบ (Pinch Point)", "ΔT_min = 10 °C (Hot 105 °C, Cold 95 °C)", "แบ่งขอบเขตอุณหพลศาสตร์อย่างชัดเจน ห้ามแลกเปลี่ยนความร้อนข้ามพินช์"], ["ภาระความร้อนที่นำกลับมาใช้ (Heat Recovery)", "12.14 MW (HEN Network)", "นำความร้อนจาก Syngas ร้อนไปอุ่นและต้มระเหยสารผสมป้อนเข้า E-100"], ["การลดการใช้พลังงานภายนอก", "Hot Utility ลด 73.7%, Cold ลด 85.2%", "ประหยัดเชื้อเพลิงก๊าซธรรมชาติและน้ำหล่อเย็นมูลค่ามหาศาลต่อปี"], ["ประสิทธิภาพทางเอ็กเซอร์จี (Exergy Efficiency)", "96.9% (Overall Plant)", "สูญเสีย Exergy รวมเพียง 4,554.8 kW (จุดสูญเสียสูงสุดอยู่ที่เตาเผา F-101)"]], "ref": "รายงานบทที่ 10 (Heat Exchanger Network Synthesis & Exergy Analysis)"},
+    {"slide": 8, "short": "Process Control", "topic": "Process Control & Dynamic Resiliency", "speaker": "ชวนากร (5:25–5:45)", "headline": "โครงสร้างควบคุม 7 ลูปหลักและกลยุทธ์ฟีดฟอร์เวิร์ดรับมือความผันแปรอัตราป้อน ±20%", "params": [["การคุมอัตราส่วนไอน้ำต่อเอทานอล", "Ratio Control (FIC-101 / FIC-102)", "ล็อกค่าโมลาร์ S/E = 3.0:1.0 เสมอเพื่อตัดความเสี่ยงการเกิดเขม่าคาร์บอน"], ["การคุมอุณหภูมิทางออกเตาปฏิกรณ์", "TIC-101 ควบคุมวาล์วเชื้อเพลิงเตา F-101", "รักษาอุณหภูมิก๊าซขาออก 650 ± 2 °C ป้องกันความเสียหายต่อโลหะท่อ Inconel 625"], ["การคุมแรงดันดูดซับ PSA Skid", "PIC-101 ควบคุมวาล์วบายพาสและแบ็กเพรชเชอร์", "คุมแรงดันทำงานคงที่ 20.0 ± 0.2 bar เพื่อความเสถียรของหน้าคลื่นการดูดซับ"], ["ระบบ Safety Interlock (SIS)", "SIL-2 Architecture ตาม IEC 61511", "ทริปวาล์วตัดแยกระบบเชื้อเพลิงฉุกเฉิน XV-101 ภายใน 1.5 วินาทีเมื่ออุณหภูมิเกินพิกัด"]], "ref": "รายงานบทที่ 9 (Instrumentation & Process Control Architecture)"},
+    {"slide": 9, "short": "CAPEX 35 Units", "topic": "Equipment Roster & Capital Expenditure (CAPEX)", "speaker": "ชวนากร (5:45–6:15)", "headline": "ประเมินต้นทุนเครื่องจักร 35 ยูนิตตามวิธี Turton (2024 Basis): FCI = 1,096.12 MB, TCI = 1,289.55 MB", "params": [["ต้นทุนเครื่องจักรเปล่า Train 100", "Σ C_BM (Core H₂) = 652.80 MB", "18 ยูนิต (Top: R-101 184.20 MB, K-100 145.80 MB, PS-101 128.50 MB)"], ["ต้นทุนเครื่องจักรเปล่า Train 200", "Σ C_BM (CCU) = 276.12 MB", "17 ยูนิต (Top: K-201 61.20 MB, C-202 45.93 MB, C-203 31.18 MB)"], ["รวมต้นทุน Bare Module ทั้งโรงงาน", "Σ C_BM,total = 928.92 MB", "คำนวณผ่าน Cost Correlation Log-polynomial และ CEPCI ปรับปี 2024"], ["เงินลงทุนคงที่ (Fixed Capital, FCI)", "FCI = C_TM = 1,096.12 MB", "FCI = 1.18 × Σ C_BM (รวมงานโยธา ระบบท่อ ระบบไฟฟ้า และ Contingency 18%)"], ["เงินลงทุนรวมทั้งโครงการ (TCI)", "TCI = 1,289.55 MB", "FCI 1,096.12 MB + เงินทุนหมุนเวียน (Working Capital, WC 15% TCI) 193.43 MB"]], "ref": "รายงานบทที่ 11 (Equipment Costing) และ บทที่ 12 (CAPEX Estimation ตาราง 12.1–12.4)"},
+    {"slide": 10, "short": "20-Yr DCF", "topic": "20-Year DCF & Profitability Dashboard", "speaker": "ชวนากร (6:15–6:45)", "headline": "การวิเคราะห์กระแสเงินสดคิดลด 20 ปี: IRR Base 31.06% / BOI 37.34%, คืนทุนจริง 4.14 ปี", "params": [["ต้นทุนการผลิตต่อปี (COM)", "COM = 574.55 ล้านบาท/ปี", "DMC 441.22 MB + FMC 107.01 MB + GE 26.31 MB (หักค่าเสื่อม Cash COM 519.74 MB)"], ["กำไรก่อนหักดอกเบี้ยและภาษี (EBIT)", "+434.09 ล้านบาท/ปี", "EBIT Margin = 43.04% สะท้อนมาร์จิ้นธุรกิจเคมีภัณฑ์เกรดสูง"], ["อัตราผลตอบแทนภายใน (IRR)", "31.06% (Base) / 37.34% (BOI)", "เทียบกับเกณฑ์ตัดสินใจ MARR 10.0% ผ่านเกณฑ์การลงทุนอย่างเด็ดขาด"], ["มูลค่าปัจจุบันสุทธิ (NPV @ 10%)", "+2,162.31 MB (Base) / +2,625.48 MB (BOI)", "สร้างมูลค่าเพิ่มมหาศาลตลอดอายุโครงการ 20 ปี"], ["ระยะเวลาคืนทุนจริง (Realistic PBP)", "4.14 ปี (BOI) / 4.71 ปี (Base)", "นับรวมระยะเวลาก่อสร้าง EPC 1.5 ปีแล้ว (Simple PBP บน FCI เพียง 2.24 ปี)"], ["จุดคุ้มทุน (Break-Even Capacity)", "3,396.49 ตัน/ปี (44.40%)", "Margin of Safety สูงถึง 55.60% ทนทานต่อความผันผวนของตลาด"]], "ref": "รายงานบทที่ 12 (20-Yr Discounted Cash Flow Analysis ล็อกตาม newCalMemo5Tawan.xlsx)"},
+    {"slide": 11, "short": "HAZOP & SIL-2", "topic": "HAZOP Safety, SIL-2 Interlocks & Plot Plan", "speaker": "อัสนา (6:45–7:15)", "headline": "ระบบความปลอดภัย 4 ลูปตัดตอนฉุกเฉิน SIL-2 และผังโรงงาน 11 ไร่ตามมาตรฐานระยะร่นสากล", "params": [["ลูป 1 (Reformer F-101 / R-101)", "TI-101 > 820 °C (2oo3 Voting)", "ตัดเชื้อเพลิงเตาเผา F-101 ภายใน 2 วินาที และฉีดไอน้ำ Purge ฉุกเฉิน"], ["ลูป 2 (Syngas Compressor K-100)", "PDI-102 < 1.5 bar (Dry Gas Seal)", "ทริปมอเตอร์ K-100 อัตโนมัติและระบายก๊าซเข้าสู่ Flare Header ทันที"], ["ลูป 3 (CO₂ Absorber C-202)", "PDI-201 > 45 kPa (Foaming Prevention)", "ตรวจจับโฟมในหอดูดซับ ฉีดสาร Anti-foam อัตโนมัติป้องกัน Carryover"], ["ลูป 4 (H₂ & CO₂ Storage Tank)", "GD-101 > 20% LEL & UV/IR Optical", "สั่งการระบบม่านน้ำ Deluge Water Spray ระบายความร้อนและเจือจางก๊าซทันที"], ["ผังโรงงาน (Plot Plan 11 ไร่)", "NFPA 2, ASME B31.12 & พ.ร.บ. โรงงาน", "กำแพงกันไฟ Blast Wall ห่างอาคารควบคุม 30.5 ม., ถนนหลักกว้าง 8 ม."]], "ref": "รายงานบทที่ 13 (HAZOP & Safety SIL-2) และ บทที่ 14 (Plot Plan & Engineering Codes)"},
+    {"slide": 12, "short": "Net-Zero & FEED", "topic": "Net-Zero Balance, Environmental Impact & FEED", "speaker": "อัสนา (7:15–7:45)", "headline": "คาร์บอนฟุตพริ้นท์สุทธิติดลบ -61,740 tCO₂e/yr ผ่านเกณฑ์ EU RED II มติพร้อมเข้าสู่งาน FEED", "params": [["การดูดซับชีวภาพ (Biogenic Carbon)", "76,500 ตัน CO₂e/ปี", "ก๊าซคาร์บอนไดออกไซด์ที่หมุนเวียนจากไร่อ้อย/มันสำปะหลัง (Carbon-neutral)"], ["การดักจับเป็นผลิตภัณฑ์ (CCU Capture)", "-69,600 ตัน CO₂e/ปี", "ดักจับ 91.19% ส่งขายโรงงานอาหาร เครื่องดื่ม และอุตสาหกรรมแปรรูป"], ["การปล่อยทางตรง (Scope 1 Fossil)", "+7,860 ตัน CO₂e/ปี", "เกิดจากการเผาไหม้เชื้อเพลิงก๊าซธรรมชาติเสริมในเตา F-101 และระบบสาธารณูปโภค"], ["การปลดปล่อยสุทธิ (Net Carbon)", "-61,740 ตัน CO₂e/ปี (Carbon-Negative)", "ความเข้มข้นคาร์บอน 1.82–2.02 kg CO₂e / kg H₂ ต่ำกว่า Fossil SMR (10.30) ถึง 5 เท่า"], ["แผนงานวิศวกรรมขั้นละเอียด (FEED)", "3 เฟสการดำเนินงาน (18 เดือน)", "เฟส 1 ทดสอบ Pilot ตัวเร่ง 1:100 (6 ด.), เฟส 2 สำรวจพื้นที่และ P&ID, เฟส 3 จัดซื้อจัดจ้าง EPC"]], "ref": "รายงานบทที่ 13 (Environmental Impact & Net Carbon Balance) และ บทที่ 15 (FEED Roadmap)"}
+  ];
+
+  const BASELINE = {
+    "fci": 1096.12, "wc": 193.43, "tci": 1289.55,
+    "com": 574.55, "com_d": 519.74, "depreciation": 54.81,
+    "gi": 1008.63, "gi_h2": 765.03, "gi_co2": 243.6,
+    "ebit": 434.09, "ebit_margin": 43.04,
+    "irr_base": 31.06, "irr_boi": 37.34,
+    "npv_base": 2162.31, "npv_boi": 2625.48,
+    "pbp_base_simple": 2.73, "pbp_boi_simple": 2.24,
+    "pbp_base_project": 4.71, "pbp_boi_project": 4.14,
+    "dpbp_base": 5.56, "dpbp_boi": 4.72,
+    "bep_ton": 3396.49, "bep_pct": 44.4,
+    "c_raw_base": 280.0, "c_ut_base": 104.47, "c_ol_base": 28.5
+  };
+
+  // 2. Tab Navigation Controller with URL Hash Sync
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  function setActiveTab(tabId, skipScroll) {
+    tabButtons.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === tabId);
+    });
+    tabPanels.forEach(panel => {
+      panel.classList.toggle('active', panel.dataset.tab === tabId);
+    });
+    if (window.location.hash !== '#' + tabId && !window.location.hash.startsWith('#slide')) {
+      history.replaceState(null, '', '#' + tabId);
+    }
+    if (!skipScroll) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      history.replaceState(null, '', '#' + btn.dataset.tab);
+      setActiveTab(btn.dataset.tab);
+    });
+  });
+
+  // 3. Render Module 1: Slide Dossiers (Unified Box + Sticky Side Navigation Rail, No References)
+  const slideContainer = document.getElementById('slide-container');
+  const slideRail = document.getElementById('slide-rail');
+
+  function renderSlides() {
+    slideContainer.innerHTML = '';
+    if (slideRail) slideRail.innerHTML = '';
+
+    SLIDES.forEach((s, idx) => {
+      const numPad = String(s.slide).padStart(2, '0');
+
+      // Side rail navigation item
+      if (slideRail) {
+        const railBtn = document.createElement('button');
+        railBtn.type = 'button';
+        railBtn.className = 'rail-item' + (idx === 0 ? ' active' : '');
+        railBtn.dataset.slide = numPad;
+        railBtn.title = `Slide ${s.slide}: ${s.short}`;
+        railBtn.innerHTML = `<span class="rail-num">${s.slide}</span>`;
+        railBtn.addEventListener('click', () => {
+          document.querySelectorAll('.rail-item').forEach(b => b.classList.remove('active'));
+          railBtn.classList.add('active');
+          const target = document.getElementById('slide-' + numPad);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        slideRail.appendChild(railBtn);
+      }
+
+      const card = document.createElement('article');
+      card.className = 'slide-card';
+      card.id = 'slide-' + numPad;
+
+      const paramsHtml = s.params.map(p => `
+        <div class="param-card">
+          <div class="param-k">${p[0]}</div>
+          <div class="param-v tabular">${p[1]}</div>
+          <div class="param-desc">${p[2]}</div>
+        </div>
+      `).join('');
+
+      card.innerHTML = `
+        <span id="s${s.slide}" style="position:relative;top:-120px"></span>
+        <span id="slide-${s.slide}" style="position:relative;top:-120px"></span>
+        <div class="slide-header">
+          <div class="slide-badge-group">
+            <span class="slide-num-pill">SLIDE ${numPad} / 12</span>
+            <span class="slide-topic-tag">${s.topic}</span>
+          </div>
+          <span class="slide-speaker-pill">ผู้นำเสนอ: ${s.speaker}</span>
+        </div>
+        <h3 class="slide-title">${s.headline}</h3>
+        <div class="slide-param-grid">${paramsHtml}</div>
+      `;
+      slideContainer.appendChild(card);
+    });
+  }
+
+  renderSlides();
+
+  // Scroll spy to highlight current slide in the side rail
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id.replace('slide-', '');
+          document.querySelectorAll('.rail-item').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.slide === id);
+          });
+        }
+      });
+    }, { rootMargin: '-20% 0px -65% 0px', threshold: 0 });
+
+    document.querySelectorAll('.slide-card').forEach(card => observer.observe(card));
+  }
+
+  // Check initial URL Hash
+  const rawHash = window.location.hash.replace('#', '');
+  if (['dossier', 'equipment', 'hmb', 'simulator'].includes(rawHash)) {
+    setActiveTab(rawHash, true);
+  } else if (rawHash.startsWith('s') || rawHash.startsWith('slide')) {
+    setActiveTab('dossier', true);
+    setTimeout(() => {
+      const el = document.getElementById(rawHash);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 150);
+  }
+
+  // 4. Render Module 2: 35-Equipment Explorer
+  const eqTbody = document.getElementById('eq-tbody');
+  const eqCardList = document.getElementById('eq-card-list');
+  const eqSearch = document.getElementById('eq-search');
+  const eqClearBtn = document.getElementById('eq-clear-search');
+  const eqCounter = document.getElementById('equipment-counter');
+  const eqSumCell = document.getElementById('eq-sum-cell');
+  let selectedTrain = 'all';
+  let selectedCat = 'all';
+
+  function renderEquipment() {
+    const query = eqSearch.value.trim().toLowerCase();
+    eqClearBtn.style.display = query ? 'block' : 'none';
+    let count = 0;
+    let sumCbm = 0;
+    eqTbody.innerHTML = '';
+    eqCardList.innerHTML = '';
+
+    EQUIPMENT.forEach(eq => {
+      const matchTrain = (selectedTrain === 'all') || (eq.train === parseInt(selectedTrain, 10));
+      const matchCat = (selectedCat === 'all') || (eq.category.toLowerCase().includes(selectedCat.toLowerCase()));
+      const matchQuery = !query ||
+        eq.tag.toLowerCase().includes(query) ||
+        eq.name.toLowerCase().includes(query) ||
+        eq.sizing.toLowerCase().includes(query) ||
+        eq.moc.toLowerCase().includes(query) ||
+        eq.conditions.toLowerCase().includes(query);
+
+      if (matchTrain && matchCat && matchQuery) {
+        count++;
+        sumCbm += eq.c_bm;
+
+        // Desktop Row
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="mono" style="font-weight:700;color:var(--brand)">${eq.tag}</td>
+          <td style="font-weight:600">${eq.name}</td>
+          <td><span class="badge badge-gray">${eq.category}</span></td>
+          <td>${eq.sizing}</td>
+          <td class="tabular" style="font-size:13px;color:var(--ink-secondary)">${eq.conditions}</td>
+          <td style="font-size:13px">${eq.moc}</td>
+          <td class="right tabular" style="color:var(--ink-secondary)">$${eq.c_p0_usd.toLocaleString()}</td>
+          <td class="right tabular" style="color:var(--ink-secondary)">${eq.f_bm.toFixed(2)}</td>
+          <td class="right tabular" style="font-weight:700">${eq.c_bm.toFixed(2)}</td>
+        `;
+        eqTbody.appendChild(tr);
+
+        // Mobile Card (All fields clearly visible without needing nested clicks)
+        const card = document.createElement('div');
+        card.className = 'm-card';
+        card.innerHTML = `
+          <div class="m-card-header">
+            <span class="m-card-tag mono">${eq.tag}</span>
+            <span class="m-card-cost tabular">${eq.c_bm.toFixed(2)} MB</span>
+          </div>
+          <div class="m-card-name">${eq.name}</div>
+          <div class="m-card-badges">
+            <span class="badge badge-gray">${eq.category}</span>
+            <span class="badge badge-green">Train ${eq.train}</span>
+          </div>
+          <div class="m-card-grid">
+            <div class="m-card-row"><span class="lbl">ขนาด (Sizing):</span><span class="val">${eq.sizing}</span></div>
+            <div class="m-card-row"><span class="lbl">สภาวะ:</span><span class="val tabular">${eq.conditions}</span></div>
+            <div class="m-card-row"><span class="lbl">วัสดุ (MOC):</span><span class="val">${eq.moc}</span></div>
+            <div class="m-card-row"><span class="lbl">C_p0 / F_BM:</span><span class="val tabular">$${eq.c_p0_usd.toLocaleString()} USD &bull; F_BM ${eq.f_bm}</span></div>
+          </div>
+        `;
+        eqCardList.appendChild(card);
+      }
+    });
+
+    if (count === 0) {
+      eqTbody.innerHTML = `<tr><td colspan="9" class="empty-state">ไม่พบรายการเครื่องจักรที่ตรงกับเงื่อนไขการค้นหา</td></tr>`;
+      eqCardList.innerHTML = `<div class="empty-state">ไม่พบรายการเครื่องจักรที่ตรงกับเงื่อนไขการค้นหา</div>`;
+    }
+
+    eqCounter.textContent = `แสดง ${count} จาก 35 รายการ | รวม ${sumCbm.toFixed(2)} MB`;
+    if (eqSumCell) eqSumCell.textContent = sumCbm.toFixed(2) + ' MB';
+  }
+
+  eqSearch.addEventListener('input', renderEquipment);
+  eqClearBtn.addEventListener('click', () => {
+    eqSearch.value = '';
+    renderEquipment();
+  });
+
+  document.querySelectorAll('#eq-train-pills .pill-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#eq-train-pills .pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedTrain = btn.dataset.train;
+      renderEquipment();
+    });
+  });
+
+  document.querySelectorAll('#eq-cat-pills .pill-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#eq-cat-pills .pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedCat = btn.dataset.cat;
+      renderEquipment();
+    });
+  });
+
+  renderEquipment();
+
+  // 5. Render Module 3: 15-Stream HMB Table with Search & Phase Filter
+  const streamTbody = document.getElementById('stream-tbody');
+  const streamCardList = document.getElementById('stream-card-list');
+  const streamSearch = document.getElementById('stream-search');
+  const streamCounter = document.getElementById('stream-counter');
+  let selectedPhase = 'all';
+
+  function getPhaseBadgeClass(phase) {
+    if (phase === 'Liquid') return 'badge-blue';
+    if (phase === 'Vapor') return 'badge-amber';
+    return 'badge-green';
+  }
+
+  function renderStreams() {
+    const q = streamSearch.value.trim().toLowerCase();
+    streamTbody.innerHTML = '';
+    streamCardList.innerHTML = '';
+    let shown = 0;
+
+    STREAMS.forEach(st => {
+      const matchPhase = (selectedPhase === 'all') || (st.phase === selectedPhase);
+      const matchQ = !q ||
+        ('#' + st.id).includes(q) ||
+        st.name.toLowerCase().includes(q) ||
+        st.comp.toLowerCase().includes(q) ||
+        st.phase.toLowerCase().includes(q);
+
+      if (!matchPhase || !matchQ) return;
+      shown++;
+
+      const badgeCls = getPhaseBadgeClass(st.phase);
+
+      // Desktop Row
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="center mono" style="font-weight:700;color:var(--brand)">#${st.id}</td>
+        <td style="font-weight:600">${st.name}</td>
+        <td class="center"><span class="badge ${badgeCls}">${st.phase}</span></td>
+        <td class="right tabular">${st.temp.toFixed(1)}</td>
+        <td class="right tabular">${st.press.toFixed(1)}</td>
+        <td class="right tabular" style="font-weight:700">${st.mass_flow.toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1})}</td>
+        <td class="right tabular">${st.mole_flow.toFixed(2)}</td>
+        <td class="right tabular">${st.mw.toFixed(2)}</td>
+        <td style="font-size:13px">${st.comp}</td>
+      `;
+      streamTbody.appendChild(tr);
+
+      // Mobile Stream Card
+      const card = document.createElement('div');
+      card.className = 'm-card';
+      card.innerHTML = `
+        <div class="m-card-header">
+          <span class="m-card-tag mono">Stream #${st.id}</span>
+          <span class="badge ${badgeCls}">${st.phase}</span>
+        </div>
+        <div class="m-card-name">${st.name}</div>
+        <div class="m-card-grid">
+          <div class="m-card-row"><span class="lbl">อัตราไหลมวล:</span><span class="val tabular" style="font-weight:700">${st.mass_flow.toLocaleString(undefined, {minimumFractionDigits: 1})} kg/h</span></div>
+          <div class="m-card-row"><span class="lbl">อัตราไหลโมล / MW:</span><span class="val tabular">${st.mole_flow.toFixed(2)} kmol/h &bull; MW ${st.mw.toFixed(2)}</span></div>
+          <div class="m-card-row"><span class="lbl">อุณหภูมิ / ความดัน:</span><span class="val tabular">${st.temp.toFixed(1)} °C &bull; ${st.press.toFixed(1)} bar</span></div>
+          <div class="m-card-row"><span class="lbl">องค์ประกอบ:</span><span class="val">${st.comp}</span></div>
+        </div>
+      `;
+      streamCardList.appendChild(card);
+    });
+
+    if (shown === 0) {
+      streamTbody.innerHTML = `<tr><td colspan="9" class="empty-state">ไม่พบสตรีมที่ตรงกับคำค้นหา</td></tr>`;
+      streamCardList.innerHTML = `<div class="empty-state">ไม่พบสตรีมที่ตรงกับคำค้นหา</div>`;
+    }
+    streamCounter.textContent = `แสดง ${shown} จาก 15 สตรีม`;
+  }
+
+  streamSearch.addEventListener('input', renderStreams);
+  document.querySelectorAll('#stream-phase-pills .pill-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#stream-phase-pills .pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedPhase = btn.dataset.phase;
+      renderStreams();
+    });
+  });
+
+  renderStreams();
+
+  // 6. Render Module 4: Dynamic DCF Sensitivity Simulator
+  const sliderEth = document.getElementById('slider-eth');
+  const sliderH2 = document.getElementById('slider-h2');
+  const sliderCo2 = document.getElementById('slider-co2');
+  const sliderUt = document.getElementById('slider-ut');
+  const btnBoi = document.getElementById('btn-boi-toggle');
+  const btnReset = document.getElementById('btn-reset-sim');
+  let boiEnabled = true;
+
+  btnBoi.addEventListener('click', () => {
+    boiEnabled = !boiEnabled;
+    btnBoi.classList.toggle('active', boiEnabled);
+    btnBoi.textContent = boiEnabled ? 'เปิด BOI' : 'ปิด BOI (Base Case)';
+    recalculateDCF();
+  });
+
+  btnReset.addEventListener('click', () => {
+    sliderEth.value = 0;
+    sliderH2.value = 0;
+    sliderCo2.value = 0;
+    sliderUt.value = 0;
+    boiEnabled = true;
+    btnBoi.classList.add('active');
+    btnBoi.textContent = 'เปิด BOI';
+    recalculateDCF();
+  });
+
+  [sliderEth, sliderH2, sliderCo2, sliderUt].forEach(s => {
+    s.addEventListener('input', recalculateDCF);
+  });
+
+  function calculateNPV(cashFlows, discountRate) {
+    let total = 0;
+    for (let t = 0; t < cashFlows.length; t++) {
+      total += cashFlows[t] / Math.pow(1 + discountRate, t);
+    }
+    return total;
+  }
+
+  function calculateIRR(cashFlows) {
+    let low = -0.50;
+    let high = 1.00;
+    let lowNpv = calculateNPV(cashFlows, low);
+    let highNpv = calculateNPV(cashFlows, high);
+
+    if (lowNpv * highNpv > 0) {
+      return (lowNpv > 0) ? 999 : -999;
+    }
+
+    for (let i = 0; i < 35; i++) {
+      let mid = (low + high) / 2;
+      let midNpv = calculateNPV(cashFlows, mid);
+      if (Math.abs(midNpv) < 0.0005) return mid;
+      if (midNpv > 0) {
+        low = mid;
+      } else {
+        high = mid;
+      }
+    }
+    return (low + high) / 2;
+  }
+
+  function renderDCFChart(cumFlows, pbpValue) {
+    const svg = document.getElementById('dcf-chart-svg');
+    const width = 640;
+    const height = 250;
+    const padL = 56;
+    const padR = 32;
+    const padT = 24;
+    const padB = 34;
+
+    const minVal = -1500;
+    const maxVal = Math.max(3000, cumFlows[20] * 1.12);
+    const rangeVal = maxVal - minVal;
+
+    function getX(yr) {
+      return padL + (yr / 20) * (width - padL - padR);
+    }
+    function getY(val) {
+      return padT + ((maxVal - val) / rangeVal) * (height - padT - padB);
+    }
+
+    const zeroY = getY(0);
+
+    let pathD = `M ${getX(0)} ${getY(cumFlows[0])}`;
+    let areaD = `M ${getX(0)} ${zeroY} L ${getX(0)} ${getY(cumFlows[0])}`;
+    for (let yr = 1; yr <= 20; yr++) {
+      pathD += ` L ${getX(yr)} ${getY(cumFlows[yr])}`;
+      areaD += ` L ${getX(yr)} ${getY(cumFlows[yr])}`;
+    }
+    areaD += ` L ${getX(20)} ${zeroY} Z`;
+
+    const pbpClamped = Math.max(0, Math.min(20, pbpValue));
+    const pbpX = getX(pbpClamped);
+
+    svg.innerHTML = `
+      <defs>
+        <linearGradient id="cfAreaGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0F6A48" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#0F6A48" stop-opacity="0.0"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Horizontal Grid Lines -->
+      <line x1="${padL}" y1="${getY(4000)}" x2="${width - padR}" y2="${getY(4000)}" stroke="#E2E8F0" stroke-width="1"/>
+      <line x1="${padL}" y1="${getY(2000)}" x2="${width - padR}" y2="${getY(2000)}" stroke="#E2E8F0" stroke-width="1"/>
+      <line x1="${padL}" y1="${getY(-1289.55)}" x2="${width - padR}" y2="${getY(-1289.55)}" stroke="#E2E8F0" stroke-width="1"/>
+
+      <!-- Break-Even Zero Line -->
+      <line x1="${padL}" y1="${zeroY}" x2="${width - padR}" y2="${zeroY}" stroke="#B91C1C" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <text x="${padL + 8}" y="${zeroY - 6}" font-size="11" font-weight="700" fill="#B91C1C">ระดับจุดคุ้มทุน Break-Even (0 MB)</text>
+
+      <!-- Axes -->
+      <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${height - padB}" stroke="#CBD5E1" stroke-width="1.5"/>
+      <line x1="${padL}" y1="${height - padB}" x2="${width - padR}" y2="${height - padB}" stroke="#CBD5E1" stroke-width="1.5"/>
+
+      <!-- Y-axis Labels -->
+      <text x="${padL - 8}" y="${zeroY + 4}" font-size="10.5" text-anchor="end" fill="#64748B">0</text>
+      <text x="${padL - 8}" y="${getY(-1289.55) + 4}" font-size="10.5" text-anchor="end" fill="#64748B">-1,290</text>
+      <text x="${padL - 8}" y="${getY(2000) + 4}" font-size="10.5" text-anchor="end" fill="#64748B">+2,000</text>
+      <text x="${padL - 8}" y="${getY(4000) + 4}" font-size="10.5" text-anchor="end" fill="#64748B">+4,000</text>
+
+      <!-- X-axis Labels -->
+      <text x="${getX(0)}" y="${height - 12}" font-size="11" text-anchor="middle" fill="#475569">ปี 0</text>
+      <text x="${getX(5)}" y="${height - 12}" font-size="11" text-anchor="middle" fill="#475569">ปี 5</text>
+      <text x="${getX(10)}" y="${height - 12}" font-size="11" text-anchor="middle" fill="#475569">ปี 10</text>
+      <text x="${getX(15)}" y="${height - 12}" font-size="11" text-anchor="middle" fill="#475569">ปี 15</text>
+      <text x="${getX(20)}" y="${height - 12}" font-size="11" text-anchor="middle" fill="#475569">ปี 20</text>
+
+      <!-- Shaded Area & Cumulative Curve -->
+      <path d="${areaD}" fill="url(#cfAreaGrad)"/>
+      <path d="${pathD}" fill="none" stroke="#0F6A48" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- Payback Marker -->
+      <circle cx="${pbpX}" cy="${zeroY}" r="6" fill="#B45309" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="${pbpX}" y="${zeroY + 20}" font-size="11.5" font-weight="700" fill="#B45309" text-anchor="middle">คืนทุนจริง ${pbpValue.toFixed(2)} ปี</text>
+
+      <!-- Year 20 Terminal Marker -->
+      <circle cx="${getX(20)}" cy="${getY(cumFlows[20])}" r="5" fill="#0F6A48" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="${getX(20) - 6}" y="${getY(cumFlows[20]) - 10}" font-size="11.5" font-weight="700" fill="#0F6A48" text-anchor="end">+${cumFlows[20].toLocaleString(undefined, {maximumFractionDigits: 0})} MB</text>
+    `;
+
+    const badge = document.getElementById('chart-pbp-badge');
+    if (badge) badge.textContent = `จุดคุ้มทุนจริง ~${pbpValue.toFixed(2)} ปี`;
+  }
+
+  function recalculateDCF() {
+    const dEth = parseFloat(sliderEth.value) / 100.0;
+    const dH2 = parseFloat(sliderH2.value) / 100.0;
+    const dCo2 = parseFloat(sliderCo2.value) / 100.0;
+    const dUt = parseFloat(sliderUt.value) / 100.0;
+
+    document.getElementById('val-eth-price').textContent = `${(7.0 * (1 + dEth)).toFixed(2)} ฿/กก. (${dEth >= 0 ? '+' : ''}${(dEth * 100).toFixed(0)}%)`;
+    document.getElementById('val-h2-price').textContent = `${(100.0 * (1 + dH2)).toFixed(2)} ฿/กก. (${dH2 >= 0 ? '+' : ''}${(dH2 * 100).toFixed(0)}%)`;
+    document.getElementById('val-co2-price').textContent = `${(3.5 * (1 + dCo2)).toFixed(2)} ฿/กก. (${dCo2 >= 0 ? '+' : ''}${(dCo2 * 100).toFixed(0)}%)`;
+    document.getElementById('val-ut-price').textContent = `${(3.8 * (1 + dUt)).toFixed(2)} ฿/kWh (${dUt >= 0 ? '+' : ''}${(dUt * 100).toFixed(0)}%)`;
+
+    const baseRaw = 280.00;
+    const baseUt = 104.47;
+    const tci = BASELINE.tci;
+    const dLinear = BASELINE.depreciation;
+    const wc = BASELINE.wc;
+
+    const curRaw = baseRaw * (1 + dEth);
+    const curUt = baseUt * (1 + dUt);
+    const curH2Rev = BASELINE.gi_h2 * (1 + dH2);
+    const curCo2Rev = BASELINE.gi_co2 * (1 + dCo2);
+    const curGI = curH2Rev + curCo2Rev;
+
+    const deltaCost = (curRaw - baseRaw) + (curUt - baseUt);
+    const curCOM = BASELINE.com + deltaCost;
+    const curCashCOM = curCOM - dLinear;
+    const curEBIT = curGI - curCOM;
+    const margin = (curEBIT / curGI) * 100;
+
+    const cashFlows = [-tci];
+    const cumCashFlows = [-tci];
+    const cfTbody = document.getElementById('cf-tbody');
+    cfTbody.innerHTML = '';
+    let cumDCF = -tci;
+
+    // Add Year 0 row
+    const tr0 = document.createElement('tr');
+    tr0.innerHTML = `
+      <td class="tabular mono" style="font-weight:700">ปีที่ 0 (EPC)</td>
+      <td>ลงทุนก่อสร้างโรงงาน FCI + เงินทุนหมุนเวียน WC</td>
+      <td class="right tabular">0.00</td>
+      <td class="right tabular">0.00</td>
+      <td class="right tabular">0.00</td>
+      <td class="right tabular" style="font-weight:700;color:var(--red)">-${tci.toFixed(2)}</td>
+      <td class="right tabular" style="font-weight:700;color:var(--red)">-${tci.toFixed(2)}</td>
+    `;
+    cfTbody.appendChild(tr0);
+
+    for (let yr = 1; yr <= 20; yr++) {
+      const taxRate = (boiEnabled && yr <= 8) ? 0.0 : 0.20;
+      const tax = Math.max(0, curEBIT * taxRate);
+      let ncf = (curGI - curCashCOM) - tax;
+      if (yr === 20) {
+        ncf += wc;
+      }
+      cashFlows.push(ncf);
+      cumDCF += ncf;
+      cumCashFlows.push(cumDCF);
+
+      if (yr <= 5 || yr === 8 || yr === 9 || yr === 15 || yr === 20) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="tabular mono" style="font-weight:700">ปีที่ ${yr}</td>
+          <td>${yr === 20 ? 'ดำเนินการผลิต + รับคืนเงินทุนหมุนเวียน (WC)' : (taxRate === 0 ? 'ผลิตเต็มกำลัง (สิทธิ BOI ยกเว้นภาษี 0%)' : 'ผลิตเต็มกำลัง (เสียภาษีนิติบุคคล CIT 20%)')}</td>
+          <td class="right tabular">${curGI.toFixed(2)}</td>
+          <td class="right tabular">${curCashCOM.toFixed(2)}</td>
+          <td class="right tabular" style="color:var(--red)">${tax.toFixed(2)}</td>
+          <td class="right tabular" style="font-weight:700;color:var(--brand)">+${ncf.toFixed(2)}</td>
+          <td class="right tabular" style="font-weight:700;color:${cumDCF >= 0 ? 'var(--ink)' : 'var(--red)'}">${cumDCF >= 0 ? '+' : ''}${cumDCF.toFixed(2)}</td>
+        `;
+        cfTbody.appendChild(tr);
+      }
+    }
+
+    const isBaseline = (dEth === 0 && dH2 === 0 && dCo2 === 0 && dUt === 0);
+    const calculatedIrr = isBaseline
+      ? (boiEnabled ? BASELINE.irr_boi / 100 : BASELINE.irr_base / 100)
+      : calculateIRR(cashFlows);
+    const calculatedNpv = isBaseline
+      ? (boiEnabled ? BASELINE.npv_boi : BASELINE.npv_base)
+      : calculateNPV(cashFlows, 0.10);
+
+    let pbp = 1.5;
+    if (isBaseline) {
+      pbp = boiEnabled ? BASELINE.pbp_boi_project : BASELINE.pbp_base_project;
+    } else {
+      let cumCash = -tci;
+      for (let yr = 1; yr <= 20; yr++) {
+        const ncf = cashFlows[yr];
+        if (cumCash + ncf >= 0) {
+          pbp += (Math.abs(cumCash) / ncf);
+          break;
+        }
+        cumCash += ncf;
+        pbp += 1.0;
+      }
+    }
+
+    document.getElementById('res-gi').textContent = curGI.toFixed(2);
+    document.getElementById('res-gi-delta').textContent = `${(curGI - BASELINE.gi) >= 0 ? '+' : ''}${(curGI - BASELINE.gi).toFixed(2)} MB/yr จากกรณีฐาน`;
+
+    document.getElementById('res-com').textContent = curCOM.toFixed(2);
+    document.getElementById('res-com-delta').textContent = `${(curCOM - BASELINE.com) >= 0 ? '+' : ''}${(curCOM - BASELINE.com).toFixed(2)} MB/yr (Cash COM: ${curCashCOM.toFixed(2)})`;
+
+    document.getElementById('res-ebit').textContent = curEBIT.toFixed(2);
+    document.getElementById('res-margin').textContent = `EBIT Margin: ${margin.toFixed(2)}%`;
+
+    const irrEl = document.getElementById('res-irr');
+    if (calculatedIrr === -999) {
+      irrEl.textContent = '< -50%';
+      irrEl.style.color = 'var(--red)';
+    } else if (calculatedIrr === 999) {
+      irrEl.textContent = '> 100%';
+      irrEl.style.color = 'var(--brand)';
+    } else {
+      irrEl.textContent = (calculatedIrr * 100).toFixed(2) + '%';
+      irrEl.style.color = (calculatedIrr >= 0.10) ? 'var(--amber)' : 'var(--red)';
+    }
+
+    const npvEl = document.getElementById('res-npv');
+    npvEl.textContent = (calculatedNpv >= 0 ? '+' : '') + calculatedNpv.toFixed(2);
+    npvEl.style.color = (calculatedNpv >= 0) ? 'var(--ink)' : 'var(--red)';
+
+    document.getElementById('res-pbp').textContent = pbp.toFixed(2);
+
+    renderDCFChart(cumCashFlows, pbp);
+  }
+
+  recalculateDCF();
+})();
+</script>
+</body>
+</html>
