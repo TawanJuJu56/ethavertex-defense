@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-<title>ETHAVERTEX — Capstone Oral Defense Companion</title>
-<meta name="description" content="ETHAVERTEX Group 2C Chemical Engineering Capstone Companion. 35 Equipment Units, 15 Stream HMB, 20-Year DCF Sensitivity Simulator, 12 Slide Dossiers.">
+<title>ETHAVERTEX — Capstone Oral Defense Companion & 3D Plant Layout</title>
+<meta name="description" content="ETHAVERTEX Group 2C Chemical Engineering Capstone Companion. 12 Slide Dossiers, 35 Equipment Units, 15 Stream HMB, 20-Year DCF Sensitivity Simulator, and Interactive 3D Plant Layout.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
@@ -115,7 +115,7 @@ body {
   border: 1px solid var(--border);
 }
 
-/* Top Masthead — Fixed Mobile Stacking so text never squishes */
+/* Top Masthead */
 header.masthead {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
@@ -205,6 +205,7 @@ nav.tab-nav {
   display: flex;
   justify-content: space-around;
   align-items: stretch;
+  overflow-x: auto;
 }
 
 .tab-btn {
@@ -214,7 +215,7 @@ nav.tab-nav {
   border-top: 3px solid transparent;
   color: var(--ink-muted);
   font-family: inherit;
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -222,8 +223,9 @@ nav.tab-nav {
   align-items: center;
   justify-content: center;
   gap: 3px;
-  padding: 4px 6px;
+  padding: 4px 5px;
   transition: color 0.15s ease, background-color 0.15s ease;
+  white-space: nowrap;
 }
 
 .tab-btn:hover {
@@ -381,7 +383,6 @@ main.content-area {
   position: relative;
 }
 
-/* Larger, easy-to-tap floating 1–12 rail on the right */
 .dossier-sidebar {
   position: fixed;
   right: 4px;
@@ -616,7 +617,6 @@ main.content-area {
   color: var(--ink);
 }
 
-/* Stacked Horizontal Bar + Interactive Legend */
 .stacked-bar-track {
   width: 100%;
   height: 16px;
@@ -1124,6 +1124,432 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
   height: 250px;
 }
 
+/* ================= MODULE 5: 3D INDUSTRIAL PLANT LAYOUT ================= */
+.plant3d-stage {
+  --p3d-surface: rgba(15, 23, 42, 0.72);
+  --p3d-surface-hover: rgba(51, 65, 85, 0.85);
+  --p3d-border: rgba(255, 255, 255, 0.12);
+  --p3d-ink: #f8fafc;
+  --p3d-muted: #94a3b8;
+  --p3d-brand: #38bdf8;
+  --p3d-brand-strong: #0284c7;
+  --p3d-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.45);
+  position: relative;
+  width: 100%;
+  height: 680px;
+  background: #0b131e;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-md);
+  color: var(--p3d-ink);
+  user-select: none;
+  margin-bottom: 24px;
+}
+
+.plant3d-stage .topbar {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  right: 12px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 12px;
+  background: var(--p3d-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--p3d-border);
+  border-radius: 999px;
+  box-shadow: var(--p3d-shadow);
+  pointer-events: auto;
+}
+
+.plant3d-stage .brand-group {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+.plant3d-stage .brand-badge {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 11px;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(14, 165, 233, 0.35);
+}
+
+.plant3d-stage .title-stack {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.plant3d-stage .title-stack h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--p3d-ink);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.plant3d-stage .title-stack p {
+  margin: 0;
+  font-size: 11px;
+  color: var(--p3d-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 1150px) {
+  .plant3d-stage .title-stack p {
+    display: none;
+  }
+}
+
+.plant3d-stage .camera-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: nowrap;
+}
+
+.plant3d-stage .btn-3d {
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: rgba(30, 41, 59, 0.65);
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.plant3d-stage .btn-3d:hover {
+  background: var(--p3d-surface-hover);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.plant3d-stage .btn-3d:focus-visible {
+  outline: 2px solid var(--p3d-brand);
+  outline-offset: 2px;
+}
+
+.plant3d-stage .btn-3d.active {
+  background: var(--p3d-brand-strong);
+  border-color: var(--p3d-brand);
+  color: #ffffff;
+}
+
+#canvas-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+#canvas-container:active {
+  cursor: grabbing;
+}
+
+.plant3d-stage .side-panel {
+  position: absolute;
+  top: 52px;
+  left: 12px;
+  width: 224px;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+  justify-content: flex-start;
+}
+
+.plant3d-stage .panel-card {
+  background: rgba(15, 23, 42, 0.64);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--p3d-border);
+  border-radius: 10px;
+  box-shadow: var(--p3d-shadow);
+  padding: 8px 10px;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.plant3d-stage .panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  gap: 6px;
+}
+
+.plant3d-stage .panel-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--p3d-muted);
+  margin: 0;
+}
+
+.plant3d-stage .zone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+  max-height: 196px;
+  padding-right: 2px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
+}
+
+.plant3d-stage .zone-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  text-align: left;
+  padding: 4px 7px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: rgba(30, 41, 59, 0.35);
+  color: var(--p3d-ink);
+  cursor: pointer;
+  transition: all 0.14s ease;
+  font-family: inherit;
+}
+
+.plant3d-stage .zone-item:hover {
+  background: rgba(51, 65, 85, 0.7);
+  border-color: var(--p3d-border);
+}
+
+.plant3d-stage .zone-item.selected {
+  background: rgba(2, 132, 199, 0.32);
+  border-color: var(--p3d-brand);
+}
+
+.plant3d-stage .zone-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.plant3d-stage .zone-item-text {
+  min-width: 0;
+  flex: 1;
+}
+
+.plant3d-stage .zone-item-name {
+  font-size: 11.5px;
+  font-weight: 600;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.plant3d-stage .zone-item-sub {
+  font-size: 10px;
+  color: var(--p3d-muted);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.plant3d-stage .inspector-card {
+  max-height: 265px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
+}
+
+.plant3d-stage .inspector-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--p3d-muted);
+  padding: 4px 6px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.plant3d-stage .inspector-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.16);
+  color: var(--p3d-brand);
+  margin-bottom: 5px;
+  width: fit-content;
+}
+
+.plant3d-stage .inspector-title {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.35;
+}
+
+.plant3d-stage .inspector-desc {
+  margin: 0 0 8px;
+  font-size: 11.5px;
+  color: #cbd5e1;
+  line-height: 1.45;
+}
+
+.plant3d-stage .component-list-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--p3d-muted);
+  margin: 0 0 5px;
+}
+
+.plant3d-stage .component-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.plant3d-stage .component-list li {
+  font-size: 11px;
+  color: #e2e8f0;
+  padding: 5px 8px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 5px;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  line-height: 1.35;
+}
+
+.plant3d-stage .component-list li::before {
+  content: "•";
+  color: var(--p3d-brand);
+  font-weight: bold;
+}
+
+.plant3d-stage .hint-bar {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  z-index: 15;
+  background: var(--p3d-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--p3d-border);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 11px;
+  color: var(--p3d-muted);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+  box-shadow: var(--p3d-shadow);
+}
+
+.plant3d-stage .hint-item strong {
+  color: var(--p3d-ink);
+  font-weight: 600;
+}
+
+#hover-tooltip {
+  position: absolute;
+  pointer-events: none;
+  z-index: 30;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid var(--p3d-brand);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 9px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transform: translate(-50%, -130%);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+#hover-tooltip.visible {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .plant3d-stage {
+    height: 580px;
+  }
+  .plant3d-stage .topbar {
+    border-radius: 12px;
+    flex-wrap: wrap;
+    padding: 6px 10px;
+  }
+  .plant3d-stage .camera-controls {
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 2px;
+  }
+  .plant3d-stage .side-panel {
+    top: auto;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    max-height: 36vh;
+    flex-direction: row;
+  }
+  .plant3d-stage .panel-card {
+    flex: 1;
+    min-width: 0;
+  }
+  .plant3d-stage .zone-list {
+    max-height: 110px;
+  }
+  .plant3d-stage .hint-bar {
+    display: none;
+  }
+}
+
 /* Tablet / iPad Breakpoint (>= 680px) */
 @media (min-width: 680px) {
   .header-inner {
@@ -1201,7 +1627,7 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
   .nav-container {
     justify-content: flex-start;
     padding: 0 24px;
-    gap: 8px;
+    gap: 6px;
   }
 
   .tab-btn {
@@ -1209,9 +1635,9 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
     flex-direction: row;
     border-top: none;
     border-bottom: 3px solid transparent;
-    padding: 0 18px;
-    font-size: 14px;
-    gap: 8px;
+    padding: 0 15px;
+    font-size: 13.5px;
+    gap: 7px;
   }
 
   .tab-btn.active {
@@ -1313,7 +1739,7 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
     <div class="brand-wrap">
       <div class="brand-mark">EV</div>
       <div class="brand-text-col">
-        <div class="brand-title">ETHAVERTEX &middot; Oral Defense Companion</div>
+        <div class="brand-title">ETHAVERTEX &middot; Oral Defense Companion &amp; 3D Plant</div>
         <div class="brand-tagline">Group 2C | Chulalongkorn University Chemical Engineering Capstone AY2026</div>
       </div>
     </div>
@@ -1345,6 +1771,11 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
       <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
       <span class="tab-label-mobile">จำลอง DCF</span>
       <span class="tab-label-desktop">จำลองเศรษฐศาสตร์ 20 ปี (DCF Simulator)</span>
+    </button>
+    <button class="tab-btn" data-tab="plant3d" type="button">
+      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+      <span class="tab-label-mobile">ผัง 3D (7)</span>
+      <span class="tab-label-desktop">ผังโรงงาน 3 มิติ (3D Plant Layout)<span class="tab-count">7</span></span>
     </button>
   </div>
 </nav>
@@ -1753,7 +2184,81 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
     </div>
   </section>
 
+  <!-- ================= TAB 5: 3D INDUSTRIAL PLANT LAYOUT ================= -->
+  <section class="tab-panel" id="panel-plant3d" data-tab="plant3d">
+    <div class="section-header">
+      <div class="section-title-row">
+        <div>
+          <h2>โมเดลจำลองผังโรงงานอุตสาหกรรม 3 มิติ (Interactive 3D Blockout)</h2>
+          <p>คลิกเลือกโซนในโมเดล 3D หรือจากรายการด้านซ้ายเพื่อดูรายละเอียดโครงสร้างตามผังต้นฉบับ</p>
+        </div>
+        <span class="badge badge-green">7 โซนหลักในผังโรงงาน</span>
+      </div>
+    </div>
+
+    <div class="plant3d-stage" id="plant3d-stage">
+      <!-- Floating Header Bar inside 3D Viewport -->
+      <div class="topbar">
+        <div class="brand-group">
+          <div class="brand-badge">3D</div>
+          <div class="title-stack">
+            <h3>โมเดลจำลองผังโรงงานอุตสาหกรรม 3 มิติ (Interactive 3D Blockout)</h3>
+            <p>คลิกเลือกโซนในโมเดล 3D หรือจากรายการด้านซ้ายเพื่อดูรายละเอียดโครงสร้าง</p>
+          </div>
+        </div>
+
+        <div class="camera-controls" role="toolbar" aria-label="มุมมองกล้อง">
+          <button type="button" class="btn-3d active" id="btn-cam-iso">มุมมองต้นฉบับ (Isometric)</button>
+          <button type="button" class="btn-3d" id="btn-cam-top">มุมมองด้านบน (Top Plan)</button>
+          <button type="button" class="btn-3d" id="btn-cam-front">มุมมองด้านหน้า</button>
+          <button type="button" class="btn-3d" id="btn-toggle-labels">ซ่อน/แสดงป้ายโซน</button>
+        </div>
+      </div>
+
+      <!-- Left Navigation & Zone Details -->
+      <aside class="side-panel">
+        <section class="panel-card">
+          <div class="panel-header">
+            <h4 class="panel-title">โซนหลักในผังโรงงาน (7 โซน)</h4>
+            <button type="button" class="btn-3d" id="btn-reset-selection" style="padding: 2px 7px; font-size: 10.5px;">ดูทั้งหมด</button>
+          </div>
+          <div class="zone-list" id="zone-list"></div>
+        </section>
+
+        <section class="panel-card inspector-card" id="inspector-panel">
+          <div class="inspector-empty" id="inspector-empty">
+            คลิกที่อาคาร ถังเก็บ หรือโซนต่างๆ บนโมเดล 3 มิติ เพื่อดูข้อมูลส่วนประกอบและซูมเข้าสู่โซนนั้น
+          </div>
+          <div id="inspector-content" style="display: none;">
+            <div class="inspector-badge" id="ins-badge">ZONE</div>
+            <h3 class="inspector-title" id="ins-title"></h3>
+            <p class="inspector-desc" id="ins-desc"></p>
+            <h4 class="component-list-title">องค์ประกอบในโซนนี้ (ตามภาพต้นฉบับ)</h4>
+            <ul class="component-list" id="ins-list"></ul>
+          </div>
+        </section>
+      </aside>
+
+      <!-- Bottom Right Interaction Hints -->
+      <div class="hint-bar">
+        <span class="hint-item"><strong>คลิกซ้าย + ลาก:</strong> หมุนรอบทิศทาง</span>
+        <span class="hint-item"><strong>คลิกขวา + ลาก:</strong> เลื่อนขนาน (Pan)</span>
+        <span class="hint-item"><strong>ลูกกลิ้งเมาส์:</strong> ซูมเข้า-ออก</span>
+        <span class="hint-item"><strong>คลิกที่วัตถุ:</strong> ดูข้อมูลโซน</span>
+      </div>
+
+      <!-- Hover Tooltip -->
+      <div id="hover-tooltip"></div>
+
+      <!-- Main 3D Viewport -->
+      <div id="canvas-container" aria-label="Interactive 3D Industrial Facility Viewport"></div>
+    </div>
+  </section>
+
 </main>
+
+<!-- Three.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <script>
 (function() {
@@ -1857,6 +2362,9 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
     if (window.location.hash !== '#' + tabId && !window.location.hash.startsWith('#slide')) {
       history.replaceState(null, '', '#' + tabId);
     }
+    if (tabId === 'plant3d' && typeof window.resizePlant3D === 'function') {
+      requestAnimationFrame(() => window.resizePlant3D());
+    }
     if (!skipScroll) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -1869,7 +2377,7 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
     });
   });
 
-  // 3. Render Module 1: Slide Dossiers (Unified Box + Larger Floating Right Rail 1–12)
+  // 3. Render Module 1: Slide Dossiers
   const slideContainer = document.getElementById('slide-container');
   const slideRail = document.getElementById('slide-rail');
 
@@ -1944,7 +2452,7 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
 
   // Check initial URL Hash
   const rawHash = window.location.hash.replace('#', '');
-  if (['dossier', 'equipment', 'hmb', 'simulator'].includes(rawHash)) {
+  if (['dossier', 'equipment', 'hmb', 'simulator', 'plant3d'].includes(rawHash)) {
     setActiveTab(rawHash, true);
   } else if (rawHash.startsWith('s') || rawHash.startsWith('slide')) {
     setActiveTab('dossier', true);
@@ -2407,6 +2915,1284 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
   }
 
   recalculateDCF();
+})();
+
+// ============================================================================
+// 7. Module 5: Interactive 3D Industrial Plant Layout (Three.js)
+// ============================================================================
+(function () {
+  if (typeof THREE === 'undefined') return;
+
+  const ZONES = [
+    {
+      id: 'tank-farm',
+      name: '1. โซนถังเก็บขนาดใหญ่ (Storage Tank Farm)',
+      shortSub: 'โซนซ้ายกลาง • ถังเก็บ 2 ถัง พร้อม Bund Wall',
+      color: '#facc15',
+      camTarget: [-62, 8, 2],
+      camPos: [-115, 65, 68],
+      description: 'พื้นที่จัดเก็บผลิตภัณฑ์ขนาดใหญ่ทางฝั่งซ้ายของผัง ล้อมรอบด้วยกำแพงคอนกรีตกันสารรั่วไหล (Bund Wall) และเชื่อมต่อกับสะพานท่อหลัก',
+      components: [
+        'ถังเก็บทรงกระบอกขนาดใหญ่ 2 ถัง หลังคาทรงกรวย (เหนือ-ใต้)',
+        'บันไดวนสีเหลืองรอบตัวถังพร้อมราวกันตกด้านบนหลังคา',
+        'กำแพงคอนกรีตกันสารรั่วไหล (Containment Bund Wall) ล้อมรอบพื้นที่',
+        'ระบบท่อส่งสีน้ำตาลแดงเชื่อมต่อจากฐานถังเข้าสู่สะพานท่อหลัก'
+      ]
+    },
+    {
+      id: 'process-core',
+      name: '2. โซนกระบวนการผลิตและสะพานท่อ (Central Process & Pipe Rack)',
+      shortSub: 'โซนกลาง • Pipe Rack, เตาเผา, คอมเพรสเซอร์, ถังแรงดัน',
+      color: '#38bdf8',
+      camTarget: [5, 10, 2],
+      camPos: [5, 72, 78],
+      description: 'หัวใจหลักของโรงงานประกอบด้วยสะพานท่อหลัก (Main Pipe Rack) พาดยาวแนวซ้าย-ขวา เชื่อมต่อระหว่างหน่วยเตาเผา ถังปฏิกิริยา อาคารคอมเพรสเซอร์ และชุดถังดูดซับแนวตั้ง',
+      components: [
+        'สะพานท่อหลัก (Main Pipe Rack) โครงเหล็กหลายชั้นพาดผ่านกลางโรงงาน',
+        'เตาเผาอุตสาหกรรมพร้อมปล่องระบายความสูงเด่น (Fired Heater & Stack) ด้านเหนือสะพานท่อ',
+        'อาคารหลังคาคลุมชุดปั๊มและคอมเพรสเซอร์ (Compressor Shelter) ด้านใต้สะพานท่อ',
+        'กลุ่มถังแรงดันแนวตั้ง 6 ถัง (2 แถว x 3 ถัง) พร้อมโครงบันไดสีเหลือง',
+        'ถังแยกสถานะแนวนอน (Horizontal Separator Vessel) ทางฝั่งซ้ายของอาคารคลุมปั๊ม'
+      ]
+    },
+    {
+      id: 'distillation-east',
+      name: '3. โซนหอกลั่นและถังแรงดันแนวนอน (Distillation & Bullet Tanks)',
+      shortSub: 'โซนขวา • หอคอยสูง 2 หอ และถังแคปซูลแนวนอน',
+      color: '#a855f7',
+      camTarget: [64, 14, 4],
+      camPos: [120, 75, 75],
+      description: 'พื้นที่หน่วยแยกก๊าซและหอกลั่นความสูงมากทางฝั่งขวาของโซนผลิต พร้อมโครงสร้างเหล็กสีเหลืองและถังเก็บแรงดันแนวนอน (Bullet Tanks)',
+      components: [
+        'หอกลั่น/หอคอยแนวตั้งความสูงพิเศษ 2 หอ พร้อมโครงเหล็กสีเหลืองล้อมรอบเต็มความสูง',
+        'ถังสะสมแนวนอน 2 ถังด้านหลังหอกลั่น พร้อมสะพานท่อเชื่อม',
+        'ถังเก็บก๊าซแรงดันสูงแนวนอน (Horizontal Bullet Tanks) 2 ถังทางด้านล่างขวา'
+      ]
+    },
+    {
+      id: 'cooling-north',
+      name: '4. โซนหอหล่อเย็นและเสาสื่อสาร (Cooling Tower & Utility North)',
+      shortSub: 'โซนบนขวา • Cooling Tower 4 พัดลม และเสาโครงเหล็ก',
+      color: '#22c55e',
+      camTarget: [35, 10, -48],
+      camPos: [45, 70, 12],
+      description: 'โซนสาธารณูปโภคด้านทิศเหนือของโรงงาน ประกอบด้วยอาคารหอหล่อเย็นขนาด 4 พัดลมระบายความร้อน และเสาโครงเหล็กสื่อสาร/ล่อฟ้าความสูงพิเศษ',
+      components: [
+        'อาคารหอหล่อเย็น (Induced Draft Cooling Tower) ขนาด 4 พัดลมด้านบน',
+        'บันไดเหล็กสีเหลืองขึ้นตรวจสอบบนดาดฟ้าหอหล่อเย็น 2 ตำแหน่ง',
+        'เสาโครงเหล็กถักแนวตั้ง (Lattice Communication/Utility Tower) ทางมุมบนขวา'
+      ]
+    },
+    {
+      id: 'reserve-northwest',
+      name: '5. โซนพื้นที่สำรองและสนามหญ้าด้านบน (Future Expansion Pad)',
+      shortSub: 'โซนบนซ้าย • ลานกรวดสำรองและพื้นที่สีเขียว',
+      color: '#10b981',
+      camTarget: [-45, 2, -48],
+      camPos: [-50, 65, 10],
+      description: 'พื้นที่ว่างด้านทิศตะวันตกเฉียงเหนือ แบ่งเป็นลานหินกรวดบดอัดและแปลงสนามหญ้าสีเขียว สำหรับรองรับการขยายกำลังการผลิตในอนาคต',
+      components: [
+        'ลานกรวดปรับระดับ (Gravel Expansion Lot) ฝั่งซ้ายบน',
+        'แปลงสนามหญ้าสีเขียว (Green Buffer Lawn) ถัดจากลานกรวด'
+      ]
+    },
+    {
+      id: 'gate-admin',
+      name: '6. โซนป้อมยามและอาคารสำนักงาน (Main Gate & Administration)',
+      shortSub: 'โซนล่างซ้าย-กลาง • ทางเข้าหลักและอาคารสำนักงาน',
+      color: '#f97316',
+      camTarget: [-35, 5, 55],
+      camPos: [-40, 52, 115],
+      description: 'โซนด้านหน้าโครงการฝั่งซ้ายและตรงกลาง ประกอบด้วยทางเข้า-ออกหลัก ป้อม รปภ. อาคารจุดตรวจรถยนต์ และอาคารสำนักงานใหญ่ที่ล้อมรอบด้วยสนามหญ้าและแนวพุ่มไม้',
+      components: [
+        'ป้อมยามริมรั้วหน้าประตูทางเข้าหลัก พร้อมไม้กั้นและรถยนต์กำลังผ่านจุดตรวจ',
+        'อาคารหลังคาคลุมช่องจราจรตรวจสอบความปลอดภัย (Security Gate Canopy)',
+        'อาคารสำนักงานหลัก (Administration Building) หลังคาแบนพร้อมผนังกระจกด้านหน้า',
+        'สนามหญ้าสีเขียวสดล้อมกรอบด้วยแนวพุ่มไม้ตัดแต่งรอบอาคารสำนักงาน'
+      ]
+    },
+    {
+      id: 'warehouse-loading',
+      name: '7. โซนอาคารคลังสินค้าและจุดโหลดก๊าซ (Warehouse & Hydrogen Tube Bay)',
+      shortSub: 'โซนล่างขวา • อาคารคลังสินค้าและรถบรรทุก Hydrogen Tube',
+      color: '#ec4899',
+      camTarget: [52, 6, 55],
+      camPos: [60, 52, 118],
+      description: 'โซนโลจิสติกส์และสถานีบรรจุก๊าซทางด้านหน้าฝั่งขวา ประกอบด้วยอาคารคลังสินค้า 2 หลังเชื่อมต่อกัน และลานจอดรถบรรทุกขนส่งก๊าซไฮโดรเจน',
+      components: [
+        'อาคารคลังสินค้าและซ่อมบำรุง 2 อาคารพร้อมประตูม้วนอุตสาหกรรม (Roll-up Doors)',
+        'รถบรรทุกตู้ทึบติดข้อความ "Hydrogen Tube" จอดเทียบหน้าอาคารฝั่งซ้าย',
+        'รถบรรทุกพ่วงถังก๊าซทรงกระบอก (Tube / Tanker Trailers) 2 คัน จอดเรียงทางฝั่งขวา'
+      ]
+    }
+  ];
+
+  const stageEl = document.getElementById('plant3d-stage');
+  const container = document.getElementById('canvas-container');
+  const tooltip = document.getElementById('hover-tooltip');
+  const zoneListEl = document.getElementById('zone-list');
+
+  // Scene setup with natural sunlit forest atmosphere
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x273c22);
+  scene.fog = new THREE.FogExp2(0x273c22, 0.0011);
+
+  const initW = container.clientWidth || 1100;
+  const initH = container.clientHeight || 680;
+
+  const camera = new THREE.PerspectiveCamera(
+    34,
+    initW / initH,
+    1,
+    1200
+  );
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+  renderer.setSize(initW, initH);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.06;
+  container.appendChild(renderer.domElement);
+
+  function createNoiseTexture(baseHex, variance, size = 128, repeat = 8) {
+    const c = document.createElement('canvas');
+    c.width = size;
+    c.height = size;
+    const ctx = c.getContext('2d');
+    const baseColor = new THREE.Color(baseHex);
+    const img = ctx.createImageData(size, size);
+    for (let i = 0; i < img.data.length; i += 4) {
+      const delta = (Math.random() - 0.5) * variance;
+      img.data[i] = Math.min(255, Math.max(0, baseColor.r * 255 + delta));
+      img.data[i + 1] = Math.min(255, Math.max(0, baseColor.g * 255 + delta));
+      img.data[i + 2] = Math.min(255, Math.max(0, baseColor.b * 255 + delta));
+      img.data[i + 3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+    const tex = new THREE.CanvasTexture(c);
+    tex.wrapS = THREE.RepeatWrapping;
+    tex.wrapT = THREE.RepeatWrapping;
+    tex.repeat.set(repeat, repeat);
+    return tex;
+  }
+
+  function createLouverTexture() {
+    const c = document.createElement('canvas');
+    c.width = 128;
+    c.height = 128;
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = '#181d22';
+    ctx.fillRect(0, 0, 128, 128);
+    ctx.fillStyle = '#283038';
+    for (let y = 0; y < 128; y += 8) {
+      ctx.fillRect(0, y, 128, 3);
+    }
+    const tex = new THREE.CanvasTexture(c);
+    tex.wrapS = THREE.RepeatWrapping;
+    tex.wrapT = THREE.RepeatWrapping;
+    tex.repeat.set(8, 2);
+    return tex;
+  }
+
+  function createHydrogenTruckTexture() {
+    const c = document.createElement('canvas');
+    c.width = 512;
+    c.height = 160;
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = '#f4f6f8';
+    ctx.fillRect(0, 0, 512, 160);
+    ctx.strokeStyle = '#cbd5e1';
+    ctx.lineWidth = 4;
+    ctx.strokeRect(2, 2, 508, 156);
+    ctx.fillStyle = '#1e293b';
+    ctx.font = 'bold 42px -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('Hydrogen Tube', 256, 84);
+    return new THREE.CanvasTexture(c);
+  }
+
+  const ambientLight = new THREE.AmbientLight(0xe0f2fe, 0.62);
+  scene.add(ambientLight);
+
+  const hemiLight = new THREE.HemisphereLight(0xfffbeb, 0x365314, 0.48);
+  hemiLight.position.set(0, 150, 0);
+  scene.add(hemiLight);
+
+  const sunLight = new THREE.DirectionalLight(0xfffef5, 1.25);
+  sunLight.position.set(-105, 145, 95);
+  sunLight.castShadow = true;
+  sunLight.shadow.mapSize.width = 4096;
+  sunLight.shadow.mapSize.height = 4096;
+  sunLight.shadow.camera.near = 20;
+  sunLight.shadow.camera.far = 380;
+  const d = 140;
+  sunLight.shadow.camera.left = -d;
+  sunLight.shadow.camera.right = d;
+  sunLight.shadow.camera.top = d;
+  sunLight.shadow.camera.bottom = -d;
+  sunLight.shadow.bias = -0.00035;
+  scene.add(sunLight);
+
+  const fillLight = new THREE.DirectionalLight(0xbae6fd, 0.32);
+  fillLight.position.set(110, 80, -60);
+  scene.add(fillLight);
+
+  const MATS = {
+    forestGround: new THREE.MeshLambertMaterial({ map: createNoiseTexture(0x365826, 22, 128, 24) }),
+    grassBright: new THREE.MeshLambertMaterial({ map: createNoiseTexture(0x5b8f2e, 18, 128, 10) }),
+    hedgeDark: new THREE.MeshLambertMaterial({ color: 0x29461a }),
+    gravelLot: new THREE.MeshStandardMaterial({
+      map: createNoiseTexture(0xc2beb4, 34, 128, 14),
+      roughness: 0.92,
+      metalness: 0.02
+    }),
+    concretePad: new THREE.MeshStandardMaterial({
+      map: createNoiseTexture(0xd5d5d0, 12, 128, 12),
+      roughness: 0.82,
+      metalness: 0.05
+    }),
+    concreteWall: new THREE.MeshStandardMaterial({ color: 0xbabbb6, roughness: 0.75, metalness: 0.05 }),
+    asphalt: new THREE.MeshStandardMaterial({
+      map: createNoiseTexture(0x37393d, 14, 128, 18),
+      roughness: 0.85,
+      metalness: 0.05
+    }),
+    roadLine: new THREE.MeshBasicMaterial({ color: 0xf1f5f9 }),
+    roadEdge: new THREE.MeshBasicMaterial({ color: 0xcbd5e1 }),
+    tankWhite: new THREE.MeshStandardMaterial({ color: 0xe8e9e4, roughness: 0.38, metalness: 0.18 }),
+    steelSilver: new THREE.MeshStandardMaterial({ color: 0xcbd5e1, roughness: 0.3, metalness: 0.68 }),
+    vesselSilver: new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.22, metalness: 0.78 }),
+    safetyYellow: new THREE.MeshStandardMaterial({ color: 0xfacc15, roughness: 0.35, metalness: 0.25 }),
+    rustPipe: new THREE.MeshStandardMaterial({ color: 0x9e5847, roughness: 0.48, metalness: 0.35 }),
+    buildingLight: new THREE.MeshStandardMaterial({ color: 0xdadcd8, roughness: 0.55, metalness: 0.12 }),
+    buildingRoof: new THREE.MeshStandardMaterial({ color: 0xc4c7c2, roughness: 0.62, metalness: 0.15 }),
+    shutterDoor: new THREE.MeshStandardMaterial({ color: 0x949894, roughness: 0.5, metalness: 0.35 }),
+    darkGlass: new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.12, metalness: 0.88 }),
+    coolingDark: new THREE.MeshStandardMaterial({ map: createLouverTexture(), roughness: 0.7, metalness: 0.2 }),
+    furnaceGrey: new THREE.MeshStandardMaterial({ color: 0x8f928d, roughness: 0.58, metalness: 0.25 }),
+    truckWhite: new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.28, metalness: 0.12 }),
+    truckLogoSide: new THREE.MeshStandardMaterial({ map: createHydrogenTruckTexture(), roughness: 0.32, metalness: 0.1 }),
+    truckCabDark: new THREE.MeshStandardMaterial({ color: 0x111827, roughness: 0.4, metalness: 0.2 }),
+    redAccent: new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.4, metalness: 0.2 }),
+    treeFoliage1: new THREE.MeshLambertMaterial({ color: 0x315420 }),
+    treeFoliage2: new THREE.MeshLambertMaterial({ color: 0x436d2c }),
+    treeFoliage3: new THREE.MeshLambertMaterial({ color: 0x527d37 }),
+    treeTrunk: new THREE.MeshLambertMaterial({ color: 0x4a3728 })
+  };
+
+  const zoneGroups = {};
+  const interactableMeshes = [];
+  const fanBlades = [];
+  const labelSprites = [];
+
+  ZONES.forEach(z => {
+    const g = new THREE.Group();
+    g.name = z.id;
+    scene.add(g);
+    zoneGroups[z.id] = g;
+  });
+
+  function tagZoneMesh(mesh, zoneId) {
+    mesh.userData.zoneId = zoneId;
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    interactableMeshes.push(mesh);
+  }
+
+  function addBox(parent, w, h, d, x, y, z, mat, zoneId) {
+    const geom = new THREE.BoxGeometry(w, h, d);
+    const mesh = new THREE.Mesh(geom, mat);
+    mesh.position.set(x, y + h / 2, z);
+    parent.add(mesh);
+    if (zoneId) {
+      tagZoneMesh(mesh, zoneId);
+    } else {
+      mesh.receiveShadow = true;
+    }
+    return mesh;
+  }
+
+  function addCylinder(parent, rTop, rBot, h, segs, x, y, z, mat, zoneId) {
+    const geom = new THREE.CylinderGeometry(rTop, rBot, h, segs);
+    const mesh = new THREE.Mesh(geom, mat);
+    mesh.position.set(x, y + h / 2, z);
+    parent.add(mesh);
+    if (zoneId) {
+      tagZoneMesh(mesh, zoneId);
+    } else {
+      mesh.receiveShadow = true;
+    }
+    return mesh;
+  }
+
+  function addStrut(parent, p1, p2, radius, mat, zoneId) {
+    const v1 = new THREE.Vector3(p1[0], p1[1], p1[2]);
+    const v2 = new THREE.Vector3(p2[0], p2[1], p2[2]);
+    const dist = v1.distanceTo(v2);
+    const geom = new THREE.CylinderGeometry(radius, radius, dist, 6);
+    const mesh = new THREE.Mesh(geom, mat);
+    mesh.position.copy(v1).add(v2).multiplyScalar(0.5);
+    mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), v2.clone().sub(v1).normalize());
+    parent.add(mesh);
+    if (zoneId) tagZoneMesh(mesh, zoneId);
+    return mesh;
+  }
+
+  // 1. Base Environment
+  const envGroup = new THREE.Group();
+  scene.add(envGroup);
+
+  addBox(envGroup, 480, 1, 360, 0, -1, 0, MATS.forestGround, null);
+  addBox(envGroup, 200, 0.3, 146, 0, 0, 0, MATS.asphalt, null);
+  addBox(envGroup, 280, 0.32, 16, 0, 0, 82, MATS.asphalt, null);
+  addBox(envGroup, 18, 0.33, 16, -72, 0, 72, MATS.asphalt, null);
+
+  function addDashedLine(x1, z1, x2, z2, dashLen = 2.8, gapLen = 2.8) {
+    const dx = x2 - x1;
+    const dz = z2 - z1;
+    const dist = Math.hypot(dx, dz);
+    const angle = Math.atan2(dx, dz);
+    const steps = Math.floor(dist / (dashLen + gapLen));
+    for (let i = 0; i <= steps; i++) {
+      const t = (i * (dashLen + gapLen) + dashLen / 2) / dist;
+      if (t > 1) break;
+      const cx = x1 + dx * t;
+      const cz = z1 + dz * t;
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(0.32, dashLen), MATS.roadLine);
+      m.rotation.x = -Math.PI / 2;
+      m.rotation.z = angle;
+      m.position.set(cx, 0.36, cz);
+      envGroup.add(m);
+    }
+  }
+
+  function addSolidLine(x1, z1, x2, z2, width = 0.22) {
+    const dx = x2 - x1;
+    const dz = z2 - z1;
+    const dist = Math.hypot(dx, dz);
+    const angle = Math.atan2(dx, dz);
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(width, dist), MATS.roadEdge);
+    m.rotation.x = -Math.PI / 2;
+    m.rotation.z = angle;
+    m.position.set((x1 + x2) / 2, 0.35, (z1 + z2) / 2);
+    envGroup.add(m);
+  }
+
+  function addCrosswalk(x, z, vertical = false) {
+    for (let i = -2; i <= 2; i++) {
+      const bar = new THREE.Mesh(
+        new THREE.PlaneGeometry(vertical ? 2.4 : 0.45, vertical ? 0.45 : 2.4),
+        MATS.roadLine
+      );
+      bar.rotation.x = -Math.PI / 2;
+      bar.position.set(
+        x + (vertical ? 0 : i * 0.85),
+        0.36,
+        z + (vertical ? i * 0.85 : 0)
+      );
+      envGroup.add(bar);
+    }
+  }
+
+  addDashedLine(-92, -66, 92, -66);
+  addDashedLine(-92, -26, 92, -26);
+  addDashedLine(-92, 34, 92, 34);
+  addDashedLine(-92, -66, -92, 66);
+  addDashedLine(92, -66, 92, 66);
+  addDashedLine(-40, -26, -40, 34);
+  addDashedLine(-130, 82, 130, 82, 3.8, 3.8);
+
+  addSolidLine(-97, -70, 97, -70);
+  addSolidLine(-97, -70, -97, 70);
+  addSolidLine(97, -70, 97, 70);
+  addSolidLine(-130, 74.5, -81, 74.5);
+  addSolidLine(-63, 74.5, 130, 74.5);
+  addSolidLine(-130, 89.5, 130, 89.5);
+
+  addCrosswalk(-40, 26, true);
+  addCrosswalk(-92, 38, true);
+  addCrosswalk(92, 26, true);
+  addCrosswalk(-82, 34, false);
+
+  [[-42, -21], [-36, 28], [42, -29], [85, 28], [-85, -29]].forEach(([hx, hz]) => {
+    addCylinder(envGroup, 0.22, 0.25, 1.1, 8, hx, 0.3, hz, MATS.redAccent, null);
+  });
+
+  function buildFenceRun(x1, z1, x2, z2) {
+    const dx = x2 - x1;
+    const dz = z2 - z1;
+    const len = Math.hypot(dx, dz);
+    const angle = Math.atan2(dx, dz);
+    const midX = (x1 + x2) / 2;
+    const midZ = (z1 + z2) / 2;
+
+    const curb = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.4, len), MATS.concreteWall);
+    curb.position.set(midX, 0.4, midZ);
+    curb.rotation.y = angle;
+    envGroup.add(curb);
+
+    [1.3, 2.4].forEach(ry => {
+      const rail = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.1, len), MATS.steelSilver);
+      rail.position.set(midX, ry, midZ);
+      rail.rotation.y = angle;
+      envGroup.add(rail);
+    });
+
+    const postCount = Math.floor(len / 6.5);
+    for (let i = 0; i <= postCount; i++) {
+      const t = i / postCount;
+      const px = x1 + dx * t;
+      const pz = z1 + dz * t;
+      const post = new THREE.Mesh(new THREE.BoxGeometry(0.24, 2.5, 0.24), MATS.concreteWall);
+      post.position.set(px, 1.25, pz);
+      envGroup.add(post);
+
+      if (i % 4 === 2 && i < postCount) {
+        const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.12, 7.5, 6), MATS.steelSilver);
+        pole.position.set(px, 3.75, pz);
+        envGroup.add(pole);
+        const lampArm = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.12, 0.25), MATS.steelSilver);
+        lampArm.position.set(px, 7.5, pz);
+        envGroup.add(lampArm);
+      }
+    }
+  }
+
+  buildFenceRun(-99, -72, 99, -72);
+  buildFenceRun(-99, -72, -99, 72);
+  buildFenceRun(99, -72, 99, 72);
+  buildFenceRun(-99, 72, -82, 72);
+  buildFenceRun(-62, 72, 99, 72);
+
+  function addTree(x, z, scale = 1) {
+    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.35 * scale, 0.55 * scale, 3.2 * scale, 7), MATS.treeTrunk);
+    trunk.position.set(x, 1.6 * scale, z);
+    trunk.castShadow = true;
+    envGroup.add(trunk);
+
+    const mats = [MATS.treeFoliage1, MATS.treeFoliage2, MATS.treeFoliage3];
+    const crownMat = mats[Math.floor(Math.random() * mats.length)];
+
+    const c1 = new THREE.Mesh(new THREE.IcosahedronGeometry(3.2 * scale, 1), crownMat);
+    c1.position.set(x, 5.0 * scale, z);
+    c1.castShadow = true;
+    c1.receiveShadow = true;
+    envGroup.add(c1);
+
+    const c2 = new THREE.Mesh(new THREE.IcosahedronGeometry(2.4 * scale, 1), crownMat);
+    c2.position.set(x + 1.2 * scale, 6.3 * scale, z - 0.7 * scale);
+    c2.castShadow = true;
+    envGroup.add(c2);
+
+    const c3 = new THREE.Mesh(new THREE.IcosahedronGeometry(2.1 * scale, 1), crownMat);
+    c3.position.set(x - 1.1 * scale, 5.8 * scale, z + 0.8 * scale);
+    c3.castShadow = true;
+    envGroup.add(c3);
+  }
+
+  for (let x = -155; x <= 155; x += 8) {
+    for (let z = -118; z <= -77; z += 8) {
+      addTree(x + (Math.random() - 0.5) * 4.5, z + (Math.random() - 0.5) * 4.5, 0.8 + Math.random() * 0.55);
+    }
+  }
+  for (let z = -75; z <= 74; z += 8) {
+    for (let x = -155; x <= -105; x += 8) {
+      addTree(x + (Math.random() - 0.5) * 4.5, z + (Math.random() - 0.5) * 4.5, 0.8 + Math.random() * 0.55);
+    }
+    for (let x = 105; x <= 155; x += 8) {
+      addTree(x + (Math.random() - 0.5) * 4.5, z + (Math.random() - 0.5) * 4.5, 0.8 + Math.random() * 0.55);
+    }
+  }
+
+  // ZONE 5: Reserve Pad
+  const zReserve = zoneGroups['reserve-northwest'];
+  addBox(zReserve, 84, 0.4, 33, -44, 0.1, -46, MATS.concretePad, 'reserve-northwest');
+  addBox(zReserve, 42, 0.52, 30, -63.5, 0.18, -46, MATS.gravelLot, 'reserve-northwest');
+  addBox(zReserve, 39, 0.56, 30, -22.5, 0.18, -46, MATS.grassBright, 'reserve-northwest');
+
+  // ZONE 4: Cooling Tower & Lattice Tower
+  const zCooling = zoneGroups['cooling-north'];
+  addBox(zCooling, 84, 0.4, 33, 44, 0.1, -46, MATS.concretePad, 'cooling-north');
+
+  const ctX = 25, ctZ = -48;
+  addBox(zCooling, 43, 1.2, 15, ctX, 0.4, ctZ, MATS.concreteWall, 'cooling-north');
+  for (let ix = -4; ix <= 4; ix++) {
+    addBox(zCooling, 0.65, 2.2, 0.65, ctX + ix * 5.0, 1.5, ctZ - 6.8, MATS.concreteWall, 'cooling-north');
+    addBox(zCooling, 0.65, 2.2, 0.65, ctX + ix * 5.0, 1.5, ctZ + 6.8, MATS.concreteWall, 'cooling-north');
+  }
+  addBox(zCooling, 41.2, 5.2, 13.4, ctX, 3.4, ctZ, MATS.coolingDark, 'cooling-north');
+  addBox(zCooling, 42.4, 4.0, 14.4, ctX, 8.6, ctZ, MATS.buildingLight, 'cooling-north');
+
+  for (let i = -2; i <= 2; i++) {
+    addBox(zCooling, 0.65, 9.2, 14.6, ctX + i * 10.1, 3.4, ctZ, MATS.concreteWall, 'cooling-north');
+  }
+
+  for (let i = 0; i < 4; i++) {
+    const fx = ctX - 15.15 + i * 10.1;
+    addCylinder(zCooling, 3.95, 4.25, 2.2, 32, fx, 12.6, ctZ, MATS.buildingLight, 'cooling-north');
+    addCylinder(zCooling, 3.55, 3.55, 0.45, 28, fx, 14.3, ctZ, MATS.coolingDark, 'cooling-north');
+
+    addCylinder(zCooling, 0.7, 0.7, 0.6, 16, fx, 14.4, ctZ, MATS.furnaceGrey, 'cooling-north');
+    addBox(zCooling, 7.2, 0.18, 0.25, fx, 14.65, ctZ, MATS.steelSilver, 'cooling-north');
+    addBox(zCooling, 0.25, 0.18, 7.2, fx, 14.65, ctZ, MATS.steelSilver, 'cooling-north');
+
+    const bladeGroup = new THREE.Group();
+    bladeGroup.position.set(fx, 14.55, ctZ);
+    for (let b = 0; b < 6; b++) {
+      const blade = new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.12, 0.65), MATS.steelSilver);
+      const angle = (b * Math.PI) / 3;
+      blade.position.set(Math.cos(angle) * 1.7, 0, Math.sin(angle) * 1.7);
+      blade.rotation.y = -angle;
+      blade.rotation.x = 0.22;
+      bladeGroup.add(blade);
+    }
+    zCooling.add(bladeGroup);
+    fanBlades.push(bladeGroup);
+  }
+
+  addBox(zCooling, 42.6, 0.9, 0.2, ctX, 12.6, ctZ + 7.15, MATS.safetyYellow, 'cooling-north');
+  addBox(zCooling, 42.6, 0.9, 0.2, ctX, 12.6, ctZ - 7.15, MATS.safetyYellow, 'cooling-north');
+  addBox(zCooling, 0.2, 0.9, 14.4, ctX - 21.2, 12.6, ctZ, MATS.safetyYellow, 'cooling-north');
+  addBox(zCooling, 0.2, 0.9, 14.4, ctX + 21.2, 12.6, ctZ, MATS.safetyYellow, 'cooling-north');
+
+  [-4.8, 5.2].forEach(lx => {
+    addBox(zCooling, 0.9, 13.0, 0.15, ctX + lx, 0.5, ctZ + 7.35, MATS.safetyYellow, 'cooling-north');
+    for (let ry = 3.5; ry <= 12.5; ry += 1.6) {
+      const hoop = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.06, 6, 16), MATS.safetyYellow);
+      hoop.rotation.x = Math.PI / 2;
+      hoop.position.set(ctX + lx, ry, ctZ + 7.65);
+      zCooling.add(hoop);
+      tagZoneMesh(hoop, 'cooling-north');
+    }
+  });
+
+  addCylinder(zCooling, 0.55, 0.55, 9, 16, ctX - 22.8, 0.5, ctZ - 2, MATS.steelSilver, 'cooling-north');
+  addCylinder(zCooling, 0.55, 0.55, 9, 16, ctX - 22.8, 0.5, ctZ + 2, MATS.steelSilver, 'cooling-north');
+
+  const ltX = 72, ltZ = -45;
+  addBox(zCooling, 7.5, 0.7, 7.5, ltX, 0.4, ltZ, MATS.concreteWall, 'cooling-north');
+  const towerLevels = 9;
+  const levelH = 4.2;
+  for (let i = 0; i < towerLevels; i++) {
+    const y0 = 1.0 + i * levelH;
+    const y1 = y0 + levelH;
+    const w0 = 2.6 * (1 - (i / towerLevels) * 0.62);
+    const w1 = 2.6 * (1 - ((i + 1) / towerLevels) * 0.62);
+
+    const c0 = [
+      [ltX - w0, y0, ltZ - w0],
+      [ltX + w0, y0, ltZ - w0],
+      [ltX + w0, y0, ltZ + w0],
+      [ltX - w0, y0, ltZ + w0]
+    ];
+    const c1 = [
+      [ltX - w1, y1, ltZ - w1],
+      [ltX + w1, y1, ltZ - w1],
+      [ltX + w1, y1, ltZ + w1],
+      [ltX - w1, y1, ltZ + w1]
+    ];
+
+    for (let f = 0; f < 4; f++) {
+      const nf = (f + 1) % 4;
+      addStrut(zCooling, c0[f], c1[f], 0.16, MATS.steelSilver, 'cooling-north');
+      addStrut(zCooling, c1[f], c1[nf], 0.11, MATS.steelSilver, 'cooling-north');
+      addStrut(zCooling, c0[f], c1[nf], 0.08, MATS.steelSilver, 'cooling-north');
+      addStrut(zCooling, c0[nf], c1[f], 0.08, MATS.steelSilver, 'cooling-north');
+    }
+  }
+  addCylinder(zCooling, 0.08, 0.14, 5.5, 8, ltX, 1.0 + towerLevels * levelH, ltZ, MATS.steelSilver, 'cooling-north');
+
+  // ZONE 1: Storage Tank Farm
+  const zTanks = zoneGroups['tank-farm'];
+  addBox(zTanks, 43, 0.4, 53, -65, 0.1, 4, MATS.concretePad, 'tank-farm');
+
+  const bwX = -65, bwZ = 4, bwW = 36.5, bwD = 47, bwH = 3.4;
+  addBox(zTanks, bwW, bwH, 0.95, bwX, 0.4, bwZ - bwD / 2, MATS.concreteWall, 'tank-farm');
+  addBox(zTanks, bwW, bwH, 0.95, bwX, 0.4, bwZ + bwD / 2, MATS.concreteWall, 'tank-farm');
+  addBox(zTanks, 0.95, bwH, bwD, bwX - bwW / 2, 0.4, bwZ, MATS.concreteWall, 'tank-farm');
+  addBox(zTanks, 0.95, bwH, bwD, bwX + bwW / 2, 0.4, bwZ, MATS.concreteWall, 'tank-farm');
+
+  addBox(zTanks, 2.2, bwH + 0.4, 1.4, bwX + bwW / 2, 0.4, bwZ, MATS.safetyYellow, 'tank-farm');
+
+  [-9.5, 13.5].forEach(tz => {
+    const tx = -65;
+    const r = 9.3;
+    const h = 15.6;
+
+    addCylinder(zTanks, r + 0.45, r + 0.55, 0.7, 48, tx, 0.4, tz, MATS.concreteWall, 'tank-farm');
+    addCylinder(zTanks, r, r, h, 48, tx, 1.0, tz, MATS.tankWhite, 'tank-farm');
+
+    [4.0, 7.5, 11.0, 14.5].forEach(sy => {
+      const seam = new THREE.Mesh(new THREE.TorusGeometry(r + 0.03, 0.05, 6, 48), MATS.concreteWall);
+      seam.rotation.x = Math.PI / 2;
+      seam.position.set(tx, sy, tz);
+      zTanks.add(seam);
+    });
+
+    addCylinder(zTanks, 0.45, r + 0.25, 2.7, 48, tx, 1.0 + h, tz, MATS.tankWhite, 'tank-farm');
+    addCylinder(zTanks, 0.35, 0.35, 1.2, 16, tx, 1.0 + h + 2.5, tz, MATS.steelSilver, 'tank-farm');
+
+    [0.45, 0.95].forEach(ry => {
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(r, 0.11, 8, 48), MATS.safetyYellow);
+      ring.rotation.x = Math.PI / 2;
+      ring.position.set(tx, 1.0 + h + ry, tz);
+      zTanks.add(ring);
+      tagZoneMesh(ring, 'tank-farm');
+    });
+    for (let a = 0; a < 16; a++) {
+      const ang = (a / 16) * Math.PI * 2;
+      addCylinder(
+        zTanks,
+        0.07,
+        0.07,
+        1.0,
+        6,
+        tx + Math.cos(ang) * r,
+        1.0 + h,
+        tz + Math.sin(ang) * r,
+        MATS.safetyYellow,
+        'tank-farm'
+      );
+    }
+
+    const steps = 28;
+    let prevHandrailPos = null;
+    for (let s = 0; s <= steps; s++) {
+      const frac = s / steps;
+      const ang = frac * Math.PI * 1.1 - 0.35;
+      const sx = tx + Math.cos(ang) * (r + 0.55);
+      const sz = tz + Math.sin(ang) * (r + 0.55);
+      const sy = 1.0 + frac * (h - 0.4);
+
+      const stepMesh = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.22, 0.85), MATS.safetyYellow);
+      stepMesh.position.set(sx, sy, sz);
+      stepMesh.rotation.y = -ang;
+      zTanks.add(stepMesh);
+      tagZoneMesh(stepMesh, 'tank-farm');
+
+      const hx = tx + Math.cos(ang) * (r + 0.98);
+      const hz = tz + Math.sin(ang) * (r + 0.98);
+      if (s % 2 === 0) {
+        addCylinder(zTanks, 0.05, 0.05, 0.95, 6, hx, sy, hz, MATS.safetyYellow, 'tank-farm');
+      }
+      const curPos = [hx, sy + 0.9, hz];
+      if (prevHandrailPos) {
+        addStrut(zTanks, prevHandrailPos, curPos, 0.06, MATS.safetyYellow, 'tank-farm');
+      }
+      prevHandrailPos = curPos;
+    }
+
+    [-2.0, -0.7, 0.7, 2.0].forEach(pz => {
+      const p = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, 17, 12), MATS.rustPipe);
+      p.rotation.z = Math.PI / 2;
+      p.position.set(tx + 14.5, 1.5, tz + pz);
+      zTanks.add(p);
+      tagZoneMesh(p, 'tank-farm');
+    });
+  });
+
+  for (let pz = -18; pz <= 24; pz += 8) {
+    addBox(zTanks, 2.2, 3.2, 0.3, -86, 0.4, pz, MATS.steelSilver, 'tank-farm');
+  }
+  addBox(zTanks, 0.35, 0.35, 44, -85.5, 3.4, 3, MATS.vesselSilver, 'tank-farm');
+  addBox(zTanks, 0.35, 0.35, 44, -86.5, 3.4, 3, MATS.vesselSilver, 'tank-farm');
+
+  // ZONE 2: Central Process Core
+  const zProcess = zoneGroups['process-core'];
+  addBox(zProcess, 118, 0.4, 53, 24, 0.1, 4, MATS.concretePad, 'process-core');
+
+  const prStartX = -52, prEndX = 75, prZ = 3;
+  const prLen = prEndX - prStartX;
+  const prMidX = (prStartX + prEndX) / 2;
+
+  for (let px = prStartX; px <= prEndX; px += 7.5) {
+    addBox(zProcess, 0.48, 9.2, 0.48, px, 0.4, prZ - 2.8, MATS.steelSilver, 'process-core');
+    addBox(zProcess, 0.48, 9.2, 0.48, px, 0.4, prZ + 2.8, MATS.steelSilver, 'process-core');
+    addBox(zProcess, 0.45, 0.4, 6.1, px, 6.2, prZ, MATS.steelSilver, 'process-core');
+    addBox(zProcess, 0.45, 0.4, 6.1, px, 8.8, prZ, MATS.steelSilver, 'process-core');
+  }
+
+  [-2.3, -1.65, -1.0, -0.35, 0.35, 1.0, 1.65, 2.3].forEach((oz, idx) => {
+    const mat = idx === 0 ? MATS.rustPipe : idx === 7 ? MATS.safetyYellow : MATS.vesselSilver;
+    const pipe1 = new THREE.Mesh(new THREE.CylinderGeometry(0.26, 0.26, prLen, 14), mat);
+    pipe1.rotation.z = Math.PI / 2;
+    pipe1.position.set(prMidX, 6.65, prZ + oz);
+    zProcess.add(pipe1);
+    tagZoneMesh(pipe1, 'process-core');
+
+    if (idx < 7) {
+      const pipe2 = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, prLen, 14), MATS.steelSilver);
+      pipe2.rotation.z = Math.PI / 2;
+      pipe2.position.set(prMidX, 9.2, prZ + (oz + 0.32) * 0.85);
+      zProcess.add(pipe2);
+      tagZoneMesh(pipe2, 'process-core');
+    }
+  });
+
+  addBox(zProcess, 11, 7.6, 9.2, -13, 0.5, -12, MATS.buildingLight, 'process-core');
+  addBox(zProcess, 10.5, 9.8, 10.5, -1.5, 0.5, -12, MATS.furnaceGrey, 'process-core');
+  addCylinder(zProcess, 3.8, 6.6, 3.6, 4, -1.5, 10.3, -12, MATS.furnaceGrey, 'process-core');
+  addCylinder(zProcess, 1.15, 1.38, 17.5, 24, -1.5, 13.8, -12, MATS.furnaceGrey, 'process-core');
+  addCylinder(zProcess, 1.35, 1.35, 0.6, 20, -1.5, 26.0, -12, MATS.safetyYellow, 'process-core');
+  addBox(zProcess, 11.4, 0.5, 11.4, -1.5, 9.8, -12, MATS.safetyYellow, 'process-core');
+  addBox(zProcess, 11.8, 0.4, 9.8, -13, 7.8, -12, MATS.safetyYellow, 'process-core');
+
+  [
+    { x: 11, z: -13, r: 2.1, h: 13.5 },
+    { x: 21, z: -12, r: 1.85, h: 9.8 },
+    { x: 33, z: -12, r: 2.55, h: 17.0 }
+  ].forEach(v => {
+    addCylinder(zProcess, v.r, v.r, v.h, 28, v.x, 0.5, v.z, MATS.vesselSilver, 'process-core');
+    const dome = new THREE.Mesh(new THREE.SphereGeometry(v.r, 24, 16), MATS.vesselSilver);
+    dome.position.set(v.x, 0.5 + v.h, v.z);
+    zProcess.add(dome);
+    tagZoneMesh(dome, 'process-core');
+    addCylinder(zProcess, v.r + 0.55, v.r + 0.55, 0.35, 24, v.x, v.h * 0.65, v.z, MATS.safetyYellow, 'process-core');
+    addBox(zProcess, 0.6, v.h, 0.4, v.x + v.r + 0.25, 0.5, v.z, MATS.safetyYellow, 'process-core');
+    addBox(zProcess, 0.45, 0.45, Math.abs(prZ - v.z), v.x, 8.8, (prZ + v.z) / 2, MATS.vesselSilver, 'process-core');
+  });
+
+  for (let pz = -19; pz <= 2; pz += 6) {
+    addBox(zProcess, 5.2, 7.5, 0.4, 46, 0.4, pz, MATS.steelSilver, 'process-core');
+  }
+  for (let ox = -2.0; ox <= 2.0; ox += 0.8) {
+    const nsPipe = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.24, 24, 12), MATS.vesselSilver);
+    nsPipe.rotation.x = Math.PI / 2;
+    nsPipe.position.set(46 + ox, 8.0, -8.5);
+    zProcess.add(nsPipe);
+    tagZoneMesh(nsPipe, 'process-core');
+  }
+
+  const sepLen = 11.5, sepRad = 2.25;
+  const sepCyl = new THREE.Mesh(new THREE.CylinderGeometry(sepRad, sepRad, sepLen, 28), MATS.vesselSilver);
+  sepCyl.rotation.x = Math.PI / 2;
+  sepCyl.position.set(-22, 3.3, 16);
+  zProcess.add(sepCyl);
+  tagZoneMesh(sepCyl, 'process-core');
+  [-sepLen / 2, sepLen / 2].forEach(oz => {
+    const cap = new THREE.Mesh(new THREE.SphereGeometry(sepRad, 20, 16), MATS.vesselSilver);
+    cap.position.set(-22, 3.3, 16 + oz);
+    zProcess.add(cap);
+    tagZoneMesh(cap, 'process-core');
+  });
+  addBox(zProcess, 3.8, 2.5, 0.8, -22, 0.5, 12.2, MATS.concreteWall, 'process-core');
+  addBox(zProcess, 3.8, 2.5, 0.8, -22, 0.5, 19.8, MATS.concreteWall, 'process-core');
+  addBox(zProcess, 1.4, 4.8, 3.2, -25, 0.5, 16, MATS.safetyYellow, 'process-core');
+  [-23, -21].forEach(px => {
+    addBox(zProcess, 0.35, 0.35, 11, px, 6.5, 10, MATS.vesselSilver, 'process-core');
+    addCylinder(zProcess, 0.18, 0.18, 3.2, 10, px, 3.5, 15, MATS.vesselSilver, 'process-core');
+  });
+
+  addBox(zProcess, 21, 0.65, 14.5, 1, 9.2, 17, MATS.buildingRoof, 'process-core');
+  [[-9.5, -6.5], [9.5, -6.5], [-9.5, 6.5], [9.5, 6.5], [0, -6.5], [0, 6.5]].forEach(([ox, oz]) => {
+    addBox(zProcess, 0.45, 8.8, 0.45, 1 + ox, 0.5, 17 + oz, MATS.steelSilver, 'process-core');
+  });
+  [14.2, 19.8].forEach(sz => {
+    addBox(zProcess, 15, 1.2, 3.6, 1, 0.5, sz, MATS.concreteWall, 'process-core');
+    addCylinder(zProcess, 1.1, 1.1, 5.5, 16, -2.5, 1.7, sz, MATS.furnaceGrey, 'process-core');
+    addBox(zProcess, 4.2, 2.4, 2.6, 4.0, 1.7, sz, MATS.steelSilver, 'process-core');
+    addBox(zProcess, 14, 0.4, 0.4, 1, 4.8, sz, MATS.vesselSilver, 'process-core');
+  });
+
+  [25, 30.5, 36].forEach(vx => {
+    [13, 19.5].forEach(vz => {
+      addCylinder(zProcess, 1.5, 1.6, 2.2, 20, vx, 0.5, vz, MATS.furnaceGrey, 'process-core');
+      addCylinder(zProcess, 1.55, 1.55, 11.8, 28, vx, 2.7, vz, MATS.vesselSilver, 'process-core');
+      const dome = new THREE.Mesh(new THREE.SphereGeometry(1.55, 24, 16), MATS.vesselSilver);
+      dome.position.set(vx, 14.5, vz);
+      zProcess.add(dome);
+      tagZoneMesh(dome, 'process-core');
+    });
+  });
+  addBox(zProcess, 15.2, 0.35, 10.2, 30.5, 6.5, 16.25, MATS.safetyYellow, 'process-core');
+  addBox(zProcess, 15.2, 0.35, 10.2, 30.5, 12.2, 16.25, MATS.safetyYellow, 'process-core');
+  addBox(zProcess, 13.5, 0.45, 0.45, 30.5, 16.3, 13, MATS.vesselSilver, 'process-core');
+  addBox(zProcess, 13.5, 0.45, 0.45, 30.5, 16.3, 19.5, MATS.vesselSilver, 'process-core');
+
+  // ZONE 3: East Distillation Towers & Bullet Tanks
+  const zEast = zoneGroups['distillation-east'];
+
+  [60, 73].forEach(tx => {
+    const colH = 30.5;
+    addCylinder(zEast, 2.35, 2.5, colH, 32, tx, 0.5, 2, MATS.vesselSilver, 'distillation-east');
+    const topDome = new THREE.Mesh(new THREE.SphereGeometry(2.35, 24, 16), MATS.vesselSilver);
+    topDome.position.set(tx, 0.5 + colH, 2);
+    zEast.add(topDome);
+    tagZoneMesh(topDome, 'distillation-east');
+
+    const uBend = new THREE.Mesh(new THREE.TorusGeometry(1.4, 0.32, 12, 24, Math.PI), MATS.vesselSilver);
+    uBend.position.set(tx + 1.4, 0.5 + colH + 1.8, 2);
+    zEast.add(uBend);
+    tagZoneMesh(uBend, 'distillation-east');
+    addCylinder(zEast, 0.32, 0.32, colH - 2, 12, tx + 2.8, 2.5, 2, MATS.vesselSilver, 'distillation-east');
+
+    for (let py = 4.8; py <= colH - 1.5; py += 4.4) {
+      addBox(zEast, 6.4, 0.3, 6.4, tx, py, 2, MATS.safetyYellow, 'distillation-east');
+      addBox(zEast, 6.5, 0.7, 0.15, tx, py + 0.3, 2 + 3.15, MATS.safetyYellow, 'distillation-east');
+      addBox(zEast, 6.5, 0.7, 0.15, tx, py + 0.3, 2 - 3.15, MATS.safetyYellow, 'distillation-east');
+      addBox(zEast, 0.15, 0.7, 6.5, tx - 3.15, py + 0.3, 2, MATS.safetyYellow, 'distillation-east');
+      addBox(zEast, 0.15, 0.7, 6.5, tx + 3.15, py + 0.3, 2, MATS.safetyYellow, 'distillation-east');
+    }
+    [[-3.0, -3.0], [3.0, -3.0], [3.0, 3.0], [-3.0, 3.0]].forEach(([ox, oz]) => {
+      addBox(zEast, 0.28, colH + 0.5, 0.28, tx + ox, 0.5, 2 + oz, MATS.safetyYellow, 'distillation-east');
+    });
+  });
+
+  [-10.5, -15.5].forEach(hz => {
+    const hLen = 15.5, hRad = 1.95;
+    const hCyl = new THREE.Mesh(new THREE.CylinderGeometry(hRad, hRad, hLen, 28), MATS.vesselSilver);
+    hCyl.rotation.z = Math.PI / 2;
+    hCyl.position.set(66.5, 3.6, hz);
+    zEast.add(hCyl);
+    tagZoneMesh(hCyl, 'distillation-east');
+    [-hLen / 2, hLen / 2].forEach(ox => {
+      const cap = new THREE.Mesh(new THREE.SphereGeometry(hRad, 20, 14), MATS.vesselSilver);
+      cap.position.set(66.5 + ox, 3.6, hz);
+      zEast.add(cap);
+      tagZoneMesh(cap, 'distillation-east');
+    });
+    addBox(zEast, 1.0, 2.2, 3.2, 61, 0.5, hz, MATS.concreteWall, 'distillation-east');
+    addBox(zEast, 1.0, 2.2, 3.2, 72, 0.5, hz, MATS.concreteWall, 'distillation-east');
+  });
+
+  [18.5, 24.5].forEach(bz => {
+    const bLen = 18.5;
+    const bRad = 2.15;
+    const bCyl = new THREE.Mesh(new THREE.CylinderGeometry(bRad, bRad, bLen, 32), MATS.vesselSilver);
+    bCyl.rotation.z = Math.PI / 2;
+    bCyl.position.set(67, 3.1, bz);
+    zEast.add(bCyl);
+    tagZoneMesh(bCyl, 'distillation-east');
+
+    [-bLen / 2, bLen / 2].forEach(ox => {
+      const cap = new THREE.Mesh(new THREE.SphereGeometry(bRad, 24, 16), MATS.vesselSilver);
+      cap.position.set(67 + ox, 3.1, bz);
+      zEast.add(cap);
+      tagZoneMesh(cap, 'distillation-east');
+    });
+
+    addBox(zEast, 1.2, 2.1, 3.8, 60.5, 0.5, bz, MATS.concreteWall, 'distillation-east');
+    addBox(zEast, 1.2, 2.1, 3.8, 73.5, 0.5, bz, MATS.concreteWall, 'distillation-east');
+  });
+
+  addBox(zEast, 0.5, 0.4, 20, 52, 2.2, 14, MATS.vesselSilver, 'distillation-east');
+  addBox(zEast, 0.5, 0.4, 20, 53.2, 2.2, 14, MATS.vesselSilver, 'distillation-east');
+  addBox(zEast, 8, 0.4, 0.5, 56, 2.2, 23.5, MATS.vesselSilver, 'distillation-east');
+  addBox(zEast, 8, 0.4, 0.5, 56, 2.2, 18.5, MATS.vesselSilver, 'distillation-east');
+
+  // ZONE 6: Gate & Admin Building
+  const zAdmin = zoneGroups['gate-admin'];
+
+  addBox(zAdmin, 24, 5.2, 11.5, -78, 0.4, 50, MATS.buildingLight, 'gate-admin');
+  [-85, -80, -73].forEach(wx => {
+    addBox(zAdmin, 3.2, 2.2, 0.25, wx, 1.8, 55.75, MATS.darkGlass, 'gate-admin');
+  });
+  addBox(zAdmin, 37, 1.15, 13.5, -71.5, 5.6, 50, MATS.buildingRoof, 'gate-admin');
+  addBox(zAdmin, 0.85, 5.2, 0.85, -54.5, 0.4, 44.5, MATS.concreteWall, 'gate-admin');
+  addBox(zAdmin, 0.85, 5.2, 0.85, -54.5, 0.4, 55.5, MATS.concreteWall, 'gate-admin');
+  addBox(zAdmin, 0.8, 1.8, 0.8, -66.5, 0.4, 54, MATS.safetyYellow, 'gate-admin');
+  addBox(zAdmin, 9.5, 0.22, 0.22, -61.5, 1.8, 54, MATS.redAccent, 'gate-admin');
+
+  addBox(zAdmin, 8.8, 4.2, 5.6, -82, 0.4, 68, MATS.buildingLight, 'gate-admin');
+  addBox(zAdmin, 9.8, 0.65, 6.6, -82, 4.6, 68, MATS.buildingRoof, 'gate-admin');
+  addBox(zAdmin, 5.5, 1.8, 0.25, -82, 2.0, 70.8, MATS.darkGlass, 'gate-admin');
+
+  addBox(zAdmin, 3.3, 1.3, 6.4, -62, 0.65, 58, MATS.furnaceGrey, 'gate-admin');
+  addBox(zAdmin, 2.9, 1.15, 3.6, -62, 1.95, 58.2, MATS.darkGlass, 'gate-admin');
+  [[-1.6, -2.0], [1.6, -2.0], [-1.6, 2.0], [1.6, 2.0]].forEach(([wx, wz]) => {
+    addBox(zAdmin, 0.45, 0.9, 0.9, -62 + wx, 0.35, 58 + wz, MATS.truckCabDark, 'gate-admin');
+  });
+
+  const adminX = -12, adminZ = 54;
+  addBox(zAdmin, 68, 0.48, 29.5, adminX, 0.15, adminZ, MATS.grassBright, 'gate-admin');
+  addBox(zAdmin, 68, 1.45, 1.25, adminX, 0.4, adminZ - 14.2, MATS.hedgeDark, 'gate-admin');
+  addBox(zAdmin, 1.25, 1.45, 29.5, adminX - 33.5, 0.4, adminZ, MATS.hedgeDark, 'gate-admin');
+  addBox(zAdmin, 1.25, 1.45, 29.5, adminX + 33.5, 0.4, adminZ, MATS.hedgeDark, 'gate-admin');
+  addBox(zAdmin, 68, 1.1, 1.0, adminX, 0.4, adminZ + 14.2, MATS.hedgeDark, 'gate-admin');
+
+  addBox(zAdmin, 36.5, 6.2, 16.5, adminX, 0.5, adminZ - 2, MATS.buildingLight, 'gate-admin');
+  addBox(zAdmin, 39.5, 1.25, 19.5, adminX, 6.7, adminZ - 2, MATS.buildingRoof, 'gate-admin');
+  addBox(zAdmin, 34.5, 0.35, 14.5, adminX, 7.95, adminZ - 2, MATS.concreteWall, 'gate-admin');
+  addBox(zAdmin, 23, 4.4, 0.4, adminX, 1.1, adminZ + 6.15, MATS.darkGlass, 'gate-admin');
+  for (let mx = -9; mx <= 9; mx += 4.5) {
+    addBox(zAdmin, 0.22, 4.4, 0.5, adminX + mx, 1.1, adminZ + 6.2, MATS.steelSilver, 'gate-admin');
+  }
+
+  // ZONE 7: Warehouse & Loading
+  const zWarehouse = zoneGroups['warehouse-loading'];
+
+  addBox(zWarehouse, 28.5, 7.4, 15.5, 42, 0.4, 47, MATS.buildingLight, 'warehouse-loading');
+  addBox(zWarehouse, 29.8, 0.85, 16.6, 42, 7.8, 47, MATS.buildingRoof, 'warehouse-loading');
+
+  addBox(zWarehouse, 5.5, 6.2, 12.5, 57, 0.4, 46.5, MATS.buildingLight, 'warehouse-loading');
+  addBox(zWarehouse, 6.0, 0.7, 13.5, 57, 6.6, 46.5, MATS.buildingRoof, 'warehouse-loading');
+
+  addBox(zWarehouse, 32.5, 8.0, 16.5, 74, 0.4, 47, MATS.buildingLight, 'warehouse-loading');
+  addBox(zWarehouse, 33.8, 0.85, 17.6, 74, 8.4, 47, MATS.buildingRoof, 'warehouse-loading');
+
+  [33.5, 41.5, 49.5, 63.5, 73.5, 83.5].forEach(dx => {
+    addBox(zWarehouse, 4.8, 4.8, 0.35, dx, 0.5, 54.95, MATS.shutterDoor, 'warehouse-loading');
+    addCylinder(zWarehouse, 0.14, 0.14, 1.2, 8, dx - 2.7, 0.4, 55.6, MATS.safetyYellow, 'warehouse-loading');
+    addCylinder(zWarehouse, 0.14, 0.14, 1.2, 8, dx + 2.7, 0.4, 55.6, MATS.safetyYellow, 'warehouse-loading');
+  });
+
+  function buildBoxTruck(x, z) {
+    const trailerMats = [
+      MATS.truckWhite,
+      MATS.truckWhite,
+      MATS.truckWhite,
+      MATS.truckWhite,
+      MATS.truckLogoSide,
+      MATS.truckLogoSide
+    ];
+    const trailerMesh = new THREE.Mesh(new THREE.BoxGeometry(14.8, 4.3, 3.8), trailerMats);
+    trailerMesh.position.set(x - 2, 1.25 + 4.3 / 2, z);
+    zWarehouse.add(trailerMesh);
+    tagZoneMesh(trailerMesh, 'warehouse-loading');
+
+    addBox(zWarehouse, 15.5, 0.55, 3.2, x, 0.9, z, MATS.truckCabDark, 'warehouse-loading');
+
+    addBox(zWarehouse, 3.6, 3.5, 3.6, x + 7.4, 1.15, z, MATS.truckWhite, 'warehouse-loading');
+    addBox(zWarehouse, 0.45, 1.5, 3.2, x + 9.05, 2.5, z, MATS.darkGlass, 'warehouse-loading');
+    addBox(zWarehouse, 1.4, 1.4, 0.25, x + 7.8, 2.5, z + 1.82, MATS.darkGlass, 'warehouse-loading');
+    [-7.5, -5.6, 3.2, 6.6, 8.4].forEach(wx => {
+      const wheel = new THREE.Mesh(new THREE.CylinderGeometry(0.68, 0.68, 4.1, 16), MATS.truckCabDark);
+      wheel.rotation.x = Math.PI / 2;
+      wheel.position.set(x + wx, 0.68, z);
+      zWarehouse.add(wheel);
+      tagZoneMesh(wheel, 'warehouse-loading');
+    });
+  }
+  buildBoxTruck(47, 60);
+
+  function buildTankerTruck(x, z) {
+    addBox(zWarehouse, 3.6, 3.5, 3.5, x - 7.5, 1.15, z, MATS.truckWhite, 'warehouse-loading');
+    addBox(zWarehouse, 0.45, 1.5, 3.1, x - 9.15, 2.5, z, MATS.darkGlass, 'warehouse-loading');
+    addBox(zWarehouse, 1.4, 1.4, 0.25, x - 7.8, 2.5, z + 1.78, MATS.darkGlass, 'warehouse-loading');
+
+    const cyl = new THREE.Mesh(new THREE.CylinderGeometry(1.72, 1.72, 13.6, 28), MATS.truckWhite);
+    cyl.rotation.z = Math.PI / 2;
+    cyl.position.set(x + 1.5, 3.15, z);
+    zWarehouse.add(cyl);
+    tagZoneMesh(cyl, 'warehouse-loading');
+
+    [-5.3, 8.3].forEach(cx => {
+      const cap = new THREE.Mesh(new THREE.SphereGeometry(1.72, 20, 14), MATS.truckWhite);
+      cap.position.set(x + cx, 3.15, z);
+      zWarehouse.add(cap);
+      tagZoneMesh(cap, 'warehouse-loading');
+    });
+
+    [-2.5, 1.5, 5.5].forEach(rx => {
+      const band = new THREE.Mesh(new THREE.TorusGeometry(1.75, 0.08, 8, 24), MATS.steelSilver);
+      band.rotation.y = Math.PI / 2;
+      band.position.set(x + rx, 3.15, z);
+      zWarehouse.add(band);
+    });
+
+    addBox(zWarehouse, 14.8, 0.6, 3.2, x + 1.2, 1.1, z, MATS.truckCabDark, 'warehouse-loading');
+    [-8.2, -5.6, 4.6, 6.8, 8.4].forEach(wx => {
+      const wheel = new THREE.Mesh(new THREE.CylinderGeometry(0.68, 0.68, 3.95, 16), MATS.truckCabDark);
+      wheel.rotation.x = Math.PI / 2;
+      wheel.position.set(x + wx, 0.68, z);
+      zWarehouse.add(wheel);
+      tagZoneMesh(wheel, 'warehouse-loading');
+    });
+  }
+  buildTankerTruck(78, 59);
+  buildTankerTruck(78, 66.5);
+
+  function makeZoneSprite(text, colorHex, pos) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 192;
+    canvas.height = 56;
+    const ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.86)';
+    ctx.strokeStyle = colorHex;
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    if (ctx.roundRect) {
+      ctx.roundRect(6, 6, 180, 44, 22);
+    } else {
+      ctx.rect(6, 6, 180, 44);
+    }
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 21px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, 96, 29);
+
+    const tex = new THREE.CanvasTexture(canvas);
+    const mat = new THREE.SpriteMaterial({ map: tex, depthTest: false, transparent: true });
+    const sprite = new THREE.Sprite(mat);
+    sprite.position.set(pos[0], pos[1] + 17, pos[2]);
+    sprite.scale.set(14.5, 4.2, 1);
+    sprite.renderOrder = 999;
+    scene.add(sprite);
+    labelSprites.push(sprite);
+  }
+
+  ZONES.forEach((z, idx) => {
+    const shortLabel = `โซน ${idx + 1}`;
+    makeZoneSprite(shortLabel, z.color, z.camTarget);
+  });
+
+  const camState = {
+    target: new THREE.Vector3(0, 3, 5),
+    desiredTarget: new THREE.Vector3(0, 3, 5),
+    spherical: new THREE.Spherical(210, 0.95, 0.0),
+    desiredSpherical: new THREE.Spherical(210, 0.95, 0.0),
+    isDragging: false,
+    dragButton: 0,
+    prevMouse: { x: 0, y: 0 },
+    downMouse: { x: 0, y: 0 }
+  };
+
+  function setCameraPreset(posArr, targetArr, btnId) {
+    const offset = new THREE.Vector3(
+      posArr[0] - targetArr[0],
+      posArr[1] - targetArr[1],
+      posArr[2] - targetArr[2]
+    );
+    camState.desiredTarget.set(targetArr[0], targetArr[1], targetArr[2]);
+    camState.desiredSpherical.setFromVector3(offset);
+
+    document.querySelectorAll('.camera-controls .btn-3d').forEach(b => {
+      if (b.id !== 'btn-toggle-labels') b.classList.remove('active');
+    });
+    if (btnId) {
+      const btn = document.getElementById(btnId);
+      if (btn) btn.classList.add('active');
+    }
+  }
+
+  setCameraPreset([0, 134, 168], [0, 3, 5], 'btn-cam-iso');
+  camState.target.copy(camState.desiredTarget);
+  camState.spherical.copy(camState.desiredSpherical);
+
+  const domEl = renderer.domElement;
+
+  domEl.addEventListener('contextmenu', e => e.preventDefault());
+
+  domEl.addEventListener('pointerdown', e => {
+    camState.isDragging = true;
+    camState.dragButton = e.button;
+    camState.prevMouse.x = e.clientX;
+    camState.prevMouse.y = e.clientY;
+    camState.downMouse.x = e.clientX;
+    camState.downMouse.y = e.clientY;
+  });
+
+  window.addEventListener('pointermove', e => {
+    if (camState.isDragging) {
+      const dx = e.clientX - camState.prevMouse.x;
+      const dy = e.clientY - camState.prevMouse.y;
+      camState.prevMouse.x = e.clientX;
+      camState.prevMouse.y = e.clientY;
+
+      if (camState.dragButton === 0 && !e.shiftKey) {
+        camState.desiredSpherical.theta -= dx * 0.0065;
+        camState.desiredSpherical.phi = Math.max(
+          0.12,
+          Math.min(Math.PI / 2 - 0.06, camState.desiredSpherical.phi - dy * 0.006)
+        );
+      } else {
+        const panSpeed = camState.desiredSpherical.radius * 0.0012;
+        const forward = new THREE.Vector3();
+        camera.getWorldDirection(forward);
+        forward.y = 0;
+        forward.normalize();
+        const right = new THREE.Vector3().crossVectors(forward, new THREE.Vector3(0, 1, 0)).normalize();
+
+        camState.desiredTarget.addScaledVector(right, -dx * panSpeed);
+        camState.desiredTarget.addScaledVector(forward, dy * panSpeed);
+      }
+      tooltip.classList.remove('visible');
+      return;
+    }
+
+    if (document.getElementById('panel-plant3d').classList.contains('active')) {
+      updateHover(e);
+    }
+  });
+
+  window.addEventListener('pointerup', e => {
+    if (!camState.isDragging) return;
+    camState.isDragging = false;
+    const moveDist = Math.hypot(e.clientX - camState.downMouse.x, e.clientY - camState.downMouse.y);
+    if (moveDist < 5 && e.button === 0) {
+      handleSceneClick(e);
+    }
+  });
+
+  domEl.addEventListener('wheel', e => {
+    e.preventDefault();
+    const factor = e.deltaY > 0 ? 1.1 : 0.9;
+    camState.desiredSpherical.radius = Math.max(40, Math.min(340, camState.desiredSpherical.radius * factor));
+  }, { passive: false });
+
+  const raycaster = new THREE.Raycaster();
+  const mouseNDC = new THREE.Vector2();
+
+  function getIntersectedZone(e) {
+    const rect = domEl.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return null;
+    if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+      return null;
+    }
+    mouseNDC.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    mouseNDC.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    raycaster.setFromCamera(mouseNDC, camera);
+    const hits = raycaster.intersectObjects(interactableMeshes, false);
+    if (hits.length > 0) {
+      return hits[0].object.userData.zoneId;
+    }
+    return null;
+  }
+
+  function updateHover(e) {
+    const zId = getIntersectedZone(e);
+    if (zId) {
+      const zObj = ZONES.find(z => z.id === zId);
+      if (zObj) {
+        const stageRect = stageEl.getBoundingClientRect();
+        tooltip.textContent = zObj.name;
+        tooltip.style.left = (e.clientX - stageRect.left) + 'px';
+        tooltip.style.top = (e.clientY - stageRect.top) + 'px';
+        tooltip.classList.add('visible');
+        container.style.cursor = 'pointer';
+        return;
+      }
+    }
+    tooltip.classList.remove('visible');
+    container.style.cursor = 'grab';
+  }
+
+  function handleSceneClick(e) {
+    const zId = getIntersectedZone(e);
+    if (zId) {
+      selectZone(zId, true);
+    }
+  }
+
+  function selectZone(zoneId, focusCamera = true) {
+    const zone = ZONES.find(z => z.id === zoneId);
+
+    document.querySelectorAll('.zone-item').forEach(btn => {
+      btn.classList.toggle('selected', btn.dataset.zoneId === zoneId);
+    });
+
+    const emptyEl = document.getElementById('inspector-empty');
+    const contentEl = document.getElementById('inspector-content');
+
+    if (!zone) {
+      emptyEl.style.display = 'flex';
+      contentEl.style.display = 'none';
+      return;
+    }
+
+    emptyEl.style.display = 'none';
+    contentEl.style.display = 'block';
+
+    const badgeEl = document.getElementById('ins-badge');
+    badgeEl.textContent = 'กำลังเลือกโซน';
+    badgeEl.style.color = zone.color;
+
+    document.getElementById('ins-title').textContent = zone.name;
+    document.getElementById('ins-desc').textContent = zone.description;
+
+    const listEl = document.getElementById('ins-list');
+    listEl.innerHTML = '';
+    zone.components.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      listEl.appendChild(li);
+    });
+
+    if (focusCamera) {
+      setCameraPreset(zone.camPos, zone.camTarget, null);
+    }
+  }
+
+  ZONES.forEach(z => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'zone-item';
+    btn.dataset.zoneId = z.id;
+    btn.innerHTML = `
+      <span class="zone-dot" style="background:${z.color}"></span>
+      <span class="zone-item-text">
+        <span class="zone-item-name">${z.name}</span>
+        <span class="zone-item-sub">${z.shortSub}</span>
+      </span>
+    `;
+    btn.addEventListener('click', () => selectZone(z.id, true));
+    zoneListEl.appendChild(btn);
+  });
+
+  document.getElementById('btn-cam-iso').addEventListener('click', () => {
+    setCameraPreset([0, 134, 168], [0, 3, 5], 'btn-cam-iso');
+  });
+
+  document.getElementById('btn-cam-top').addEventListener('click', () => {
+    setCameraPreset([0, 235, 12], [0, 0, 2], 'btn-cam-top');
+  });
+
+  document.getElementById('btn-cam-front').addEventListener('click', () => {
+    setCameraPreset([0, 52, 195], [0, 8, 15], 'btn-cam-front');
+  });
+
+  let labelsVisible = true;
+  document.getElementById('btn-toggle-labels').addEventListener('click', function () {
+    labelsVisible = !labelsVisible;
+    labelSprites.forEach(s => { s.visible = labelsVisible; });
+    this.classList.toggle('active', !labelsVisible);
+  });
+
+  document.getElementById('btn-reset-selection').addEventListener('click', () => {
+    selectZone(null, false);
+    setCameraPreset([0, 134, 168], [0, 3, 5], 'btn-cam-iso');
+  });
+
+  window.resizePlant3D = function () {
+    const w = container.clientWidth;
+    const h = container.clientHeight;
+    if (w > 0 && h > 0) {
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+  };
+
+  window.addEventListener('resize', window.resizePlant3D);
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    camState.target.lerp(camState.desiredTarget, 0.1);
+    camState.spherical.radius += (camState.desiredSpherical.radius - camState.spherical.radius) * 0.1;
+    camState.spherical.phi += (camState.desiredSpherical.phi - camState.spherical.phi) * 0.1;
+    camState.spherical.theta += (camState.desiredSpherical.theta - camState.spherical.theta) * 0.1;
+
+    const offset = new THREE.Vector3().setFromSpherical(camState.spherical);
+    camera.position.copy(camState.target).add(offset);
+    camera.lookAt(camState.target);
+
+    fanBlades.forEach(fb => {
+      fb.rotation.y += 0.06;
+    });
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
 })();
 </script>
 </body>
