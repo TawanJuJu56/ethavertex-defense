@@ -1145,6 +1145,26 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
   color: var(--p3d-ink);
   user-select: none;
   margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.plant3d-stage.is-fullscreen,
+.plant3d-stage:fullscreen,
+.plant3d-stage:-webkit-full-screen {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  max-height: none !important;
+  z-index: 9999 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+body.p3d-fs-lock {
+  overflow: hidden !important;
 }
 
 .plant3d-stage .topbar {
@@ -1266,7 +1286,16 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
   position: relative;
   width: 100%;
   height: 100%;
+  flex: 1;
+  min-height: 280px;
   cursor: grab;
+  touch-action: none;
+}
+
+#canvas-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 #canvas-container:active {
@@ -1517,33 +1546,92 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
 
 @media (max-width: 768px) {
   .plant3d-stage {
-    height: 580px;
+    height: auto;
+    min-height: 600px;
   }
-  .plant3d-stage .topbar {
+  .plant3d-stage:not(.is-fullscreen) .topbar {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    margin: 8px 8px 0 8px;
     border-radius: 12px;
     flex-wrap: wrap;
-    padding: 6px 10px;
+    padding: 8px 10px;
+    gap: 8px;
+  }
+  .plant3d-stage.is-fullscreen .topbar {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    border-radius: 12px;
+    flex-wrap: wrap;
+    padding: 7px 10px;
+    gap: 6px;
+  }
+  .plant3d-stage .title-stack h3 {
+    font-size: 12px;
   }
   .plant3d-stage .camera-controls {
     overflow-x: auto;
     width: 100%;
     padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
   }
-  .plant3d-stage .side-panel {
+  .plant3d-stage:not(.is-fullscreen) #canvas-container {
+    height: 360px;
+    min-height: 340px;
+    flex: none;
+  }
+  .plant3d-stage.is-fullscreen #canvas-container {
+    height: 100%;
+    flex: 1;
+  }
+  .plant3d-stage:not(.is-fullscreen) .side-panel {
+    position: relative;
     top: auto;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
+    max-height: none;
+    padding: 8px;
+    flex-direction: column;
+    gap: 8px;
+    background: #080f18;
+    border-top: 1px solid var(--p3d-border);
+  }
+  .plant3d-stage.is-fullscreen .side-panel {
+    top: auto;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
     width: auto;
-    max-height: 36vh;
-    flex-direction: row;
+    max-height: 36dvh;
+    flex-direction: column;
+    gap: 6px;
   }
   .plant3d-stage .panel-card {
-    flex: 1;
+    flex: none;
+    width: 100%;
     min-width: 0;
   }
   .plant3d-stage .zone-list {
-    max-height: 110px;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-height: none;
+    gap: 6px;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .plant3d-stage .zone-item {
+    flex: 0 0 185px;
+    padding: 6px 8px;
+  }
+  .plant3d-stage .inspector-card {
+    max-height: 165px;
   }
   .plant3d-stage .hint-bar {
     display: none;
@@ -2212,6 +2300,11 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
           <button type="button" class="btn-3d" id="btn-cam-top">มุมมองด้านบน (Top Plan)</button>
           <button type="button" class="btn-3d" id="btn-cam-front">มุมมองด้านหน้า</button>
           <button type="button" class="btn-3d" id="btn-toggle-labels">ซ่อน/แสดงป้ายโซน</button>
+          <button type="button" class="btn-3d" id="btn-3d-fullscreen" title="ขยายเต็มจอ (Full Screen)">
+            <svg id="icon-fs-enter" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+            <svg id="icon-fs-exit" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="display:none"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path></svg>
+            <span id="txt-3d-fullscreen">เต็มจอ</span>
+          </button>
         </div>
       </div>
 
@@ -3965,7 +4058,7 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
     camState.desiredSpherical.setFromVector3(offset);
 
     document.querySelectorAll('.camera-controls .btn-3d').forEach(b => {
-      if (b.id !== 'btn-toggle-labels') b.classList.remove('active');
+      if (b.id !== 'btn-toggle-labels' && b.id !== 'btn-3d-fullscreen') b.classList.remove('active');
     });
     if (btnId) {
       const btn = document.getElementById(btnId);
@@ -4161,17 +4254,91 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
     setCameraPreset([0, 134, 168], [0, 3, 5], 'btn-cam-iso');
   });
 
+  // Fullscreen Toggle & Mobile Aspect Ratio Sync
+  const btnFs = document.getElementById('btn-3d-fullscreen');
+  const txtFs = document.getElementById('txt-3d-fullscreen');
+  const iconFsEnter = document.getElementById('icon-fs-enter');
+  const iconFsExit = document.getElementById('icon-fs-exit');
+
+  function syncFullscreenUI(active) {
+    stageEl.classList.toggle('is-fullscreen', active);
+    document.body.classList.toggle('p3d-fs-lock', active);
+    if (btnFs) btnFs.classList.toggle('active', active);
+    if (txtFs) txtFs.textContent = active ? 'ย่อจอ' : 'เต็มจอ';
+    if (iconFsEnter) iconFsEnter.style.display = active ? 'none' : 'inline';
+    if (iconFsExit) iconFsExit.style.display = active ? 'inline' : 'none';
+    setTimeout(() => window.resizePlant3D(), 30);
+    setTimeout(() => window.resizePlant3D(), 180);
+  }
+
+  function togglePlantFullscreen() {
+    const nativeFsEl = document.fullscreenElement || document.webkitFullscreenElement;
+    const isCurrentlyFs = stageEl.classList.contains('is-fullscreen') || nativeFsEl === stageEl;
+
+    if (!isCurrentlyFs) {
+      syncFullscreenUI(true);
+      const reqFs = stageEl.requestFullscreen || stageEl.webkitRequestFullscreen;
+      if (reqFs) {
+        try {
+          const p = reqFs.call(stageEl);
+          if (p && typeof p.catch === 'function') p.catch(() => {});
+        } catch (err) {}
+      }
+    } else {
+      syncFullscreenUI(false);
+      if (nativeFsEl) {
+        const exitFs = document.exitFullscreen || document.webkitExitFullscreen;
+        if (exitFs) {
+          try {
+            const p = exitFs.call(document);
+            if (p && typeof p.catch === 'function') p.catch(() => {});
+          } catch (err) {}
+        }
+      }
+    }
+  }
+
+  if (btnFs) {
+    btnFs.addEventListener('click', togglePlantFullscreen);
+  }
+
+  document.addEventListener('fullscreenchange', () => {
+    const isNative = (document.fullscreenElement === stageEl);
+    if (!isNative && stageEl.classList.contains('is-fullscreen')) {
+      syncFullscreenUI(false);
+    } else if (isNative) {
+      syncFullscreenUI(true);
+    }
+  });
+
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && stageEl.classList.contains('is-fullscreen')) {
+      syncFullscreenUI(false);
+    }
+  });
+
   window.resizePlant3D = function () {
-    const w = container.clientWidth;
-    const h = container.clientHeight;
+    const rect = container.getBoundingClientRect();
+    const w = Math.round(rect.width) || container.clientWidth;
+    const h = Math.round(rect.height) || container.clientHeight;
     if (w > 0 && h > 0) {
+      const isPortrait = w < 640 && h > w * 0.85;
+      camera.fov = isPortrait ? 44 : 34;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
+      renderer.setSize(w, h, false);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     }
   };
 
   window.addEventListener('resize', window.resizePlant3D);
+
+  if (typeof ResizeObserver !== 'undefined') {
+    const ro = new ResizeObserver(() => {
+      window.resizePlant3D();
+    });
+    ro.observe(container);
+  }
 
   function animate() {
     requestAnimationFrame(animate);
