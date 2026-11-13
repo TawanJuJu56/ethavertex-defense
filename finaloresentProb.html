@@ -10,38 +10,33 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #F4F5F7;
+  --bg: #F6F5F1;
   --surface: #FFFFFF;
-  --surface-subtle: #F8FAFC;
-  --surface-hover: #F1F5F9;
-  --ink: #0F172A;
-  --ink-secondary: #334155;
-  --ink-muted: #64748B;
-  --border: #E2E8F0;
-  --border-strong: #CBD5E1;
+  --surface-subtle: #FBFBF9;
+  --surface-muted: #F0EEE8;
+  --surface-hover: #EAE7DF;
+  --ink: #16181D;
+  --ink-secondary: #5B5F66;
+  --ink-muted: #61656C;
+  --border: #E4E2DC;
+  --border-strong: #CFCBC2;
 
-  --brand: #0F6A48;
-  --brand-hover: #0B5237;
-  --brand-soft: #ECFDF5;
-  --brand-border: #A7F3D0;
+  --brand: #17694A;
+  --brand-hover: #115239;
+  --brand-soft: #ECF5F0;
+  --brand-border: #B7DCCB;
 
-  --blue: #1D4ED8;
-  --blue-soft: #EFF6FF;
-  --blue-border: #BFDBFE;
+  --amber: #8A5409;
+  --amber-accent: #A86A12;
+  --amber-soft: #FDF6E7;
+  --amber-border: #E8D1A0;
 
-  --amber: #B45309;
-  --amber-soft: #FFFBEB;
-  --amber-border: #FDE68A;
+  --red: #B42318;
+  --red-soft: #FEF1F0;
+  --red-border: #F2B8B3;
 
-  --red: #B91C1C;
-  --red-soft: #FEF2F2;
-  --red-border: #FECACA;
-
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
-  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.06);
+  --radius-sm: 4px;
+  --radius-md: 8px;
 
   --font-sans: "IBM Plex Sans Thai", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -55,10 +50,17 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+::selection {
+  background: rgba(23, 105, 74, 0.16);
+  color: var(--ink);
+}
+
 html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
 }
 
 body {
@@ -67,11 +69,16 @@ body {
   font-family: var(--font-sans);
   line-height: 1.6;
   font-size: 15px;
-  padding-bottom: calc(var(--bottom-nav-h) + 28px);
+  padding-bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom, 0px) + 28px);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-/* Typography & Utility Classes */
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
 .tabular {
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
@@ -83,40 +90,33 @@ body {
 .right { text-align: right; }
 .center { text-align: center; }
 
-.badge {
+.tag-chip {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   padding: 3px 9px;
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 600;
-  border-radius: 99px;
+  border-radius: var(--radius-sm);
   line-height: 1.35;
   white-space: nowrap;
-}
-.badge-green {
-  background: var(--brand-soft);
-  color: var(--brand);
-  border: 1px solid var(--brand-border);
-}
-.badge-blue {
-  background: var(--blue-soft);
-  color: var(--blue);
-  border: 1px solid var(--blue-border);
-}
-.badge-amber {
-  background: var(--amber-soft);
-  color: var(--amber);
-  border: 1px solid var(--amber-border);
-}
-.badge-gray {
+  border: 1px solid var(--border);
   background: var(--surface-subtle);
   color: var(--ink-secondary);
-  border: 1px solid var(--border);
+}
+.tag-chip.accent {
+  background: var(--brand-soft);
+  color: var(--brand);
+  border-color: var(--brand-border);
+}
+.tag-chip.amber {
+  background: var(--amber-soft);
+  color: var(--amber);
+  border-color: var(--amber-border);
 }
 
-/* Top Masthead */
-header.masthead {
+/* Unified Top Chrome (Masthead + Desktop Tabs) */
+.top-chrome {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   position: sticky;
@@ -124,27 +124,32 @@ header.masthead {
   z-index: 120;
 }
 
+header.masthead {
+  border-bottom: 1px solid var(--border);
+}
+
 .header-inner {
-  max-width: 1360px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 12px 16px;
+  padding: 10px 16px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 6px;
 }
 
 .brand-wrap {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
+  min-width: 0;
 }
 
 .brand-mark {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
   background: var(--brand);
   color: #FFFFFF;
   display: flex;
@@ -152,8 +157,8 @@ header.masthead {
   justify-content: center;
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 14px;
-  letter-spacing: -0.03em;
+  font-size: 13px;
+  letter-spacing: -0.02em;
   flex-shrink: 0;
 }
 
@@ -165,57 +170,53 @@ header.masthead {
 .brand-title {
   font-size: 15.5px;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   color: var(--ink);
   line-height: 1.25;
 }
 
 .brand-tagline {
-  font-size: 12px;
-  color: var(--ink-muted);
-  font-weight: 500;
+  font-size: 12.5px;
+  color: var(--ink-secondary);
+  font-weight: 400;
   line-height: 1.35;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 .header-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding-left: 46px;
+  display: none;
 }
 
-/* Primary Navigation Tabs */
+/* Primary Navigation Tabs: Fixed Bottom on Mobile, Docked Row on Desktop */
 nav.tab-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: var(--bottom-nav-h);
+  height: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
   background: var(--surface);
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--border-strong);
   z-index: 150;
-  box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.06);
 }
 
 .nav-container {
-  max-width: 1360px;
+  max-width: 1320px;
   margin: 0 auto;
   height: 100%;
   display: flex;
   justify-content: space-around;
   align-items: stretch;
-  overflow-x: auto;
 }
 
 .tab-btn {
   flex: 1;
   background: transparent;
   border: none;
-  border-top: 3px solid transparent;
-  color: var(--ink-muted);
+  border-top: 2px solid transparent;
+  color: var(--ink-secondary);
   font-family: inherit;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -223,7 +224,7 @@ nav.tab-nav {
   align-items: center;
   justify-content: center;
   gap: 3px;
-  padding: 4px 5px;
+  padding: 4px 4px;
   transition: color 0.15s ease, background-color 0.15s ease;
   white-space: nowrap;
 }
@@ -237,22 +238,25 @@ nav.tab-nav {
   color: var(--brand);
   border-top-color: var(--brand);
   font-weight: 700;
-  background: rgba(15, 106, 72, 0.03);
+  background: var(--brand-soft);
 }
 
 .tab-btn .tab-icon {
-  width: 20px;
-  height: 20px;
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
 }
 
 .tab-btn .tab-label-desktop { display: none; }
 .tab-btn .tab-label-mobile { display: block; }
+
 .tab-count {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
+  font-weight: 600;
   padding: 1px 6px;
-  border-radius: 99px;
-  background: var(--surface-hover);
+  border-radius: var(--radius-sm);
+  background: var(--surface-muted);
   color: var(--ink-secondary);
   margin-left: 6px;
 }
@@ -261,94 +265,87 @@ nav.tab-nav {
   color: var(--brand);
 }
 
-/* Executive KPI Ribbon */
+/* Executive KPI Strip: Single Hairline-Divided Bar (Max 4 Metrics) */
 .kpi-strip {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  margin-bottom: 20px;
+  padding: 10px 0;
+  margin-bottom: 24px;
 }
 
 .kpi-container {
-  max-width: 1360px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 12px 16px;
 }
 
 .kpi-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .kpi-item {
-  background: var(--surface-subtle);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 10px 12px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-width: 0;
 }
-
-.kpi-item.highlight-green {
-  background: #F4FBF7;
-  border-color: var(--brand-border);
-}
-
-.kpi-item.highlight-amber {
-  background: #FFFDF5;
-  border-color: var(--amber-border);
-}
+.kpi-item:nth-child(2n) { border-right: none; }
+.kpi-item:nth-child(n+3) { border-bottom: none; }
 
 .kpi-label {
-  font-size: 11.5px;
-  color: var(--ink-muted);
+  font-size: 12px;
+  color: var(--ink-secondary);
   font-weight: 600;
   line-height: 1.3;
 }
 
 .kpi-value {
-  font-size: 17.5px;
-  font-weight: 800;
+  font-size: 18px;
+  font-weight: 700;
   color: var(--ink);
   line-height: 1.25;
-  margin-top: 4px;
-  letter-spacing: -0.01em;
+  margin-top: 3px;
+  letter-spacing: -0.015em;
+}
+.kpi-item.is-primary .kpi-value {
+  color: var(--brand);
 }
 
 .kpi-unit {
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--ink-secondary);
 }
 
 .kpi-sub {
-  font-size: 11.5px;
-  color: var(--ink-secondary);
-  margin-top: 3px;
-  line-height: 1.3;
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-top: 2px;
+  line-height: 1.35;
 }
 
-/* Main Content Wrapper */
+/* Main Content Area */
 main.content-area {
-  max-width: 1360px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 0 16px;
 }
 
 .tab-panel {
   display: none;
+  scroll-margin-top: 120px;
 }
 .tab-panel.active {
   display: block;
 }
 
-/* Section Header */
 .section-header {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
 }
 
 .section-title-row {
@@ -356,124 +353,83 @@ main.content-area {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-end;
-  gap: 12px;
+  gap: 10px 16px;
 }
 
 .section-header h1,
 .section-header h2 {
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--ink);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   line-height: 1.35;
 }
 
 .section-header p {
-  font-size: 13.5px;
+  font-size: 14px;
   color: var(--ink-secondary);
-  max-width: 820px;
+  max-width: 96ch;
+  margin-top: 4px;
 }
 
 /* ================= MODULE 1: SLIDE DOSSIERS ================= */
-#panel-dossier {
-  padding-right: 0;
-}
-
-.dossier-layout {
-  position: relative;
-}
-
-.dossier-sidebar {
-  position: fixed;
-  right: 4px;
-  top: 52%;
-  transform: translateY(-50%);
-  z-index: 140;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--border-strong);
-  border-radius: 999px;
-  padding: 6px 4px;
-  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.14);
-}
-
-.dossier-sidebar-title {
-  display: none;
-}
-
-.slide-rail-list {
+.slide-jump-mobile {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 2px 0 14px;
+  margin-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.slide-jump-mobile::-webkit-scrollbar { display: none; }
 
-.rail-item {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 1px solid transparent;
-  background: transparent;
+.jump-pill {
+  flex: 0 0 auto;
+  padding: 7px 12px;
+  min-height: 36px;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: inherit;
+  background: var(--surface);
   color: var(--ink-secondary);
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  font-weight: 700;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  transition: all 0.15s ease;
-  position: relative;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
-
-.rail-item:hover {
-  background: var(--brand-soft);
-  color: var(--brand);
-  border-color: var(--brand-border);
+.jump-pill:hover {
+  color: var(--ink);
+  border-color: var(--ink-secondary);
 }
-
-.rail-item.active {
+.jump-pill.active {
   background: var(--brand);
   color: #FFFFFF;
   border-color: var(--brand);
-  box-shadow: 0 2px 6px rgba(15, 106, 72, 0.32);
 }
 
-.rail-num {
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  font-weight: 700;
-  line-height: 1;
+.dossier-layout {
+  display: block;
 }
 
-.rail-text {
+.dossier-sidebar {
   display: none;
 }
 
 .slide-list {
-  background: var(--surface);
-  border: 1px solid var(--border-strong);
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  margin-bottom: 24px;
+  gap: 18px;
+  min-width: 0;
 }
 
-.slide-card {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--border);
-  border-radius: 0;
-  padding: 24px 32px 24px 20px;
-  box-shadow: none;
-  scroll-margin-top: 126px;
-}
-.slide-card:last-child {
-  border-bottom: none;
+.slide-sheet {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  scroll-margin-top: 130px;
 }
 
 .slide-header {
@@ -481,11 +437,8 @@ main.content-area {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
-  padding: 0 0 12px 0;
-  margin-bottom: 14px;
-  background: transparent;
-  border-bottom: 1px solid var(--border);
+  gap: 8px 14px;
+  margin-bottom: 10px;
 }
 
 .slide-badge-group {
@@ -496,109 +449,92 @@ main.content-area {
 }
 
 .slide-num-pill {
-  background: var(--brand);
-  color: #FFFFFF;
+  background: var(--brand-soft);
+  color: var(--brand);
+  border: 1px solid var(--brand-border);
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 6px;
-  letter-spacing: 0.03em;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.02em;
 }
 
 .slide-topic-tag {
-  font-size: 14.5px;
-  font-weight: 700;
-  color: var(--ink);
-  letter-spacing: -0.01em;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-secondary);
+}
+
+.slide-speaker {
+  font-size: 12.5px;
+  color: var(--ink-muted);
+  font-weight: 500;
 }
 
 .slide-title {
   font-size: 17.5px;
   font-weight: 700;
   color: var(--ink);
-  line-height: 1.5;
-  margin: 0 0 16px 0;
-  padding: 12px 16px;
-  background: var(--surface-subtle);
-  border-left: 4px solid var(--brand);
-  border-radius: 0 10px 10px 0;
+  line-height: 1.45;
+  margin: 0 0 18px 0;
 }
 
 .slide-param-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
-  padding: 0;
+  border-top: 1px solid var(--border);
 }
 
-.param-card {
-  background: var(--surface-subtle);
-  border: 1px solid var(--border);
-  padding: 14px 16px;
-  border-radius: 10px;
+.param-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  transition: border-color 0.15s ease, background-color 0.15s ease;
+  gap: 4px;
 }
-.param-card:hover {
-  border-color: var(--brand-border);
-  background: #FFFFFF;
+.param-item:last-child {
+  border-bottom: none;
+  padding-bottom: 2px;
 }
 
 .param-k {
   font-size: 12.5px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--brand);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.param-k::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--brand);
-  flex-shrink: 0;
 }
 
 .param-v {
   font-size: 16.5px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--ink);
   line-height: 1.35;
   letter-spacing: -0.01em;
-  padding-bottom: 5px;
-  border-bottom: 1px dashed var(--border);
 }
 
 .param-desc {
   font-size: 13.5px;
   color: var(--ink-secondary);
-  line-height: 1.5;
-  margin-top: 2px;
+  line-height: 1.55;
+  max-width: 68ch;
 }
 
-/* ================= MODULE 2: EQUIPMENT EXPLORER ================= */
-.cost-breakdown-card {
+/* ================= MODULE 2 & 3: EQUIPMENT & HMB ================= */
+.editorial-sheet {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   padding: 18px 20px;
   margin-bottom: 16px;
-  box-shadow: var(--shadow-sm);
 }
 
 .cost-card-header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
+  align-items: baseline;
+  gap: 8px 16px;
+  margin-bottom: 12px;
 }
 
 .cost-card-title {
@@ -607,37 +543,64 @@ main.content-area {
   color: var(--ink);
 }
 
+.cost-card-meta {
+  font-size: 12.5px;
+  color: var(--ink-secondary);
+}
+
 .stacked-bar-track {
   width: 100%;
   height: 16px;
-  border-radius: 99px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
   display: flex;
-  background: var(--surface-subtle);
-  margin-bottom: 14px;
-  gap: 2px;
+  background: var(--surface-muted);
+  margin-bottom: 16px;
+  gap: 1.5px;
 }
 
 .stacked-segment {
   height: 100%;
-  transition: opacity 0.2s ease;
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  transition: opacity 0.14s ease, filter 0.14s ease;
+  cursor: pointer;
+}
+.stacked-segment:hover {
+  filter: brightness(1.08);
+}
+.stacked-segment:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: -2px;
+}
+.stacked-segment.dimmed {
+  opacity: 0.32;
+}
+.stacked-segment.active-seg {
+  opacity: 1;
+  box-shadow: inset 0 -2px 0 rgba(255, 255, 255, 0.9);
 }
 
 .cost-legend-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px 14px;
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--border);
 }
 
 .cost-legend-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 12.5px;
-  padding: 6px 10px;
-  background: var(--surface-subtle);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
+  gap: 12px;
+  font-size: 13px;
+  padding: 9px 4px;
+  border-bottom: 1px solid var(--border);
+  min-width: 0;
+}
+.cost-legend-item:last-child {
+  border-bottom: none;
 }
 
 .legend-left {
@@ -646,31 +609,33 @@ main.content-area {
   gap: 8px;
   font-weight: 600;
   color: var(--ink-secondary);
+  min-width: 0;
 }
 
 .legend-swatch {
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
   flex-shrink: 0;
 }
 
 .legend-right {
   font-weight: 700;
   color: var(--ink);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* Filter Bar */
 .filter-bar {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 16px;
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
   margin-bottom: 16px;
-  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .search-row {
@@ -683,7 +648,7 @@ main.content-area {
 .search-input-wrap {
   position: relative;
   flex: 1;
-  min-width: 240px;
+  min-width: 220px;
 }
 
 .search-icon {
@@ -697,8 +662,9 @@ main.content-area {
 
 .search-input {
   width: 100%;
-  padding: 10px 36px 10px 38px;
-  font-size: 14px;
+  min-height: 42px;
+  padding: 8px 34px 8px 36px;
+  font-size: 16px;
   font-family: inherit;
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);
@@ -706,11 +672,17 @@ main.content-area {
   color: var(--ink);
   transition: border-color 0.15s ease, background-color 0.15s ease;
 }
+.search-input::placeholder {
+  color: var(--ink-muted);
+}
 .search-input:focus {
-  outline: none;
   border-color: var(--brand);
   background: var(--surface);
-  box-shadow: 0 0 0 3px rgba(15, 106, 72, 0.12);
+  box-shadow: 0 0 0 2px rgba(23, 105, 74, 0.16);
+}
+.search-input:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 1px;
 }
 
 .clear-search-btn {
@@ -720,9 +692,11 @@ main.content-area {
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
   cursor: pointer;
-  padding: 4px;
+  padding: 4px 6px;
+  font-size: 16px;
+  line-height: 1;
   display: none;
 }
 
@@ -743,20 +717,21 @@ main.content-area {
 }
 
 .pill-btn {
-  padding: 7px 13px;
+  padding: 6px 12px;
+  min-height: 36px;
   font-size: 13px;
   font-weight: 600;
   font-family: inherit;
   background: var(--surface-subtle);
   color: var(--ink-secondary);
-  border: 1px solid var(--border);
-  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 .pill-btn:hover {
-  border-color: var(--border-strong);
+  border-color: var(--ink-secondary);
   color: var(--ink);
 }
 .pill-btn.active {
@@ -765,12 +740,12 @@ main.content-area {
   border-color: var(--brand);
 }
 
-/* Mobile Cards vs Desktop Table */
+/* Mobile List Cards (Flat, Hairline-Divided, No Nested Boxes) */
 .desktop-table-view { display: none; }
 .mobile-card-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   margin-bottom: 20px;
 }
 
@@ -779,7 +754,6 @@ main.content-area {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 14px 16px;
-  box-shadow: var(--shadow-sm);
 }
 
 .m-card-header {
@@ -787,21 +761,17 @@ main.content-area {
   justify-content: space-between;
   align-items: center;
   gap: 8px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .m-card-tag {
   font-weight: 700;
   color: var(--brand);
-  font-size: 15px;
-  background: var(--brand-soft);
-  padding: 2px 8px;
-  border-radius: 5px;
-  border: 1px solid var(--brand-border);
+  font-size: 14px;
 }
 
 .m-card-cost {
-  font-weight: 800;
+  font-weight: 700;
   font-size: 15px;
   color: var(--ink);
 }
@@ -813,48 +783,61 @@ main.content-area {
   margin-bottom: 8px;
 }
 
-.m-card-badges {
+.m-card-meta {
   display: flex;
   gap: 6px;
   margin-bottom: 10px;
   flex-wrap: wrap;
 }
 
-.m-card-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 6px;
+.m-card-rows {
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   font-size: 13px;
-  background: var(--surface-subtle);
-  padding: 10px 12px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
 }
 
 .m-card-row {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
+  gap: 12px;
 }
 .m-card-row .lbl {
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
   font-weight: 600;
   flex-shrink: 0;
 }
 .m-card-row .val {
   color: var(--ink);
-  font-weight: 500;
   text-align: right;
 }
 
-/* Desktop Data Table */
-.table-wrapper {
+/* Desktop Data Tables (Generous Inset inside Editorial Sheet) */
+.table-sheet {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow-x: auto;
-  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
   margin-bottom: 24px;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+.table-scroll::-webkit-scrollbar,
+.inspector-detail::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.table-scroll::-webkit-scrollbar-thumb,
+.inspector-detail::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
 }
 
 table.eng-table {
@@ -865,48 +848,42 @@ table.eng-table {
 }
 
 table.eng-table th {
-  background: var(--surface-subtle);
   color: var(--ink-secondary);
   font-weight: 700;
   font-size: 12.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  padding: 12px 14px;
-  border-bottom: 2px solid var(--border);
+  padding: 10px 10px 11px;
+  border-bottom: 2px solid var(--border-strong);
   white-space: nowrap;
   user-select: none;
 }
 
-table.eng-table th.sortable {
-  cursor: pointer;
-}
-table.eng-table th.sortable:hover {
-  color: var(--ink);
-  background: var(--surface-hover);
-}
-
 table.eng-table td {
-  padding: 11px 14px;
+  padding: 10px;
   border-bottom: 1px solid var(--border);
   color: var(--ink);
-  vertical-align: middle;
+  vertical-align: top;
+  line-height: 1.45;
 }
 
 table.eng-table tbody tr:hover td {
-  background: #F8FAFC;
+  background: var(--surface-subtle);
+}
+
+table.eng-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 table.eng-table tfoot td {
-  background: var(--surface-subtle);
   font-weight: 700;
-  padding: 12px 14px;
+  padding: 12px 10px 6px;
   border-top: 2px solid var(--border-strong);
+  border-bottom: none;
 }
 
 .empty-state {
   text-align: center;
   padding: 36px 20px;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
   font-size: 14px;
 }
 
@@ -915,27 +892,35 @@ table.eng-table tfoot td {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  scroll-margin-top: 120px;
+}
+
+.sim-right-col {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .sim-panel {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   padding: 20px;
-  box-shadow: var(--shadow-sm);
 }
 
 .sim-panel-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  gap: 8px;
+  margin-bottom: 18px;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--border);
 }
 
 .sim-panel-title {
-  font-size: 16px;
+  font-size: 15.5px;
   font-weight: 700;
   color: var(--ink);
 }
@@ -962,48 +947,61 @@ table.eng-table tfoot td {
   font-size: 13px;
   font-weight: 700;
   color: var(--brand);
-  background: var(--brand-soft);
-  padding: 2px 8px;
-  border-radius: 6px;
-  border: 1px solid var(--brand-border);
+  white-space: nowrap;
 }
 
 input[type="range"].sim-slider {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 8px;
-  border-radius: 99px;
+  height: 6px;
+  border-radius: 999px;
   background: var(--border-strong);
-  outline: none;
   cursor: pointer;
-  margin: 6px 0;
+  margin: 8px 0;
+}
+input[type="range"].sim-slider:focus:not(:focus-visible) {
+  outline: none;
+}
+input[type="range"].sim-slider:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 4px;
 }
 
 input[type="range"].sim-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: var(--brand);
   border: 2px solid #FFFFFF;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 3px rgba(22, 24, 29, 0.35);
+  cursor: pointer;
+}
+
+input[type="range"].sim-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--brand);
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 1px 3px rgba(22, 24, 29, 0.35);
   cursor: pointer;
 }
 
 .sim-scale-labels {
   display: flex;
   justify-content: space-between;
+  gap: 6px;
   font-size: 11.5px;
   color: var(--ink-muted);
+  white-space: nowrap;
 }
 
-.boi-switch-box {
-  background: var(--surface-subtle);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 12px 14px;
+.boi-switch-row {
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1012,7 +1010,8 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
 }
 
 .toggle-btn {
-  padding: 8px 16px;
+  padding: 8px 14px;
+  min-height: 38px;
   font-size: 13px;
   font-weight: 700;
   font-family: inherit;
@@ -1021,7 +1020,7 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
   border: 1px solid var(--border-strong);
   background: var(--surface);
   color: var(--ink-secondary);
-  transition: all 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   white-space: nowrap;
 }
 .toggle-btn.active {
@@ -1033,55 +1032,61 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
 .reset-btn {
   width: 100%;
   margin-top: 14px;
-  padding: 10px 14px;
+  min-height: 40px;
+  padding: 9px 14px;
   font-size: 13.5px;
   font-weight: 600;
   font-family: inherit;
   background: var(--surface-subtle);
-  color: var(--ink-secondary);
+  color: var(--ink);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: background-color 0.15s ease;
 }
 .reset-btn:hover {
   background: var(--surface-hover);
-  color: var(--ink);
 }
 
-/* DCF Output KPI Grid */
-.sim-card-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
-.res-card {
+/* Unified Hairline DCF Results Matrix (Zero Border-Accent Slop) */
+.sim-results-strip {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 14px 16px;
-  border-top: 3.5px solid var(--brand);
-  box-shadow: var(--shadow-sm);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  overflow: hidden;
 }
-.res-card.amber { border-top-color: var(--amber); }
-.res-card.blue { border-top-color: var(--blue); }
 
-.res-card .lbl {
+.res-cell {
+  padding: 14px 16px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  min-width: 0;
+}
+.res-cell:nth-child(2n) { border-right: none; }
+.res-cell:nth-child(n+5) { border-bottom: none; }
+
+.res-cell .lbl {
   font-size: 12px;
-  color: var(--ink-muted);
+  color: var(--ink-secondary);
   font-weight: 600;
 }
-.res-card .val {
-  font-size: 22px;
-  font-weight: 800;
+.res-cell .val {
+  font-size: 21px;
+  font-weight: 700;
   color: var(--ink);
   margin-top: 4px;
   line-height: 1.2;
 }
-.res-card .sub {
-  font-size: 12px;
+.res-cell .val-unit {
+  font-size: 13px;
+  font-weight: 600;
   color: var(--ink-secondary);
+}
+.res-cell .sub {
+  font-size: 12px;
+  color: var(--ink-muted);
   margin-top: 4px;
 }
 
@@ -1089,9 +1094,8 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
 .chart-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   padding: 18px 20px;
-  box-shadow: var(--shadow-sm);
 }
 
 .chart-header {
@@ -1099,8 +1103,8 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 8px 14px;
+  margin-bottom: 10px;
 }
 
 .chart-title {
@@ -1109,34 +1113,108 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
   color: var(--ink);
 }
 
-.chart-svg-container {
-  width: 100%;
-  height: 250px;
+.chart-header-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
 }
 
-/* ================= MODULE 5: 3D INDUSTRIAL PLANT LAYOUT ================= */
-.plant3d-stage {
-  --p3d-surface: rgba(15, 23, 42, 0.72);
-  --p3d-surface-hover: rgba(51, 65, 85, 0.85);
-  --p3d-border: rgba(255, 255, 255, 0.12);
-  --p3d-ink: #f8fafc;
-  --p3d-muted: #94a3b8;
-  --p3d-brand: #38bdf8;
-  --p3d-brand-strong: #0284c7;
-  --p3d-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.45);
+.chart-legend-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--ink-secondary);
+}
+
+.chart-key-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.chart-key-line {
+  width: 14px;
+  height: 2.5px;
+  border-radius: 2px;
+}
+
+.chart-svg-container {
   position: relative;
   width: 100%;
-  height: 680px;
-  background: #0b131e;
-  border-radius: 16px;
-  overflow: hidden;
+  height: auto;
+}
+
+#dcf-chart-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+  touch-action: pan-y;
+}
+
+.dcf-tooltip {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  pointer-events: none;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.97);
   border: 1px solid var(--border-strong);
-  box-shadow: var(--shadow-md);
-  color: var(--p3d-ink);
-  user-select: none;
-  margin-bottom: 24px;
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--ink);
+  box-shadow: 0 4px 14px rgba(22, 24, 29, 0.10);
+  min-width: 170px;
+  display: none;
+}
+.dcf-tooltip.visible {
+  display: block;
+}
+.dcf-tt-head {
+  font-weight: 700;
+  color: var(--ink);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 3px;
+  margin-bottom: 4px;
+}
+.dcf-tt-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--ink-secondary);
+}
+.dcf-tt-row strong {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.table-header-row {
+  padding: 4px 10px 12px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+/* ================= MODULE 5: SPLIT-WORKBENCH 3D PLANT LAYOUT ================= */
+.plant3d-stage {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 24px;
+  scroll-margin-top: 120px;
 }
 
 .plant3d-stage.is-fullscreen,
@@ -1146,7 +1224,6 @@ input[type="range"].sim-slider::-webkit-slider-thumb {
   inset: 0 !important;
   width: 100vw !important;
   height: 100dvh !important;
-  max-height: none !important;
   z-index: 9999 !important;
   margin: 0 !important;
   border-radius: 0 !important;
@@ -1157,127 +1234,87 @@ body.p3d-fs-lock {
   overflow: hidden !important;
 }
 
-.plant3d-stage .topbar {
-  position: absolute;
-  top: 10px;
-  left: 12px;
-  right: 12px;
-  z-index: 20;
+.plant3d-toolbar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  padding: 6px 12px;
-  background: var(--p3d-surface);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--p3d-border);
-  border-radius: 999px;
-  box-shadow: var(--p3d-shadow);
-  pointer-events: auto;
+  gap: 8px 12px;
+  padding: 8px 12px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
 }
 
-.plant3d-stage .brand-group {
-  display: flex;
+.toolbar-meta {
+  display: none;
   align-items: center;
-  gap: 9px;
-  min-width: 0;
-}
-
-.plant3d-stage .brand-badge {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #0ea5e9, #2563eb);
-  display: grid;
-  place-items: center;
-  font-weight: 700;
-  font-size: 11px;
-  color: #fff;
-  flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(14, 165, 233, 0.35);
-}
-
-.plant3d-stage .title-stack {
-  min-width: 0;
-  display: flex;
-  align-items: baseline;
   gap: 8px;
-}
-
-.plant3d-stage .title-stack h3 {
-  margin: 0;
   font-size: 13px;
-  font-weight: 700;
-  color: var(--p3d-ink);
-  letter-spacing: -0.01em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-weight: 600;
+  color: var(--ink-secondary);
 }
 
-.plant3d-stage .title-stack p {
-  margin: 0;
-  font-size: 11px;
-  color: var(--p3d-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.camera-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  width: 100%;
 }
 
-@media (max-width: 1150px) {
-  .plant3d-stage .title-stack p {
-    display: none;
-  }
-}
-
-.plant3d-stage .camera-controls {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  flex-wrap: nowrap;
-}
-
-.plant3d-stage .btn-3d {
+.btn-3d {
   font: inherit;
   font-size: 11.5px;
   font-weight: 600;
-  padding: 5px 10px;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  background: rgba(30, 41, 59, 0.65);
-  color: #e2e8f0;
+  min-height: 36px;
+  padding: 6px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-subtle);
+  color: var(--ink);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
   white-space: nowrap;
 }
-
-.plant3d-stage .btn-3d:hover {
-  background: var(--p3d-surface-hover);
-  border-color: rgba(255, 255, 255, 0.18);
-  color: #fff;
+.btn-3d:hover {
+  background: var(--surface-hover);
+  border-color: var(--ink-secondary);
+}
+.btn-3d.active {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #FFFFFF;
 }
 
-.plant3d-stage .btn-3d:focus-visible {
-  outline: 2px solid var(--p3d-brand);
-  outline-offset: 2px;
+.plant3d-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  width: 100%;
 }
 
-.plant3d-stage .btn-3d.active {
-  background: var(--p3d-brand-strong);
-  border-color: var(--p3d-brand);
-  color: #ffffff;
+.plant3d-canvas-wrap {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  min-width: 0;
+  overflow: hidden;
+  background: #DFE6E2;
+}
+
+.plant3d-stage.is-fullscreen .plant3d-canvas-wrap {
+  height: 55dvh;
 }
 
 #canvas-container {
   position: relative;
   width: 100%;
   height: 100%;
-  flex: 1;
-  min-height: 280px;
+  min-width: 0;
+  overflow: hidden;
   cursor: grab;
   touch-action: none;
 }
@@ -1286,355 +1323,210 @@ body.p3d-fs-lock {
   display: block;
   width: 100% !important;
   height: 100% !important;
+  max-width: 100% !important;
 }
 
 #canvas-container:active {
   cursor: grabbing;
 }
 
-.plant3d-stage .side-panel {
-  position: absolute;
-  top: 52px;
-  left: 12px;
-  width: 224px;
-  z-index: 15;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  pointer-events: none;
-  justify-content: flex-start;
+.hint-bar {
+  display: none;
 }
 
-.plant3d-stage .panel-card {
-  background: rgba(15, 23, 42, 0.64);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--p3d-border);
-  border-radius: 10px;
-  box-shadow: var(--p3d-shadow);
-  padding: 8px 10px;
-  pointer-events: auto;
-  display: flex;
-  flex-direction: column;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.plant3d-stage .panel-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 5px;
-  gap: 6px;
-}
-
-.plant3d-stage .panel-title {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--p3d-muted);
-  margin: 0;
-}
-
-.plant3d-stage .zone-list {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  overflow-y: auto;
-  max-height: 196px;
-  padding-right: 2px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
-}
-
-.plant3d-stage .zone-item {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  width: 100%;
-  text-align: left;
-  padding: 4px 7px;
-  border-radius: 6px;
-  border: 1px solid transparent;
-  background: rgba(30, 41, 59, 0.35);
-  color: var(--p3d-ink);
-  cursor: pointer;
-  transition: all 0.14s ease;
-  font-family: inherit;
-}
-
-.plant3d-stage .zone-item:hover {
-  background: rgba(51, 65, 85, 0.7);
-  border-color: var(--p3d-border);
-}
-
-.plant3d-stage .zone-item.selected {
-  background: rgba(2, 132, 199, 0.32);
-  border-color: var(--p3d-brand);
-}
-
-.plant3d-stage .zone-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.plant3d-stage .zone-item-text {
-  min-width: 0;
-  flex: 1;
-}
-
-.plant3d-stage .zone-item-name {
-  font-size: 11.5px;
-  font-weight: 600;
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.plant3d-stage .zone-item-sub {
-  font-size: 10px;
-  color: var(--p3d-muted);
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.plant3d-stage .inspector-card {
-  max-height: 265px;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
-}
-
-.plant3d-stage .inspector-empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.touch-hint-strip {
+  padding: 7px 14px;
+  font-size: 12px;
+  color: var(--ink-secondary);
+  background: var(--surface-subtle);
+  border-top: 1px solid var(--border);
   text-align: center;
-  color: var(--p3d-muted);
-  padding: 4px 6px;
-  font-size: 11px;
   line-height: 1.4;
 }
-
-.plant3d-stage .inspector-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: rgba(56, 189, 248, 0.16);
-  color: var(--p3d-brand);
-  margin-bottom: 5px;
-  width: fit-content;
-}
-
-.plant3d-stage .inspector-title {
-  margin: 0 0 4px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.35;
-}
-
-.plant3d-stage .inspector-desc {
-  margin: 0 0 8px;
-  font-size: 11.5px;
-  color: #cbd5e1;
-  line-height: 1.45;
-}
-
-.plant3d-stage .component-list-title {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--p3d-muted);
-  margin: 0 0 5px;
-}
-
-.plant3d-stage .component-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.plant3d-stage .component-list li {
-  font-size: 11px;
-  color: #e2e8f0;
-  padding: 5px 8px;
-  background: rgba(15, 23, 42, 0.55);
-  border: 1px solid rgba(148, 163, 184, 0.12);
-  border-radius: 5px;
-  display: flex;
-  align-items: flex-start;
-  gap: 6px;
-  line-height: 1.35;
-}
-
-.plant3d-stage .component-list li::before {
-  content: "•";
-  color: var(--p3d-brand);
-  font-weight: bold;
-}
-
-.plant3d-stage .hint-bar {
-  position: absolute;
-  right: 12px;
-  bottom: 10px;
-  z-index: 15;
-  background: var(--p3d-surface);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--p3d-border);
-  border-radius: 999px;
-  padding: 4px 12px;
-  font-size: 11px;
-  color: var(--p3d-muted);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  pointer-events: none;
-  box-shadow: var(--p3d-shadow);
-}
-
-.plant3d-stage .hint-item strong {
-  color: var(--p3d-ink);
-  font-weight: 600;
+.touch-hint-strip strong {
+  color: var(--ink);
 }
 
 #hover-tooltip {
   position: absolute;
   pointer-events: none;
   z-index: 30;
-  background: rgba(15, 23, 42, 0.92);
-  border: 1px solid var(--p3d-brand);
-  color: #fff;
-  font-size: 11.5px;
+  background: rgba(22, 24, 29, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+  font-size: 12px;
   font-weight: 600;
-  padding: 4px 9px;
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  transform: translate(-50%, -130%);
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  transform: translate(-50%, -135%);
   white-space: nowrap;
   opacity: 0;
   transition: opacity 0.12s ease;
 }
-
 #hover-tooltip.visible {
   opacity: 1;
 }
 
-@media (max-width: 768px) {
-  .plant3d-stage {
-    height: auto;
-    min-height: 600px;
-  }
-  .plant3d-stage:not(.is-fullscreen) .topbar {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
-    margin: 8px 8px 0 8px;
-    border-radius: 12px;
-    flex-wrap: wrap;
-    padding: 8px 10px;
-    gap: 8px;
-  }
-  .plant3d-stage.is-fullscreen .topbar {
-    top: 8px;
-    left: 8px;
-    right: 8px;
-    border-radius: 12px;
-    flex-wrap: wrap;
-    padding: 7px 10px;
-    gap: 6px;
-  }
-  .plant3d-stage .title-stack h3 {
-    font-size: 12px;
-  }
-  .plant3d-stage .camera-controls {
-    overflow-x: auto;
-    width: 100%;
-    padding-bottom: 2px;
-    -webkit-overflow-scrolling: touch;
-  }
-  .plant3d-stage:not(.is-fullscreen) #canvas-container {
-    height: 360px;
-    min-height: 340px;
-    flex: none;
-  }
-  .plant3d-stage.is-fullscreen #canvas-container {
-    height: 100%;
-    flex: 1;
-  }
-  .plant3d-stage:not(.is-fullscreen) .side-panel {
-    position: relative;
-    top: auto;
-    bottom: auto;
-    left: auto;
-    right: auto;
-    width: 100%;
-    max-height: none;
-    padding: 8px;
-    flex-direction: column;
-    gap: 8px;
-    background: #080f18;
-    border-top: 1px solid var(--p3d-border);
-  }
-  .plant3d-stage.is-fullscreen .side-panel {
-    top: auto;
-    bottom: 8px;
-    left: 8px;
-    right: 8px;
-    width: auto;
-    max-height: 36dvh;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .plant3d-stage .panel-card {
-    flex: none;
-    width: 100%;
-    min-width: 0;
-  }
-  .plant3d-stage .zone-list {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    max-height: none;
-    gap: 6px;
-    padding-bottom: 4px;
-    -webkit-overflow-scrolling: touch;
-  }
-  .plant3d-stage .zone-item {
-    flex: 0 0 185px;
-    padding: 6px 8px;
-  }
-  .plant3d-stage .inspector-card {
-    max-height: 165px;
-  }
-  .plant3d-stage .hint-bar {
-    display: none;
-  }
+/* Docked Side/Bottom Inspector (Zero Floating Overlap over 3D Model) */
+.plant3d-inspector {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
-/* Tablet / iPad Breakpoint (>= 680px) */
+.zone-dir-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 14px 8px;
+}
+
+.zone-dir-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-secondary);
+}
+
+.zone-scroll-hint {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--brand);
+}
+
+.zone-list {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 8px;
+  padding: 0 14px 12px;
+  scroll-padding-inline: 14px;
+  scroll-snap-type: x proximity;
+  border-bottom: 1px solid var(--border);
+  -webkit-overflow-scrolling: touch;
+}
+
+.zone-item {
+  flex: 0 0 auto;
+  max-width: min(256px, calc(100vw - 64px));
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+  padding: 7px 10px;
+  min-height: 40px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-subtle);
+  color: var(--ink);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.14s ease, border-color 0.14s ease;
+}
+
+.zone-item:hover {
+  background: var(--surface-muted);
+  border-color: var(--ink-secondary);
+}
+
+.zone-item.selected {
+  background: var(--brand-soft);
+  border-color: var(--brand);
+}
+
+.zone-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-muted);
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.zone-item.selected .zone-num {
+  background: var(--brand);
+  color: #FFFFFF;
+}
+
+.zone-item-text {
+  min-width: 0;
+}
+
+.zone-item-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink);
+  display: block;
+  white-space: normal;
+  line-height: 1.28;
+}
+
+.inspector-detail {
+  padding: 14px 16px 16px;
+}
+
+.inspector-empty {
+  color: var(--ink-secondary);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.inspector-title {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.inspector-desc {
+  margin: 0 0 10px;
+  font-size: 12.5px;
+  color: var(--ink-secondary);
+  line-height: 1.5;
+}
+
+.component-list-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-secondary);
+  margin: 0 0 5px;
+}
+
+.component-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+
+.component-list li {
+  font-size: 12.5px;
+  color: var(--ink);
+  padding: 5.5px 0;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.42;
+}
+.component-list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* ================= RESPONSIVE BREAKPOINTS ================= */
 @media (min-width: 680px) {
   .header-inner {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 20px;
+    padding: 11px 24px;
   }
 
   .brand-wrap {
@@ -1642,78 +1534,130 @@ body.p3d-fs-lock {
   }
 
   .header-actions {
-    padding-left: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   main.content-area {
-    padding: 0 20px;
+    padding: 0 24px;
+  }
+
+  .search-input {
+    min-height: 40px;
+    font-size: 14px;
+  }
+
+  .slide-jump-mobile {
+    flex-wrap: wrap;
+    overflow-x: visible;
   }
 
   .slide-param-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 28px;
+  }
+  .param-item {
+    padding: 14px 0;
+  }
+  .slide-param-grid[data-count="1"] .param-item:last-child,
+  .slide-param-grid[data-count="3"] .param-item:last-child,
+  .slide-param-grid[data-count="5"] .param-item:last-child,
+  .slide-param-grid[data-count="7"] .param-item:last-child,
+  .slide-param-grid[data-count="2"] .param-item:nth-last-child(-n+2),
+  .slide-param-grid[data-count="4"] .param-item:nth-last-child(-n+2),
+  .slide-param-grid[data-count="6"] .param-item:nth-last-child(-n+2) {
+    border-bottom: none;
   }
 
-  .dossier-sidebar {
-    right: 6px;
-    padding: 7px 5px;
+  .cost-legend-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 28px;
+  }
+  .cost-legend-item:nth-last-child(-n+2) {
+    border-bottom: none;
   }
 
-  .rail-item {
-    width: 30px;
-    height: 30px;
-    font-size: 12px;
+  .sim-results-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+  .res-cell:nth-child(2n) { border-right: 1px solid var(--border); }
+  .res-cell:nth-child(3n) { border-right: none; }
+  .res-cell:nth-child(n+4) { border-bottom: none; }
+  .res-cell:nth-child(-n+3) { border-bottom: 1px solid var(--border); }
 
-  .rail-num {
-    font-size: 12px;
-  }
-
-  .slide-card {
-    padding: 28px 36px 28px 24px;
+  .plant3d-canvas-wrap {
+    height: 470px;
   }
 }
 
-/* Desktop Breakpoint (>= 920px) */
-@media (min-width: 920px) {
+@media (min-width: 680px) and (max-width: 959px) {
+  .camera-controls {
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+  }
+  .btn-3d {
+    min-height: 40px;
+    padding: 6px 12px;
+    font-size: 12.5px;
+  }
+  .zone-scroll-hint {
+    display: none;
+  }
+  .zone-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 10px 14px 12px;
+    overflow-x: visible;
+  }
+  .zone-item {
+    max-width: none;
+  }
+  .zone-item-name {
+    white-space: normal;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 959px) {
+  .pill-btn,
+  .jump-pill,
+  .btn-3d,
+  .toggle-btn {
+    min-height: 40px;
+  }
+}
+
+@media (min-width: 960px) {
   body {
     padding-bottom: 48px;
   }
 
-  .header-inner {
-    padding: 14px 24px;
-  }
-
   .brand-title {
-    font-size: 18px;
+    font-size: 17px;
   }
 
-  .brand-tagline {
-    font-size: 12.5px;
-  }
-
-  /* Move Navigation to Sticky Top Bar below Masthead */
   nav.tab-nav {
-    position: sticky;
-    top: 65px;
-    bottom: auto;
-    height: 50px;
+    position: static;
+    height: 46px;
     border-top: none;
-    border-bottom: 1px solid var(--border);
-    box-shadow: none;
+    background: var(--surface);
   }
 
   .nav-container {
     justify-content: flex-start;
     padding: 0 24px;
-    gap: 6px;
+    gap: 4px;
   }
 
   .tab-btn {
     flex: 0 0 auto;
     flex-direction: row;
     border-top: none;
-    border-bottom: 3px solid transparent;
-    padding: 0 15px;
+    border-bottom: 2px solid transparent;
+    padding: 0 14px;
     font-size: 13.5px;
     gap: 7px;
   }
@@ -1721,79 +1665,360 @@ body.p3d-fs-lock {
   .tab-btn.active {
     border-bottom-color: var(--brand);
     border-top-color: transparent;
+    background: transparent;
   }
 
   .tab-btn .tab-label-desktop { display: inline; }
   .tab-btn .tab-label-mobile { display: none; }
 
-  .kpi-container {
-    padding: 14px 24px;
-  }
-
   .kpi-grid {
-    grid-template-columns: repeat(6, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+  .kpi-item {
+    padding: 6px 24px;
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+  }
+  .kpi-item:nth-child(2n) { border-right: 1px solid var(--border); }
+  .kpi-item:last-child { border-right: none; }
 
   .kpi-value {
     font-size: 19px;
   }
 
-  main.content-area {
-    padding: 0 24px;
-  }
-
-  .dossier-sidebar {
-    right: 8px;
-    padding: 8px 6px;
-  }
-
-  .rail-item {
-    width: 32px;
-    height: 32px;
-    font-size: 12.5px;
-  }
-
-  .rail-num {
-    font-size: 12.5px;
-  }
-
-  .slide-card {
-    padding: 28px 40px 28px 24px;
-  }
-
-  .slide-param-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .cost-legend-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
   .desktop-table-view { display: block; }
   .mobile-card-list { display: none; }
+  .touch-hint-strip { display: none; }
+
+  table.eng-table th,
+  table.eng-table td {
+    padding: 8px 7px;
+    font-size: 12.5px;
+  }
 
   .sim-layout {
     display: grid;
-    grid-template-columns: 380px 1fr;
+    grid-template-columns: 315px minmax(0, 1fr);
     align-items: start;
+    gap: 18px;
+  }
+
+  .plant3d-toolbar {
+    padding: 10px 14px;
+  }
+  .toolbar-meta {
+    display: flex;
+  }
+  .camera-controls {
+    display: flex;
+    width: auto;
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+  .btn-3d {
+    font-size: 12.5px;
+    padding: 6px 12px;
+    gap: 6px;
+  }
+  .zone-scroll-hint {
+    display: none;
+  }
+
+  /* 3D Workbench Split Screen on Desktop / iPad Landscape */
+  .plant3d-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    height: clamp(460px, calc(100dvh - 185px), 640px);
+  }
+  .plant3d-stage.is-fullscreen .plant3d-body {
+    height: calc(100dvh - 58px);
+  }
+  .plant3d-canvas-wrap {
+    height: 100%;
+  }
+  .plant3d-stage.is-fullscreen .plant3d-canvas-wrap {
+    height: 100%;
+  }
+  .hint-bar {
+    position: absolute;
+    left: 14px;
+    bottom: 12px;
+    z-index: 15;
+    background: rgba(255, 255, 255, 0.94);
+    color: #16181D;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    padding: 5px 12px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(22, 24, 29, 0.08);
+  }
+  .hint-bar span, .hint-bar strong {
+    color: #16181D;
+  }
+  .plant3d-inspector {
+    border-top: none;
+    border-left: 1px solid var(--border);
+    height: 100%;
+    overflow: hidden;
+  }
+  .zone-dir-header {
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-subtle);
+    padding: 8px 14px;
+  }
+  .zone-list {
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow-x: visible;
+    padding: 0;
+    gap: 0;
+  }
+  .zone-item {
+    max-width: none;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    padding: 5px 12px;
+    min-height: 30px;
+    background: var(--surface);
+    align-items: center;
+  }
+  .zone-item:last-child {
+    border-bottom: none;
+  }
+  .zone-item:hover {
+    background: var(--surface-subtle);
+  }
+  .zone-item.selected {
+    background: var(--brand-soft);
+  }
+  .zone-item-text {
+    flex: 1;
+    min-width: 0;
+  }
+  .zone-item-name {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.3;
+    font-size: 12px;
+  }
+  .inspector-detail {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 12px 14px 14px;
+  }
+  .inspector-desc {
+    margin: 0 0 8px;
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+  .component-list li {
+    font-size: 12px;
+    padding: 4.5px 0;
+    line-height: 1.38;
+  }
+}
+
+@media (min-width: 1040px) {
+  .slide-jump-mobile {
+    display: none;
+  }
+
+  .dossier-layout {
+    display: grid;
+    grid-template-columns: 236px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .dossier-sidebar {
+    display: block;
+    position: sticky;
+    top: 128px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .dossier-sidebar-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink-secondary);
+    padding: 12px 14px 10px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-subtle);
+  }
+
+  .slide-rail-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rail-item {
+    width: 100%;
+    text-align: left;
+    background: var(--surface);
+    border: none;
+    border-bottom: 1px solid var(--border);
+    padding: 9px 14px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    transition: background-color 0.14s ease, color 0.14s ease;
+  }
+  .rail-item:last-child {
+    border-bottom: none;
+  }
+  .rail-item:hover {
+    background: var(--surface-subtle);
+    color: var(--ink);
+  }
+  .rail-item.active {
+    background: var(--brand-soft);
+    color: var(--brand);
+    font-weight: 700;
+  }
+
+  .rail-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink-muted);
+    flex-shrink: 0;
+  }
+  .rail-item.active .rail-num {
+    color: var(--brand);
+  }
+  .rail-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (min-width: 1180px) {
+  .cost-legend-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0 14px;
+  }
+  .cost-legend-item {
+    gap: 8px;
+    font-size: 12.5px;
+  }
+  .cost-legend-item:nth-last-child(-n+4) {
+    border-bottom: none;
+  }
+  .sim-layout {
+    grid-template-columns: 360px minmax(0, 1fr);
     gap: 24px;
   }
-
-  .sim-card-grid {
-    grid-template-columns: repeat(3, 1fr);
+  #panel-plant3d .section-header {
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+  .plant3d-toolbar {
+    padding: 7px 14px;
+  }
+  .plant3d-body {
+    grid-template-columns: minmax(0, 1fr) 440px;
+  }
+  .zone-dir-header {
+    padding: 6px 12px;
+  }
+  .zone-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+    padding: 6px 10px;
+    background: var(--surface-subtle);
+    border-bottom: 1px solid var(--border);
+  }
+  .zone-item {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 3.5px 7px;
+    min-height: 28px;
+    gap: 6px;
+  }
+  .zone-item:last-child {
+    grid-column: 1 / -1;
+    border-bottom: 1px solid var(--border);
+  }
+  .zone-item.selected {
+    border-color: var(--brand);
+  }
+  .zone-num {
+    width: 21px;
+    height: 21px;
+    font-size: 12px;
+  }
+  .zone-item-name {
+    font-size: 12px;
+    line-height: 1.24;
+  }
+  .inspector-detail {
+    padding: 10px 14px 12px;
+  }
+  .inspector-title {
+    margin: 0 0 4px;
+    font-size: 14.5px;
+  }
+  .inspector-desc {
+    margin: 0 0 7px;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .component-list li {
+    padding: 3.5px 0;
+    line-height: 1.32;
+  }
+  table.eng-table th {
+    padding: 10px 10px 11px;
+    font-size: 12.5px;
+  }
+  table.eng-table td {
+    padding: 10px;
+    font-size: 13.5px;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1220px) {
   .slide-param-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 28px;
+  }
+  .slide-param-grid .param-item {
+    border-bottom: 1px solid var(--border);
+  }
+  .slide-param-grid[data-count="4"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .slide-param-grid[data-count="4"] .param-item:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+  .slide-param-grid[data-count="1"] .param-item:last-child,
+  .slide-param-grid[data-count="7"] .param-item:last-child,
+  .slide-param-grid[data-count="2"] .param-item:nth-last-child(-n+2),
+  .slide-param-grid[data-count="5"] .param-item:nth-last-child(-n+2),
+  .slide-param-grid[data-count="3"] .param-item:nth-last-child(-n+3),
+  .slide-param-grid[data-count="6"] .param-item:nth-last-child(-n+3) {
+    border-bottom: none;
   }
 }
 
-/* Print Layout */
 @media print {
-  header.masthead, nav.tab-nav, .filter-bar, .dossier-sidebar, .header-actions {
+  .top-chrome, nav.tab-nav, .filter-bar, .dossier-sidebar, .slide-jump-mobile, .header-actions, .plant3d-toolbar {
     display: none !important;
   }
   body {
@@ -1811,66 +2036,61 @@ body.p3d-fs-lock {
 </head>
 <body>
 
-<!-- Top Masthead -->
-<header class="masthead">
-  <div class="header-inner">
-    <div class="brand-wrap">
-      <div class="brand-mark">EV</div>
-      <div class="brand-text-col">
-        <div class="brand-title">ETHAVERTEX &middot; Oral Defense Companion &amp; 3D Plant</div>
-        <div class="brand-tagline">Group 2C | Chulalongkorn University Chemical Engineering Capstone AY2026</div>
+<div class="top-chrome">
+  <header class="masthead">
+    <div class="header-inner">
+      <div class="brand-wrap">
+        <div class="brand-mark">EV</div>
+        <div class="brand-text-col">
+          <div class="brand-title">ETHAVERTEX &middot; Oral Defense Companion &amp; 3D Plant</div>
+          <div class="brand-tagline">Group 2C | Chulalongkorn University Chemical Engineering Capstone AY2026</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span class="tag-chip accent">Fuel-Cell H₂ + Food-Grade CO₂</span>
       </div>
     </div>
-    <div class="header-actions">
-      <span class="badge badge-green">Fuel-Cell H₂ + Food-Grade CO₂</span>
+  </header>
+
+  <nav class="tab-nav" aria-label="Main Navigation">
+    <div class="nav-container">
+      <button class="tab-btn active" data-tab="dossier" type="button">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+        <span class="tab-label-mobile">สไลด์ (12)</span>
+        <span class="tab-label-desktop">สไลด์บรรยาย<span class="tab-count">12</span></span>
+      </button>
+      <button class="tab-btn" data-tab="equipment" type="button">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        <span class="tab-label-mobile">เครื่องจักร (35)</span>
+        <span class="tab-label-desktop">ทะเบียนเครื่องจักร<span class="tab-count">35</span></span>
+      </button>
+      <button class="tab-btn" data-tab="hmb" type="button">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+        <span class="tab-label-mobile">สตรีม HMB</span>
+        <span class="tab-label-desktop">สมดุลมวลสาร HMB<span class="tab-count">15</span></span>
+      </button>
+      <button class="tab-btn" data-tab="simulator" type="button">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        <span class="tab-label-mobile">จำลอง DCF</span>
+        <span class="tab-label-desktop">จำลองเศรษฐศาสตร์ 20 ปี</span>
+      </button>
+      <button class="tab-btn" data-tab="plant3d" type="button">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+        <span class="tab-label-mobile">ผัง 3D (7)</span>
+        <span class="tab-label-desktop">ผังโรงงาน 3 มิติ<span class="tab-count">7</span></span>
+      </button>
     </div>
-  </div>
-</header>
+  </nav>
+</div>
 
-<!-- Navigation Bar (Sticky Top on Desktop, Fixed Bottom on Mobile) -->
-<nav class="tab-nav" aria-label="Main Navigation">
-  <div class="nav-container">
-    <button class="tab-btn active" data-tab="dossier" type="button">
-      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-      <span class="tab-label-mobile">สไลด์ (12)</span>
-      <span class="tab-label-desktop">สไลด์บรรยาย (Slide Dossier)<span class="tab-count">12</span></span>
-    </button>
-    <button class="tab-btn" data-tab="equipment" type="button">
-      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-      <span class="tab-label-mobile">เครื่องจักร (35)</span>
-      <span class="tab-label-desktop">ทะเบียนเครื่องจักร (Equipment)<span class="tab-count">35</span></span>
-    </button>
-    <button class="tab-btn" data-tab="hmb" type="button">
-      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-      <span class="tab-label-mobile">สตรีม HMB (15)</span>
-      <span class="tab-label-desktop">สมดุลมวลสาร (HMB Streams)<span class="tab-count">15</span></span>
-    </button>
-    <button class="tab-btn" data-tab="simulator" type="button">
-      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-      <span class="tab-label-mobile">จำลอง DCF</span>
-      <span class="tab-label-desktop">จำลองเศรษฐศาสตร์ 20 ปี (DCF Simulator)</span>
-    </button>
-    <button class="tab-btn" data-tab="plant3d" type="button">
-      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-      <span class="tab-label-mobile">ผัง 3D (7)</span>
-      <span class="tab-label-desktop">ผังโรงงาน 3 มิติ (3D Plant Layout)<span class="tab-count">7</span></span>
-    </button>
-  </div>
-</nav>
-
-<!-- Executive Summary KPI Ribbon -->
+<!-- Executive Summary KPI Strip (4 Headline Metrics with 1px Hairline Dividers) -->
 <section class="kpi-strip" aria-label="Key Project Metrics">
   <div class="kpi-container">
     <div class="kpi-grid">
-      <div class="kpi-item highlight-green">
+      <div class="kpi-item is-primary">
         <div class="kpi-label">กำลังการผลิต H₂ (99.99%)</div>
         <div class="kpi-value tabular">7,650.35 <span class="kpi-unit">t/y</span></div>
-        <div class="kpi-sub">956.3 kg/h (ISO 14687-2)</div>
-      </div>
-      <div class="kpi-item highlight-green">
-        <div class="kpi-label">กำลังผลิต Liquid CO₂</div>
-        <div class="kpi-value tabular">69,600.00 <span class="kpi-unit">t/y</span></div>
-        <div class="kpi-sub">8,700 kg/h @ -25 °C, 20 bar</div>
+        <div class="kpi-sub">956.3 kg/h (ISO 14687-2) &middot; CO₂ 69,600 t/y</div>
       </div>
       <div class="kpi-item">
         <div class="kpi-label">เงินลงทุนรวม (TCI)</div>
@@ -1878,25 +2098,19 @@ body.p3d-fs-lock {
         <div class="kpi-sub">FCI 1,096.12 + WC 193.43 MB</div>
       </div>
       <div class="kpi-item">
-        <div class="kpi-label">รายรับรวม (Gross Income)</div>
+        <div class="kpi-label">รายรับรวม / EBIT</div>
         <div class="kpi-value tabular">1,008.63 <span class="kpi-unit">MB/yr</span></div>
-        <div class="kpi-sub">H₂ 765.03 + CO₂ 243.60 MB</div>
+        <div class="kpi-sub">EBIT +434.09 MB/yr (Margin 43.04%)</div>
       </div>
-      <div class="kpi-item highlight-amber">
-        <div class="kpi-label">IRR (BOI / Base Case)</div>
-        <div class="kpi-value tabular">37.34% <span class="kpi-unit">/ 31.06%</span></div>
-        <div class="kpi-sub">MARR 10.0% | คืนทุนจริง 4.14 ปี</div>
-      </div>
-      <div class="kpi-item">
-        <div class="kpi-label">NPV @ 10% (BOI / Base)</div>
-        <div class="kpi-value tabular">+2,625.48 <span class="kpi-unit">MB</span></div>
-        <div class="kpi-sub">Base Case: +2,162.31 MB</div>
+      <div class="kpi-item is-primary">
+        <div class="kpi-label">IRR / NPV @ 10% (BOI)</div>
+        <div class="kpi-value tabular">37.34% <span class="kpi-unit">/ Base 31.06%</span></div>
+        <div class="kpi-sub">NPV +2,625.48 MB &middot; คืนทุนจริง 4.14 ปี</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Main Content Area -->
 <main class="content-area">
 
   <!-- ================= TAB 1: 12-SLIDE COMPANION DOSSIER ================= -->
@@ -1905,23 +2119,21 @@ body.p3d-fs-lock {
       <div class="section-title-row">
         <div>
           <h2>แฟ้มข้อมูลประกอบสไลด์นำเสนอ 12 หน้า (Oral Defense Slide Dossier)</h2>
-          <p>สรุปตัวเลขวิศวกรรมและสมการออกแบบตรงตามลำดับสไลด์นำเสนอ</p>
+          <p>สรุปตัวเลขวิศวกรรมและสมการออกแบบตรงตามลำดับสไลด์นำเสนอ 7 นาที</p>
         </div>
-        <span class="badge badge-green" id="slide-count-badge">แสดงครบ 12 สไลด์</span>
+        <span class="tag-chip accent" id="slide-count-badge">แสดงครบ 12 สไลด์</span>
       </div>
     </div>
+
+    <div class="slide-jump-mobile" id="slide-jump-mobile" aria-label="Slide Quick Jump"></div>
 
     <div class="dossier-layout">
       <aside class="dossier-sidebar" aria-label="Slide Navigation">
         <div class="dossier-sidebar-title">สารบัญสไลด์ (1–12)</div>
-        <div class="slide-rail-list" id="slide-rail">
-          <!-- Populated by JS -->
-        </div>
+        <div class="slide-rail-list" id="slide-rail"></div>
       </aside>
 
-      <div class="slide-list" id="slide-container">
-        <!-- Populated by JS -->
-      </div>
+      <div class="slide-list" id="slide-container"></div>
     </div>
   </section>
 
@@ -1931,64 +2143,62 @@ body.p3d-fs-lock {
       <div class="section-title-row">
         <div>
           <h2>ทะเบียนสเปกและต้นทุนเครื่องจักร 35 ยูนิต (Equipment Roster)</h2>
-          <p>ประเมินต้นทุนตามวิธี Turton Bare Module (2024 Basis): รวม Σ C_BM = 928.92 ล้านบาท และ FCI = 1,096.12 ล้านบาท</p>
+          <p>ประเมินต้นทุนตามวิธี Turton Bare Module (2024 Basis): รวม &Sigma; C<sub>BM</sub> = 928.92 ล้านบาท และ FCI = 1,096.12 ล้านบาท</p>
         </div>
-        <span class="badge badge-green" id="equipment-counter">แสดง 35 จาก 35 รายการ | 928.92 MB</span>
+        <span class="tag-chip accent" id="equipment-counter">แสดง 35 จาก 35 รายการ | 928.92 MB</span>
       </div>
     </div>
 
-    <!-- Clean Stacked Proportion Bar & Cost Breakdown -->
-    <div class="cost-breakdown-card">
+    <div class="editorial-sheet">
       <div class="cost-card-header">
-        <span class="cost-card-title">สัดส่วนต้นทุนเครื่องจักร Bare Module Cost (Σ C_BM = 928.92 MB)</span>
-        <span style="font-size:12.5px; color:var(--ink-muted)">Train 100 (Core H₂): 652.80 MB &bull; Train 200 (CCU): 276.12 MB</span>
+        <span class="cost-card-title">สัดส่วนต้นทุนเครื่องจักร Bare Module Cost (&Sigma; C<sub>BM</sub> = 928.92 MB)</span>
+        <span class="cost-card-meta tabular">Train 100 (Core H₂): 652.80 MB &middot; Train 200 (CCU): 276.12 MB</span>
       </div>
-      <div class="stacked-bar-track" role="img" aria-label="C_BM Cost Distribution">
-        <div class="stacked-segment" style="width:24.42%; background:#0F6A48" title="Reactor: 226.80 MB (24.4%)"></div>
-        <div class="stacked-segment" style="width:22.28%; background:#1D4ED8" title="Compressor: 207.00 MB (22.3%)"></div>
-        <div class="stacked-segment" style="width:14.36%; background:#059669" title="Separation Skid: 133.37 MB (14.4%)"></div>
-        <div class="stacked-segment" style="width:11.86%; background:#D97706" title="Heat Exchanger: 110.17 MB (11.9%)"></div>
-        <div class="stacked-segment" style="width:9.28%; background:#7C3AED" title="Column / Tower: 86.16 MB (9.3%)"></div>
-        <div class="stacked-segment" style="width:7.15%; background:#0891B2" title="Cryogenic Tank: 66.41 MB (7.1%)"></div>
-        <div class="stacked-segment" style="width:10.65%; background:#64748B" title="Vessel/Furnace/Pump: 99.01 MB (10.6%)"></div>
+      <div class="stacked-bar-track" id="cost-bar-track" role="group" aria-label="C_BM Cost Distribution (คลิกเพื่อกรองเครื่องจักรตามกลุ่ม)">
+        <button type="button" class="stacked-segment" data-cat="Reactor" style="width:24.42%; background:#17694A" title="คลิกเพื่อกรอง Reactor (2): 226.80 MB (24.4%)" aria-label="กรอง Reactor (2): 226.80 MB (24.4%)" aria-pressed="false" data-cost-label="Reactor (2): 226.80 MB (24.4%)"></button>
+        <button type="button" class="stacked-segment" data-cat="Compressor" style="width:23.06%; background:#2C5E4D" title="คลิกเพื่อกรอง Compressor / Fan (3): 214.20 MB (23.1%)" aria-label="กรอง Compressor / Fan (3): 214.20 MB (23.1%)" aria-pressed="false" data-cost-label="Compressor / Fan (3): 214.20 MB (23.1%)"></button>
+        <button type="button" class="stacked-segment" data-cat="Separation Skid" style="width:14.36%; background:#4B5563" title="คลิกเพื่อกรอง PSA &amp; Dryer (2): 133.37 MB (14.4%)" aria-label="กรอง PSA &amp; Dryer (2): 133.37 MB (14.4%)" aria-pressed="false" data-cost-label="PSA &amp; Dryer (2): 133.37 MB (14.4%)"></button>
+        <button type="button" class="stacked-segment" data-cat="Heat Exchanger" style="width:11.86%; background:#6B7280" title="คลิกเพื่อกรอง Exchanger (10): 110.17 MB (11.9%)" aria-label="กรอง Exchanger (10): 110.17 MB (11.9%)" aria-pressed="false" data-cost-label="Exchanger (10): 110.17 MB (11.9%)"></button>
+        <button type="button" class="stacked-segment" data-cat="Column" style="width:9.28%; background:#8E939C" title="คลิกเพื่อกรอง Column (3): 86.16 MB (9.3%)" aria-label="กรอง Column (3): 86.16 MB (9.3%)" aria-pressed="false" data-cost-label="Column (3): 86.16 MB (9.3%)"></button>
+        <button type="button" class="stacked-segment" data-cat="Cryogenic Tank" style="width:7.15%; background:#A86A12" title="คลิกเพื่อกรอง Cryo Tank (1): 66.41 MB (7.1%)" aria-label="กรอง Cryo Tank (1): 66.41 MB (7.1%)" aria-pressed="false" data-cost-label="Cryo Tank (1): 66.41 MB (7.1%)"></button>
+        <button type="button" class="stacked-segment" data-cat="Vessel,Furnace,Pump,Utility Package" style="width:9.87%; background:#C7CAD0" title="คลิกเพื่อกรอง Vessel, Furnace &amp; Aux (14 — Vessel 6, Furnace 1, Pump 6, Utility 1): 91.81 MB (9.9%)" aria-label="กรอง Vessel / Furnace / Aux (14): 91.81 MB (9.9%)" aria-pressed="false" data-cost-label="Vessel / Furnace / Aux (14): 91.81 MB (9.9%)"></button>
       </div>
       <div class="cost-legend-grid">
         <div class="cost-legend-item">
-          <span class="legend-left"><span class="legend-swatch" style="background:#0F6A48"></span>Reactor (2)</span>
+          <span class="legend-left"><span class="legend-swatch" style="background:#17694A"></span>Reactor (2)</span>
           <span class="legend-right tabular">226.80 MB (24.4%)</span>
         </div>
         <div class="cost-legend-item">
-          <span class="legend-left"><span class="legend-swatch" style="background:#1D4ED8"></span>Compressor (3)</span>
-          <span class="legend-right tabular">207.00 MB (22.3%)</span>
+          <span class="legend-left"><span class="legend-swatch" style="background:#2C5E4D"></span>Compressor / Fan (3)</span>
+          <span class="legend-right tabular">214.20 MB (23.1%)</span>
         </div>
         <div class="cost-legend-item">
-          <span class="legend-left"><span class="legend-swatch" style="background:#059669"></span>PSA &amp; Dryer (2)</span>
+          <span class="legend-left"><span class="legend-swatch" style="background:#4B5563"></span>PSA &amp; Dryer (2)</span>
           <span class="legend-right tabular">133.37 MB (14.4%)</span>
         </div>
         <div class="cost-legend-item">
-          <span class="legend-left"><span class="legend-swatch" style="background:#D97706"></span>Exchanger (10)</span>
+          <span class="legend-left"><span class="legend-swatch" style="background:#6B7280"></span>Exchanger (10)</span>
           <span class="legend-right tabular">110.17 MB (11.9%)</span>
         </div>
         <div class="cost-legend-item">
-          <span class="legend-left"><span class="legend-swatch" style="background:#7C3AED"></span>Column (3)</span>
+          <span class="legend-left"><span class="legend-swatch" style="background:#8E939C"></span>Column (3)</span>
           <span class="legend-right tabular">86.16 MB (9.3%)</span>
         </div>
         <div class="cost-legend-item">
-          <span class="legend-left"><span class="legend-swatch" style="background:#0891B2"></span>Cryo Tank (1)</span>
+          <span class="legend-left"><span class="legend-swatch" style="background:#A86A12"></span>Cryo Tank (1)</span>
           <span class="legend-right tabular">66.41 MB (7.1%)</span>
         </div>
-        <div class="cost-legend-item">
-          <span class="legend-left"><span class="legend-swatch" style="background:#64748B"></span>Furnace/Vessel/Pump (14)</span>
-          <span class="legend-right tabular">99.01 MB (10.7%)</span>
+        <div class="cost-legend-item" title="Vessel/Tank (6), Furnace (1), Pump (6), Utility Package (1)">
+          <span class="legend-left"><span class="legend-swatch" style="background:#C7CAD0"></span>Vessel / Furnace / Aux (14)</span>
+          <span class="legend-right tabular">91.81 MB (9.9%)</span>
         </div>
-        <div class="cost-legend-item" style="background:var(--brand-soft); border-color:var(--brand-border)">
-          <span class="legend-left" style="color:var(--brand)">รวม Σ C_BM ทั้งหมด</span>
+        <div class="cost-legend-item">
+          <span class="legend-left" style="color:var(--brand)"><span>รวม &Sigma; C<sub>BM</sub> ทั้งหมด</span></span>
           <span class="legend-right tabular" style="color:var(--brand)">928.92 MB (100%)</span>
         </div>
       </div>
     </div>
 
-    <!-- Filter & Search Controls -->
     <div class="filter-bar">
       <div class="search-row">
         <div class="search-input-wrap">
@@ -2010,40 +2220,43 @@ body.p3d-fs-lock {
           <button class="pill-btn" data-cat="Separation Skid" type="button">Separation Skid</button>
           <button class="pill-btn" data-cat="Column" type="button">Column</button>
           <button class="pill-btn" data-cat="Heat Exchanger" type="button">Heat Exchanger</button>
+          <button class="pill-btn" data-cat="Cryogenic Tank" type="button">Cryo Tank</button>
           <button class="pill-btn" data-cat="Vessel" type="button">Vessel / Tank</button>
+          <button class="pill-btn" data-cat="Furnace" type="button">Furnace</button>
           <button class="pill-btn" data-cat="Pump" type="button">Pump</button>
+          <button class="pill-btn" data-cat="Utility Package" type="button">Utility</button>
         </div>
       </div>
     </div>
 
-    <!-- Mobile View: Cards -->
     <div class="mobile-card-list" id="eq-card-list"></div>
 
-    <!-- Desktop View: Table -->
     <div class="desktop-table-view">
-      <div class="table-wrapper">
-        <table class="eng-table" id="equipment-table">
-          <thead>
-            <tr>
-              <th style="width:85px">Tag</th>
-              <th style="width:220px">ชื่ออุปกรณ์ (Equipment Name)</th>
-              <th style="width:140px">ประเภท</th>
-              <th>ขนาดออกแบบ (Sizing Specification)</th>
-              <th style="width:175px">สภาวะดำเนินงาน</th>
-              <th style="width:150px">วัสดุ (MOC)</th>
-              <th class="right" style="width:105px">C_p0 (USD)</th>
-              <th class="right" style="width:70px">F_BM</th>
-              <th class="right" style="width:115px">C_BM (MB)</th>
-            </tr>
-          </thead>
-          <tbody id="eq-tbody"></tbody>
-          <tfoot>
-            <tr>
-              <td colspan="8" class="right">รวมต้นทุน Bare Module Cost (Σ C_BM ของรายการที่แสดง):</td>
-              <td class="right tabular" id="eq-sum-cell" style="color:var(--brand); font-size:14.5px">928.92 MB</td>
-            </tr>
-          </tfoot>
-        </table>
+      <div class="table-sheet">
+        <div class="table-scroll">
+          <table class="eng-table" id="equipment-table">
+            <thead>
+              <tr>
+                <th style="width:82px">Tag</th>
+                <th style="width:190px">ชื่ออุปกรณ์</th>
+                <th style="width:125px">ประเภท</th>
+                <th>ขนาดออกแบบ (Sizing)</th>
+                <th style="width:155px">สภาวะดำเนินงาน</th>
+                <th style="width:140px">วัสดุ (MOC)</th>
+                <th class="right" style="width:96px">C<sub>p0</sub> (USD)</th>
+                <th class="right" style="width:62px">F<sub>BM</sub></th>
+                <th class="right" style="width:94px">C<sub>BM</sub> (MB)</th>
+              </tr>
+            </thead>
+            <tbody id="eq-tbody"></tbody>
+            <tfoot>
+              <tr>
+                <td colspan="8" class="right">รวมต้นทุน Bare Module Cost (&Sigma; C<sub>BM</sub> ของรายการที่แสดง):</td>
+                <td class="right tabular" id="eq-sum-cell" style="color:var(--brand)">928.92 MB</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
       </div>
     </div>
   </section>
@@ -2056,11 +2269,10 @@ body.p3d-fs-lock {
           <h2>ตารางสมดุลมวลสารและพลังงาน 15 สตรีมหลัก (Heat &amp; Material Balance)</h2>
           <p>ข้อมูลจำลองกระบวนการจาก Aspen HYSYS V15 (สมดุลมวลสารและพลังงาน 100.00%, ความคลาดเคลื่อน &lt; 0.01%)</p>
         </div>
-        <span class="badge badge-blue" id="stream-counter">แสดง 15 จาก 15 สตรีม</span>
+        <span class="tag-chip" id="stream-counter">แสดง 15 จาก 15 สตรีม</span>
       </div>
     </div>
 
-    <!-- Stream Filter Bar -->
     <div class="filter-bar">
       <div class="search-row">
         <div class="search-input-wrap">
@@ -2076,28 +2288,28 @@ body.p3d-fs-lock {
       </div>
     </div>
 
-    <!-- Mobile View: Stream Cards -->
     <div class="mobile-card-list" id="stream-card-list"></div>
 
-    <!-- Desktop View: HMB Table -->
     <div class="desktop-table-view">
-      <div class="table-wrapper">
-        <table class="eng-table" id="stream-table">
-          <thead>
-            <tr>
-              <th class="center" style="width:65px">สตรีม</th>
-              <th style="width:230px">คำอธิบายสตรีม (Stream Description)</th>
-              <th class="center" style="width:90px">สถานะ</th>
-              <th class="right" style="width:85px">T (°C)</th>
-              <th class="right" style="width:85px">P (bar)</th>
-              <th class="right" style="width:120px">อัตราไหล (kg/h)</th>
-              <th class="right" style="width:120px">โมล (kmol/h)</th>
-              <th class="right" style="width:75px">MW</th>
-              <th>องค์ประกอบทางเคมีสำคัญ (Composition)</th>
-            </tr>
-          </thead>
-          <tbody id="stream-tbody"></tbody>
-        </table>
+      <div class="table-sheet">
+        <div class="table-scroll">
+          <table class="eng-table" id="stream-table">
+            <thead>
+              <tr>
+                <th class="center" style="width:66px">สตรีม</th>
+                <th style="width:225px">คำอธิบายสตรีม</th>
+                <th class="center" style="width:86px">สถานะ</th>
+                <th class="right" style="width:76px">T (°C)</th>
+                <th class="right" style="width:76px">P (bar)</th>
+                <th class="right" style="width:110px">อัตราไหล (kg/h)</th>
+                <th class="right" style="width:110px">โมล (kmol/h)</th>
+                <th class="right" style="width:70px">MW</th>
+                <th>องค์ประกอบทางเคมีสำคัญ (Composition)</th>
+              </tr>
+            </thead>
+            <tbody id="stream-tbody"></tbody>
+          </table>
+        </div>
       </div>
     </div>
   </section>
@@ -2110,19 +2322,17 @@ body.p3d-fs-lock {
           <h2>จำลองเศรษฐศาสตร์และวิเคราะห์ความอ่อนไหว 20 ปี (20-Yr DCF Sensitivity Simulator)</h2>
           <p>ปรับตัวแปรราคาวัตถุดิบ ราคาจำหน่ายผลิตภัณฑ์ และสิทธิประโยชน์ทางภาษี BOI เพื่อประเมินความทนทานทางการเงินแบบเรียลไทม์</p>
         </div>
-        <span class="badge badge-amber">MARR Benchmark: 10.0%</span>
+        <span class="tag-chip amber">MARR Benchmark: 10.0%</span>
       </div>
     </div>
 
     <div class="sim-layout">
-      <!-- Left Column: Sensitivity Sliders -->
       <div class="sim-panel">
         <div class="sim-panel-header">
           <span class="sim-panel-title">ตัวแปรวิเคราะห์ความอ่อนไหว (&plusmn;30%)</span>
-          <span class="badge badge-gray">Turton Cost Model</span>
+          <span class="tag-chip">Turton Cost Model</span>
         </div>
 
-        <!-- Slider 1: Bioethanol Price -->
         <div class="sim-group">
           <div class="sim-label-row">
             <span class="sim-label">ราคาซื้อชีวเอทานอลป้อนเข้า</span>
@@ -2130,13 +2340,12 @@ body.p3d-fs-lock {
           </div>
           <input type="range" class="sim-slider" id="slider-eth" min="-30" max="30" value="0" step="1">
           <div class="sim-scale-labels">
-            <span>-30% (4.90 ฿)</span>
-            <span>ฐาน 7.00 ฿ (280 MB/yr)</span>
-            <span>+30% (9.10 ฿)</span>
+            <span>-30% (4.90฿)</span>
+            <span>ฐาน 7.00฿ (280 MB)</span>
+            <span>+30% (9.10฿)</span>
           </div>
         </div>
 
-        <!-- Slider 2: Hydrogen Selling Price -->
         <div class="sim-group">
           <div class="sim-label-row">
             <span class="sim-label">ราคาขายก๊าซไฮโดรเจน (H₂)</span>
@@ -2144,13 +2353,12 @@ body.p3d-fs-lock {
           </div>
           <input type="range" class="sim-slider" id="slider-h2" min="-30" max="30" value="0" step="1">
           <div class="sim-scale-labels">
-            <span>-30% (70 ฿)</span>
-            <span>ฐาน 100 ฿ (765.03 MB/yr)</span>
-            <span>+30% (130 ฿)</span>
+            <span>-30% (70฿)</span>
+            <span>ฐาน 100฿ (765 MB)</span>
+            <span>+30% (130฿)</span>
           </div>
         </div>
 
-        <!-- Slider 3: Liquid CO2 Price -->
         <div class="sim-group">
           <div class="sim-label-row">
             <span class="sim-label">ราคาขาย Liquid CO₂</span>
@@ -2158,13 +2366,12 @@ body.p3d-fs-lock {
           </div>
           <input type="range" class="sim-slider" id="slider-co2" min="-30" max="30" value="0" step="1">
           <div class="sim-scale-labels">
-            <span>-30% (2.45 ฿)</span>
-            <span>ฐาน 3.50 ฿ (243.60 MB/yr)</span>
-            <span>+30% (4.55 ฿)</span>
+            <span>-30% (2.45฿)</span>
+            <span>ฐาน 3.50฿ (243.6 MB)</span>
+            <span>+30% (4.55฿)</span>
           </div>
         </div>
 
-        <!-- Slider 4: Utility Tariff -->
         <div class="sim-group">
           <div class="sim-label-row">
             <span class="sim-label">ค่าไฟฟ้าและสาธารณูปโภค</span>
@@ -2173,16 +2380,15 @@ body.p3d-fs-lock {
           <input type="range" class="sim-slider" id="slider-ut" min="-30" max="30" value="0" step="1">
           <div class="sim-scale-labels">
             <span>-30%</span>
-            <span>ฐาน 104.47 MB/yr</span>
+            <span>ฐาน 104.5 MB/yr</span>
             <span>+30%</span>
           </div>
         </div>
 
-        <!-- BOI Tax Holiday Toggle -->
-        <div class="boi-switch-box">
+        <div class="boi-switch-row">
           <div>
             <div style="font-size:13.5px; font-weight:700; color:var(--ink)">สิทธิประโยชน์ BOI (ยกเว้นภาษี 8 ปี)</div>
-            <div style="font-size:12px; color:var(--ink-muted)">CIT 0% (ปี 1–8) และ 20% (ปี 9–20)</div>
+            <div style="font-size:12px; color:var(--ink-secondary)">CIT 0% (ปี 1–8) และ 20% (ปี 9–20)</div>
           </div>
           <button class="toggle-btn active" id="btn-boi-toggle" type="button">เปิด BOI</button>
         </div>
@@ -2190,73 +2396,82 @@ body.p3d-fs-lock {
         <button class="reset-btn" id="btn-reset-sim" type="button">รีเซ็ตกลับเป็นค่าฐาน (Reset to Baseline)</button>
       </div>
 
-      <!-- Right Column: Dynamic Outputs, Chart & Cash Flow Table -->
-      <div style="display:flex; flex-direction:column; gap:16px;">
-        <!-- KPI Cards -->
-        <div class="sim-card-grid">
-          <div class="res-card">
+      <div class="sim-right-col">
+        <div class="sim-results-strip">
+          <div class="res-cell">
             <div class="lbl">รายรับรวม (Gross Income)</div>
-            <div class="val tabular"><span id="res-gi">1,008.63</span> <span style="font-size:13px;font-weight:600">MB/yr</span></div>
+            <div class="val tabular"><span id="res-gi">1,008.63</span> <span class="val-unit">MB/yr</span></div>
             <div class="sub" id="res-gi-delta">&plusmn;0.00 MB/yr จากกรณีฐาน</div>
           </div>
-          <div class="res-card blue">
+          <div class="res-cell">
             <div class="lbl">ต้นทุนการผลิตรวม (COM)</div>
-            <div class="val tabular"><span id="res-com">574.55</span> <span style="font-size:13px;font-weight:600">MB/yr</span></div>
+            <div class="val tabular"><span id="res-com">574.55</span> <span class="val-unit">MB/yr</span></div>
             <div class="sub" id="res-com-delta">&plusmn;0.00 MB/yr (Cash COM: 519.74)</div>
           </div>
-          <div class="res-card">
+          <div class="res-cell">
             <div class="lbl">กำไรจากการดำเนินงาน (EBIT)</div>
-            <div class="val tabular"><span id="res-ebit">434.09</span> <span style="font-size:13px;font-weight:600">MB/yr</span></div>
+            <div class="val tabular"><span id="res-ebit">434.09</span> <span class="val-unit">MB/yr</span></div>
             <div class="sub" id="res-margin">EBIT Margin: 43.04%</div>
           </div>
-          <div class="res-card amber">
+          <div class="res-cell">
             <div class="lbl">อัตราผลตอบแทนภายใน (IRR)</div>
-            <div class="val tabular" id="res-irr" style="color:var(--amber)">37.34%</div>
+            <div class="val tabular" id="res-irr" style="color:var(--brand)">37.34%</div>
             <div class="sub">เกณฑ์ขั้นต่ำ MARR: 10.00%</div>
           </div>
-          <div class="res-card">
+          <div class="res-cell">
             <div class="lbl">มูลค่าปัจจุบันสุทธิ (NPV @ 10%)</div>
-            <div class="val tabular"><span id="res-npv">+2,625.48</span> <span style="font-size:13px;font-weight:600">MB</span></div>
+            <div class="val tabular"><span id="res-npv">+2,625.48</span> <span class="val-unit">MB</span></div>
             <div class="sub">ตลอดอายุโครงการ 20 ปี</div>
           </div>
-          <div class="res-card amber">
+          <div class="res-cell">
             <div class="lbl">ระยะเวลาคืนทุนจริง (Realistic PBP)</div>
-            <div class="val tabular"><span id="res-pbp">4.14</span> <span style="font-size:13px;font-weight:600">ปี</span></div>
+            <div class="val tabular"><span id="res-pbp">4.14</span> <span class="val-unit">ปี</span></div>
             <div class="sub">นับรวมเวลาก่อสร้าง EPC 1.5 ปี</div>
           </div>
         </div>
 
-        <!-- Cumulative Cash Flow Chart -->
         <div class="chart-card">
           <div class="chart-header">
-            <span class="chart-title">กราฟกระแสเงินสดสะสม 20 ปี และจุดคุ้มทุน (Cumulative Cash Flow Curve)</span>
-            <span class="badge badge-amber" id="chart-pbp-badge">จุดคุ้มทุน ~4.14 ปี</span>
+            <span class="chart-title">กราฟกระแสเงินสดสะสมตลอดโครงการ (Cumulative Cash Flow Curve)</span>
+            <div class="chart-header-meta">
+              <span class="chart-legend-key">
+                <span class="chart-key-item"><span class="chart-key-line" style="background:#B42318"></span>ขาดทุนสะสม</span>
+                <span class="chart-key-item"><span class="chart-key-line" style="background:#17694A"></span>กำไรสะสม</span>
+              </span>
+              <span class="tag-chip amber" id="chart-pbp-badge">จุดคุ้มทุนจริง 4.14 ปี</span>
+            </div>
           </div>
-          <div class="chart-svg-container">
-            <svg id="dcf-chart-svg" width="100%" height="100%" viewBox="0 0 640 250" preserveAspectRatio="xMidYMid meet"></svg>
+          <div class="chart-svg-container" id="chart-svg-container">
+            <svg id="dcf-chart-svg" viewBox="0 0 700 295" preserveAspectRatio="xMidYMid meet"></svg>
+            <div id="dcf-chart-tooltip" class="dcf-tooltip" aria-hidden="true"></div>
           </div>
         </div>
 
-        <!-- Cash Flow Milestone Table -->
-        <div class="table-wrapper" style="margin-bottom:0">
-          <div style="padding:14px 16px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center">
-            <span style="font-size:14.5px; font-weight:700; color:var(--ink)">ตารางกระแสเงินสดรายปี (Cash Flow Milestone Breakdown)</span>
-            <span style="font-size:12px; color:var(--ink-muted)">หน่วย: ล้านบาท (MB)</span>
+        <div class="mobile-card-list" id="cf-card-list"></div>
+
+        <div class="desktop-table-view">
+          <div class="table-sheet" style="margin-bottom:0">
+            <div class="table-header-row">
+              <span style="font-size:14.5px; font-weight:700; color:var(--ink)">ตารางกระแสเงินสดรายปี (Cash Flow Milestone Breakdown)</span>
+              <span style="font-size:12px; color:var(--ink-secondary)">หน่วย: ล้านบาท (MB)</span>
+            </div>
+            <div class="table-scroll">
+              <table class="eng-table" id="cf-table">
+                <thead>
+                  <tr>
+                    <th style="width:90px">ปีโครงการ</th>
+                    <th>สถานะการดำเนินงานและภาษี</th>
+                    <th class="right" style="width:88px">รายรับ GI</th>
+                    <th class="right" style="width:94px">Cash COM</th>
+                    <th class="right" style="width:76px">ภาษี CIT</th>
+                    <th class="right" style="width:92px">NCF สุทธิ</th>
+                    <th class="right" style="width:105px">สะสม (MB)</th>
+                  </tr>
+                </thead>
+                <tbody id="cf-tbody"></tbody>
+              </table>
+            </div>
           </div>
-          <table class="eng-table" id="cf-table">
-            <thead>
-              <tr>
-                <th>ปีโครงการ</th>
-                <th>สถานะการดำเนินงานและภาษี</th>
-                <th class="right">รายรับ (GI)</th>
-                <th class="right">Cash COM</th>
-                <th class="right">ภาษี CIT</th>
-                <th class="right">NCF สุทธิ</th>
-                <th class="right">กระแสเงินสดสะสม</th>
-              </tr>
-            </thead>
-            <tbody id="cf-tbody"></tbody>
-          </table>
         </div>
       </div>
     </div>
@@ -2268,28 +2483,24 @@ body.p3d-fs-lock {
       <div class="section-title-row">
         <div>
           <h2>โมเดลจำลองผังโรงงานอุตสาหกรรม 3 มิติ (Interactive 3D Blockout)</h2>
-          <p>คลิกเลือกโซนในโมเดล 3D หรือจากรายการด้านซ้ายเพื่อดูรายละเอียดโครงสร้างตามผังต้นฉบับ</p>
+          <p>คลิกเลือกโซนในโมเดล 3D หรือจากรายการด้านขวาเพื่อดูรายละเอียดโครงสร้างและซูมตรวจสอบพื้นที่ตามผังโรงงาน 11 ไร่</p>
         </div>
-        <span class="badge badge-green">7 โซนหลักในผังโรงงาน</span>
+        <span class="tag-chip accent">7 โซนหลักในผังโรงงาน</span>
       </div>
     </div>
 
     <div class="plant3d-stage" id="plant3d-stage">
-      <!-- Floating Header Bar inside 3D Viewport -->
-      <div class="topbar">
-        <div class="brand-group">
-          <div class="brand-badge">3D</div>
-          <div class="title-stack">
-            <h3>โมเดลจำลองผังโรงงานอุตสาหกรรม 3 มิติ (Interactive 3D Blockout)</h3>
-            <p>คลิกเลือกโซนในโมเดล 3D หรือจากรายการด้านซ้ายเพื่อดูรายละเอียดโครงสร้าง</p>
-          </div>
+      <div class="plant3d-toolbar">
+        <div class="toolbar-meta">
+          <span>มุมมองกล้องและตัวควบคุมโมเดล 3 มิติ</span>
         </div>
 
         <div class="camera-controls" role="toolbar" aria-label="มุมมองกล้อง">
-          <button type="button" class="btn-3d active" id="btn-cam-iso">มุมมองต้นฉบับ (Isometric)</button>
-          <button type="button" class="btn-3d" id="btn-cam-top">มุมมองด้านบน (Top Plan)</button>
-          <button type="button" class="btn-3d" id="btn-cam-front">มุมมองด้านหน้า</button>
-          <button type="button" class="btn-3d" id="btn-toggle-labels">ซ่อน/แสดงป้ายโซน</button>
+          <button type="button" class="btn-3d active" id="btn-cam-iso">มุมมอง 3D (Iso)</button>
+          <button type="button" class="btn-3d" id="btn-cam-top">ด้านบน (Top)</button>
+          <button type="button" class="btn-3d" id="btn-cam-front">ด้านหน้า (Front)</button>
+          <button type="button" class="btn-3d" id="btn-toggle-labels">ซ่อนป้ายโซน</button>
+          <button type="button" class="btn-3d" id="btn-reset-selection">ดูทั้งหมด</button>
           <button type="button" class="btn-3d" id="btn-3d-fullscreen" title="ขยายเต็มจอ (Full Screen)">
             <svg id="icon-fs-enter" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
             <svg id="icon-fs-exit" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="display:none"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path></svg>
@@ -2298,54 +2509,50 @@ body.p3d-fs-lock {
         </div>
       </div>
 
-      <!-- Left Navigation & Zone Details -->
-      <aside class="side-panel">
-        <section class="panel-card">
-          <div class="panel-header">
-            <h4 class="panel-title">โซนหลักในผังโรงงาน (7 โซน)</h4>
-            <button type="button" class="btn-3d" id="btn-reset-selection" style="padding: 2px 7px; font-size: 10.5px;">ดูทั้งหมด</button>
+      <div class="plant3d-body">
+        <div class="plant3d-canvas-wrap">
+          <div id="hover-tooltip"></div>
+          <div id="canvas-container" aria-label="Interactive 3D Industrial Facility Viewport"></div>
+          <div class="hint-bar">
+            <span><strong>คลิกลากซ้าย:</strong> หมุน</span>
+            <span><strong>คลิกลากขวา:</strong> เลื่อน</span>
+            <span><strong>ลูกกลิ้ง:</strong> ซูม</span>
+            <span><strong>คลิกวัตถุ/ป้าย:</strong> เลือกโซน</span>
+          </div>
+        </div>
+
+        <div class="touch-hint-strip"><strong>ควบคุมด้วยนิ้ว:</strong> ลาก 1 นิ้วหมุน &middot; จีบ 2 นิ้วซูม/เลื่อน &middot; แตะป้ายหรือวัตถุเพื่อเลือกโซน</div>
+
+        <aside class="plant3d-inspector" aria-label="Zone Directory and Inspector">
+          <div class="zone-dir-header">
+            <span class="zone-dir-title">สารบัญโซนหลัก (01–07)</span>
+            <span class="zone-scroll-hint">เลื่อนดู 7 โซน &rarr;</span>
           </div>
           <div class="zone-list" id="zone-list"></div>
-        </section>
 
-        <section class="panel-card inspector-card" id="inspector-panel">
-          <div class="inspector-empty" id="inspector-empty">
-            คลิกที่อาคาร ถังเก็บ หรือโซนต่างๆ บนโมเดล 3 มิติ เพื่อดูข้อมูลส่วนประกอบและซูมเข้าสู่โซนนั้น
+          <div class="inspector-detail" id="inspector-panel">
+            <div class="inspector-empty" id="inspector-empty">
+              <div style="font-weight:700;color:var(--ink);margin-bottom:4px">ภาพรวมผังโรงงาน 11 ไร่ (7 โซนหลัก)</div>
+              คลิกที่อาคาร ถังเก็บ ป้ายโซนในโมเดล 3 มิติ หรือเลือกจากสารบัญด้านบนเพื่อซูมตรวจสอบอุปกรณ์เฉพาะโซน
+            </div>
+            <div id="inspector-content" style="display: none;">
+              <h3 class="inspector-title" id="ins-title"></h3>
+              <p class="inspector-desc" id="ins-desc"></p>
+              <div class="component-list-title">องค์ประกอบในโซนนี้</div>
+              <ul class="component-list" id="ins-list"></ul>
+            </div>
           </div>
-          <div id="inspector-content" style="display: none;">
-            <div class="inspector-badge" id="ins-badge">ZONE</div>
-            <h3 class="inspector-title" id="ins-title"></h3>
-            <p class="inspector-desc" id="ins-desc"></p>
-            <h4 class="component-list-title">องค์ประกอบในโซนนี้ (ตามภาพต้นฉบับ)</h4>
-            <ul class="component-list" id="ins-list"></ul>
-          </div>
-        </section>
-      </aside>
-
-      <!-- Bottom Right Interaction Hints -->
-      <div class="hint-bar">
-        <span class="hint-item"><strong>คลิกซ้าย + ลาก:</strong> หมุนรอบทิศทาง</span>
-        <span class="hint-item"><strong>คลิกขวา + ลาก:</strong> เลื่อนขนาน (Pan)</span>
-        <span class="hint-item"><strong>ลูกกลิ้งเมาส์:</strong> ซูมเข้า-ออก</span>
-        <span class="hint-item"><strong>คลิกที่วัตถุ:</strong> ดูข้อมูลโซน</span>
+        </aside>
       </div>
-
-      <!-- Hover Tooltip -->
-      <div id="hover-tooltip"></div>
-
-      <!-- Main 3D Viewport -->
-      <div id="canvas-container" aria-label="Interactive 3D Industrial Facility Viewport"></div>
     </div>
   </section>
 
 </main>
 
-<!-- Three.js CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <script>
 (function() {
-  // 1. Complete Verified Engineering Dataset
   const EQUIPMENT = [
     {"tag": "TK-101", "name": "Bioethanol Storage Tank", "train": 100, "category": "Vessel / Tank", "sizing": "V = 2,000 m³ (15 days buffer)", "conditions": "Ambient, 1.0 bar", "moc": "Carbon Steel (API 650)", "c_bm": 12.45, "c_p0_usd": 105000, "f_bm": 3.65},
     {"tag": "TK-102", "name": "Demineralized Water Tank", "train": 100, "category": "Vessel / Tank", "sizing": "V = 1,000 m³ (7 days buffer)", "conditions": "Ambient, 1.0 bar", "moc": "SS304 (API 650)", "c_bm": 8.2, "c_p0_usd": 68000, "f_bm": 3.7},
@@ -2445,8 +2652,12 @@ body.p3d-fs-lock {
     if (window.location.hash !== '#' + tabId && !window.location.hash.startsWith('#slide')) {
       history.replaceState(null, '', '#' + tabId);
     }
+    if (tabId === 'simulator' && typeof window.redrawDCFChart === 'function') {
+      requestAnimationFrame(() => window.redrawDCFChart());
+    }
     if (tabId === 'plant3d' && typeof window.resizePlant3D === 'function') {
       requestAnimationFrame(() => window.resizePlant3D());
+      setTimeout(() => window.resizePlant3D(), 60);
     }
     if (!skipScroll) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2460,13 +2671,23 @@ body.p3d-fs-lock {
     });
   });
 
-  // 3. Render Module 1: Slide Dossiers
+  // 3. Render Module 1: Slide Dossiers (Desktop Left TOC + Mobile Jump Bar)
   const slideContainer = document.getElementById('slide-container');
   const slideRail = document.getElementById('slide-rail');
+  const slideJumpMobile = document.getElementById('slide-jump-mobile');
+
+  function scrollToSlide(numPad) {
+    document.querySelectorAll('.rail-item, .jump-pill').forEach(b => {
+      b.classList.toggle('active', b.dataset.slide === numPad);
+    });
+    const target = document.getElementById('slide-' + numPad);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   function renderSlides() {
     slideContainer.innerHTML = '';
     if (slideRail) slideRail.innerHTML = '';
+    if (slideJumpMobile) slideJumpMobile.innerHTML = '';
 
     SLIDES.forEach((s, idx) => {
       const numPad = String(s.slide).padStart(2, '0');
@@ -2476,23 +2697,27 @@ body.p3d-fs-lock {
         railBtn.type = 'button';
         railBtn.className = 'rail-item' + (idx === 0 ? ' active' : '');
         railBtn.dataset.slide = numPad;
-        railBtn.title = `Slide ${s.slide}: ${s.short}`;
-        railBtn.innerHTML = `<span class="rail-num">${s.slide}</span>`;
-        railBtn.addEventListener('click', () => {
-          document.querySelectorAll('.rail-item').forEach(b => b.classList.remove('active'));
-          railBtn.classList.add('active');
-          const target = document.getElementById('slide-' + numPad);
-          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
+        railBtn.innerHTML = `<span class="rail-num">${numPad}</span><span class="rail-text">${s.short}</span>`;
+        railBtn.addEventListener('click', () => scrollToSlide(numPad));
         slideRail.appendChild(railBtn);
       }
 
+      if (slideJumpMobile) {
+        const jBtn = document.createElement('button');
+        jBtn.type = 'button';
+        jBtn.className = 'jump-pill' + (idx === 0 ? ' active' : '');
+        jBtn.dataset.slide = numPad;
+        jBtn.textContent = `${numPad} ${s.short}`;
+        jBtn.addEventListener('click', () => scrollToSlide(numPad));
+        slideJumpMobile.appendChild(jBtn);
+      }
+
       const card = document.createElement('article');
-      card.className = 'slide-card';
+      card.className = 'slide-sheet';
       card.id = 'slide-' + numPad;
 
       const paramsHtml = s.params.map(p => `
-        <div class="param-card">
+        <div class="param-item">
           <div class="param-k">${p[0]}</div>
           <div class="param-v tabular">${p[1]}</div>
           <div class="param-desc">${p[2]}</div>
@@ -2500,16 +2725,16 @@ body.p3d-fs-lock {
       `).join('');
 
       card.innerHTML = `
-        <span id="s${s.slide}" style="position:relative;top:-120px"></span>
-        <span id="slide-${s.slide}" style="position:relative;top:-120px"></span>
+        <span id="s${s.slide}" style="position:relative;top:-130px"></span>
         <div class="slide-header">
           <div class="slide-badge-group">
             <span class="slide-num-pill">SLIDE ${numPad} / 12</span>
             <span class="slide-topic-tag">${s.topic}</span>
           </div>
+          <span class="slide-speaker">${s.speaker}</span>
         </div>
         <h3 class="slide-title">${s.headline}</h3>
-        <div class="slide-param-grid">${paramsHtml}</div>
+        <div class="slide-param-grid" data-count="${s.params.length}">${paramsHtml}</div>
       `;
       slideContainer.appendChild(card);
     });
@@ -2522,17 +2747,16 @@ body.p3d-fs-lock {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const id = entry.target.id.replace('slide-', '');
-          document.querySelectorAll('.rail-item').forEach(btn => {
+          document.querySelectorAll('.rail-item, .jump-pill').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.slide === id);
           });
         }
       });
-    }, { rootMargin: '-20% 0px -65% 0px', threshold: 0 });
+    }, { rootMargin: '-22% 0px -64% 0px', threshold: 0 });
 
-    document.querySelectorAll('.slide-card').forEach(card => observer.observe(card));
+    document.querySelectorAll('.slide-sheet').forEach(card => observer.observe(card));
   }
 
-  // Check initial URL Hash
   const rawHash = window.location.hash.replace('#', '');
   if (['dossier', 'equipment', 'hmb', 'simulator', 'plant3d'].includes(rawHash)) {
     setActiveTab(rawHash, true);
@@ -2564,7 +2788,9 @@ body.p3d-fs-lock {
 
     EQUIPMENT.forEach(eq => {
       const matchTrain = (selectedTrain === 'all') || (eq.train === parseInt(selectedTrain, 10));
-      const matchCat = (selectedCat === 'all') || (eq.category.toLowerCase().includes(selectedCat.toLowerCase()));
+      const catList = selectedCat === 'all' ? null : selectedCat.split(',').map(c => c.trim().toLowerCase());
+      const eqCatLower = eq.category.toLowerCase();
+      const matchCat = !catList || catList.some(c => eqCatLower.includes(c));
       const matchQuery = !query ||
         eq.tag.toLowerCase().includes(query) ||
         eq.name.toLowerCase().includes(query) ||
@@ -2578,9 +2804,9 @@ body.p3d-fs-lock {
 
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td class="mono" style="font-weight:700;color:var(--brand)">${eq.tag}</td>
+          <td class="mono" style="font-weight:700;color:var(--brand);white-space:nowrap">${eq.tag}</td>
           <td style="font-weight:600">${eq.name}</td>
-          <td><span class="badge badge-gray">${eq.category}</span></td>
+          <td><span class="tag-chip">${eq.category}</span></td>
           <td>${eq.sizing}</td>
           <td class="tabular" style="font-size:13px;color:var(--ink-secondary)">${eq.conditions}</td>
           <td style="font-size:13px">${eq.moc}</td>
@@ -2598,15 +2824,15 @@ body.p3d-fs-lock {
             <span class="m-card-cost tabular">${eq.c_bm.toFixed(2)} MB</span>
           </div>
           <div class="m-card-name">${eq.name}</div>
-          <div class="m-card-badges">
-            <span class="badge badge-gray">${eq.category}</span>
-            <span class="badge badge-green">Train ${eq.train}</span>
+          <div class="m-card-meta">
+            <span class="tag-chip">${eq.category}</span>
+            <span class="tag-chip accent">Train ${eq.train}</span>
           </div>
-          <div class="m-card-grid">
-            <div class="m-card-row"><span class="lbl">ขนาด (Sizing):</span><span class="val">${eq.sizing}</span></div>
-            <div class="m-card-row"><span class="lbl">สภาวะ:</span><span class="val tabular">${eq.conditions}</span></div>
-            <div class="m-card-row"><span class="lbl">วัสดุ (MOC):</span><span class="val">${eq.moc}</span></div>
-            <div class="m-card-row"><span class="lbl">C_p0 / F_BM:</span><span class="val tabular">$${eq.c_p0_usd.toLocaleString()} USD &bull; F_BM ${eq.f_bm}</span></div>
+          <div class="m-card-rows">
+            <div class="m-card-row"><span class="lbl">ขนาด (Sizing)</span><span class="val">${eq.sizing}</span></div>
+            <div class="m-card-row"><span class="lbl">สภาวะ</span><span class="val tabular">${eq.conditions}</span></div>
+            <div class="m-card-row"><span class="lbl">วัสดุ (MOC)</span><span class="val">${eq.moc}</span></div>
+            <div class="m-card-row"><span class="lbl">C<sub>p0</sub> / F<sub>BM</sub></span><span class="val tabular">$${eq.c_p0_usd.toLocaleString()} &middot; ${eq.f_bm.toFixed(2)}</span></div>
           </div>
         `;
         eqCardList.appendChild(card);
@@ -2637,15 +2863,39 @@ body.p3d-fs-lock {
     });
   });
 
+  function syncCategoryUI() {
+    const activeCats = selectedCat === 'all' ? [] : selectedCat.split(',').map(s => s.trim());
+    document.querySelectorAll('#eq-cat-pills .pill-btn').forEach(btn => {
+      const isActive = selectedCat === 'all' ? btn.dataset.cat === 'all' : activeCats.includes(btn.dataset.cat);
+      btn.classList.toggle('active', isActive);
+    });
+    document.querySelectorAll('#cost-bar-track .stacked-segment').forEach(seg => {
+      const segCats = (seg.dataset.cat || '').split(',').map(s => s.trim());
+      const isMatch = selectedCat !== 'all' && segCats.some(c => activeCats.includes(c));
+      seg.classList.toggle('active-seg', isMatch);
+      seg.classList.toggle('dimmed', selectedCat !== 'all' && !isMatch);
+      seg.setAttribute('aria-pressed', isMatch ? 'true' : 'false');
+    });
+  }
+
   document.querySelectorAll('#eq-cat-pills .pill-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('#eq-cat-pills .pill-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
       selectedCat = btn.dataset.cat;
+      syncCategoryUI();
       renderEquipment();
     });
   });
 
+  document.querySelectorAll('#cost-bar-track .stacked-segment').forEach(seg => {
+    seg.addEventListener('click', () => {
+      const targetCat = seg.dataset.cat || 'all';
+      selectedCat = (selectedCat === targetCat) ? 'all' : targetCat;
+      syncCategoryUI();
+      renderEquipment();
+    });
+  });
+
+  syncCategoryUI();
   renderEquipment();
 
   // 5. Render Module 3: 15-Stream HMB Table
@@ -2655,10 +2905,10 @@ body.p3d-fs-lock {
   const streamCounter = document.getElementById('stream-counter');
   let selectedPhase = 'all';
 
-  function getPhaseBadgeClass(phase) {
-    if (phase === 'Liquid') return 'badge-blue';
-    if (phase === 'Vapor') return 'badge-amber';
-    return 'badge-green';
+  function getPhaseChipClass(phase) {
+    if (phase === 'Vapor') return 'amber';
+    if (phase === 'Gas') return 'accent';
+    return '';
   }
 
   function renderStreams() {
@@ -2678,19 +2928,19 @@ body.p3d-fs-lock {
       if (!matchPhase || !matchQ) return;
       shown++;
 
-      const badgeCls = getPhaseBadgeClass(st.phase);
+      const chipCls = getPhaseChipClass(st.phase);
 
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td class="center mono" style="font-weight:700;color:var(--brand)">#${st.id}</td>
+        <td class="center mono" style="font-weight:700;color:var(--brand);white-space:nowrap">#${st.id}</td>
         <td style="font-weight:600">${st.name}</td>
-        <td class="center"><span class="badge ${badgeCls}">${st.phase}</span></td>
+        <td class="center"><span class="tag-chip ${chipCls}">${st.phase}</span></td>
         <td class="right tabular">${st.temp.toFixed(1)}</td>
         <td class="right tabular">${st.press.toFixed(1)}</td>
         <td class="right tabular" style="font-weight:700">${st.mass_flow.toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1})}</td>
         <td class="right tabular">${st.mole_flow.toFixed(2)}</td>
         <td class="right tabular">${st.mw.toFixed(2)}</td>
-        <td style="font-size:13px">${st.comp}</td>
+        <td style="font-size:13px;color:var(--ink-secondary)">${st.comp}</td>
       `;
       streamTbody.appendChild(tr);
 
@@ -2699,14 +2949,14 @@ body.p3d-fs-lock {
       card.innerHTML = `
         <div class="m-card-header">
           <span class="m-card-tag mono">Stream #${st.id}</span>
-          <span class="badge ${badgeCls}">${st.phase}</span>
+          <span class="tag-chip ${chipCls}">${st.phase}</span>
         </div>
         <div class="m-card-name">${st.name}</div>
-        <div class="m-card-grid">
-          <div class="m-card-row"><span class="lbl">อัตราไหลมวล:</span><span class="val tabular" style="font-weight:700">${st.mass_flow.toLocaleString(undefined, {minimumFractionDigits: 1})} kg/h</span></div>
-          <div class="m-card-row"><span class="lbl">อัตราไหลโมล / MW:</span><span class="val tabular">${st.mole_flow.toFixed(2)} kmol/h &bull; MW ${st.mw.toFixed(2)}</span></div>
-          <div class="m-card-row"><span class="lbl">อุณหภูมิ / ความดัน:</span><span class="val tabular">${st.temp.toFixed(1)} °C &bull; ${st.press.toFixed(1)} bar</span></div>
-          <div class="m-card-row"><span class="lbl">องค์ประกอบ:</span><span class="val">${st.comp}</span></div>
+        <div class="m-card-rows">
+          <div class="m-card-row"><span class="lbl">อัตราไหลมวล</span><span class="val tabular" style="font-weight:700">${st.mass_flow.toLocaleString(undefined, {minimumFractionDigits: 1})} kg/h</span></div>
+          <div class="m-card-row"><span class="lbl">โมล / MW</span><span class="val tabular">${st.mole_flow.toFixed(2)} kmol/h &middot; MW ${st.mw.toFixed(2)}</span></div>
+          <div class="m-card-row"><span class="lbl">อุณหภูมิ / ความดัน</span><span class="val tabular">${st.temp.toFixed(1)} °C &middot; ${st.press.toFixed(1)} bar</span></div>
+          <div class="m-card-row"><span class="lbl">องค์ประกอบ</span><span class="val">${st.comp}</span></div>
         </div>
       `;
       streamCardList.appendChild(card);
@@ -2740,6 +2990,14 @@ body.p3d-fs-lock {
   const btnReset = document.getElementById('btn-reset-sim');
   let boiEnabled = true;
 
+  function syncSliderTrack(slider) {
+    const min = parseFloat(slider.min);
+    const max = parseFloat(slider.max);
+    const val = parseFloat(slider.value);
+    const pct = ((val - min) / (max - min)) * 100;
+    slider.style.background = `linear-gradient(to right, #17694A 0%, #17694A ${pct}%, #CFCBC2 ${pct}%, #CFCBC2 100%)`;
+  }
+
   btnBoi.addEventListener('click', () => {
     boiEnabled = !boiEnabled;
     btnBoi.classList.toggle('active', boiEnabled);
@@ -2760,6 +3018,11 @@ body.p3d-fs-lock {
 
   [sliderEth, sliderH2, sliderCo2, sliderUt].forEach(s => {
     s.addEventListener('input', recalculateDCF);
+  });
+
+  const fmt2 = (n) => Number(n).toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
   });
 
   function calculateNPV(cashFlows, discountRate) {
@@ -2793,83 +3056,261 @@ body.p3d-fs-lock {
     return (low + high) / 2;
   }
 
-  function renderDCFChart(cumFlows, pbpValue) {
+  let lastDcfState = null;
+
+  function renderDCFChart(cumFlows, annualCashFlows, pbpValue, didPayback, boiOn) {
+    lastDcfState = { cumFlows, annualCashFlows, pbpValue, didPayback, boiOn };
     const svg = document.getElementById('dcf-chart-svg');
-    const width = 640;
-    const height = 250;
-    const padL = 56;
-    const padR = 32;
-    const padT = 24;
-    const padB = 34;
+    const container = document.getElementById('chart-svg-container');
+    const tt = document.getElementById('dcf-chart-tooltip');
+    if (!svg) return;
 
-    const minVal = -1500;
-    const maxVal = Math.max(3000, cumFlows[20] * 1.12);
-    const rangeVal = maxVal - minVal;
+    const cw = (container && container.clientWidth) ? container.clientWidth : window.innerWidth;
+    const isCompact = cw < 560;
+    const width = isCompact ? 420 : 700;
+    const height = isCompact ? 270 : 295;
+    const padL = isCompact ? 56 : 68;
+    const padR = isCompact ? 18 : 26;
+    const padT = isCompact ? 34 : 32;
+    const padB = isCompact ? 36 : 40;
 
-    function getX(yr) {
-      return padL + (yr / 20) * (width - padL - padR);
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+
+    const minFlow = Math.min(-1400, ...cumFlows);
+    const maxFlow = Math.max(1500, ...cumFlows);
+    const span = maxFlow - minFlow;
+    const stepCandidates = [500, 1000, 1500, 2000, 2500, 3000, 5000];
+    let step = stepCandidates.find(s => span / s <= 5.5) || 5000;
+
+    const minVal = Math.floor(minFlow / step) * step;
+    const maxVal = Math.max(step, Math.ceil((maxFlow * 1.1) / step) * step);
+    const rangeVal = Math.max(1000, maxVal - minVal);
+
+    // True Project Timeline: t=0..1.5 EPC Construction, t=2.5..21.5 Operating Years 1..20
+    const maxT = 21.5;
+    function getX(t) {
+      return padL + (t / maxT) * (width - padL - padR);
     }
     function getY(val) {
       return padT + ((maxVal - val) / rangeVal) * (height - padT - padB);
     }
 
     const zeroY = getY(0);
+    const fsAxis = isCompact ? 13 : 11.5;
+    const fsTag = isCompact ? 12.5 : 11.5;
 
-    let pathD = `M ${getX(0)} ${getY(cumFlows[0])}`;
-    let areaD = `M ${getX(0)} ${zeroY} L ${getX(0)} ${getY(cumFlows[0])}`;
+    const pts = [
+      { t: 0, label: 'เริ่มก่อสร้าง (t = 0)', cf: 0, ncf: 0, note: 'เริ่มต้น EPC' },
+      { t: 1.5, label: 'จบ EPC (t = 1.5 ปี)', cf: cumFlows[0], ncf: -BASELINE.tci, note: 'ลงทุน FCI + WC' }
+    ];
     for (let yr = 1; yr <= 20; yr++) {
-      pathD += ` L ${getX(yr)} ${getY(cumFlows[yr])}`;
-      areaD += ` L ${getX(yr)} ${getY(cumFlows[yr])}`;
+      const t = 1.5 + yr;
+      pts.push({
+        t,
+        label: `ปีดำเนินงาน ${yr} (ปีที่ ${t.toFixed(1)})`,
+        cf: cumFlows[yr],
+        ncf: annualCashFlows[yr],
+        note: yr === 20 ? 'คืน WC + CIT 20%' : (boiOn && yr <= 8 ? 'สิทธิ BOI 0%' : 'CIT 20%')
+      });
     }
-    areaD += ` L ${getX(20)} ${zeroY} Z`;
 
-    const pbpClamped = Math.max(0, Math.min(20, pbpValue));
+    let gridLines = '';
+    for (let v = step; v < maxVal; v += step) {
+      const gy = getY(v);
+      gridLines += `
+        <line x1="${padL}" y1="${gy}" x2="${width - padR}" y2="${gy}" stroke="#E4E2DC" stroke-width="1"/>
+        <text x="${padL - 8}" y="${gy + 4}" font-size="${fsAxis}" text-anchor="end" fill="#5B5F66">+${v.toLocaleString()}</text>
+      `;
+    }
+    for (let v = -step; v >= minVal; v -= step) {
+      const gy = getY(v);
+      gridLines += `
+        <line x1="${padL}" y1="${gy}" x2="${width - padR}" y2="${gy}" stroke="#E4E2DC" stroke-width="1"/>
+        <text x="${padL - 8}" y="${gy + 4}" font-size="${fsAxis}" text-anchor="end" fill="#5B5F66">${v.toLocaleString()}</text>
+      `;
+    }
+
+    let pathD = `M ${getX(pts[0].t)} ${getY(pts[0].cf)}`;
+    let areaD = `M ${getX(pts[0].t)} ${zeroY} L ${getX(pts[0].t)} ${getY(pts[0].cf)}`;
+    for (let i = 1; i < pts.length; i++) {
+      pathD += ` L ${getX(pts[i].t)} ${getY(pts[i].cf)}`;
+      areaD += ` L ${getX(pts[i].t)} ${getY(pts[i].cf)}`;
+    }
+    areaD += ` L ${getX(maxT)} ${zeroY} Z`;
+
+    const epcEndX = getX(1.5);
+    const boiEndX = getX(9.5);
+    const endPt = pts[pts.length - 1];
+    const endVal = endPt.cf;
+    const endLabelPrefix = endVal >= 0 ? '+' : '';
+    const endColor = endVal >= 0 ? '#17694A' : '#B42318';
+
+    const pbpClamped = Math.max(1.5, Math.min(maxT, pbpValue));
     const pbpX = getX(pbpClamped);
+    const pbpAnchor = pbpX > width - padR - 95 ? 'end' : 'start';
+    const pbpTextX = pbpAnchor === 'start' ? pbpX + 9 : pbpX - 9;
+    const pbpAbove = pbpAnchor === 'end' ? true : (height - padB - zeroY) < 20;
+    const pbpTextY = pbpAbove ? zeroY - 12 : zeroY + 15;
+
+    const pbpOverlaySvg = didPayback ? `
+      <line x1="${pbpX}" y1="${zeroY}" x2="${pbpX}" y2="${height - padB}" stroke="#A86A12" stroke-width="1.25" stroke-dasharray="3 3"/>
+      <circle cx="${pbpX}" cy="${zeroY}" r="5.5" fill="#A86A12" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="${pbpTextX}" y="${pbpTextY}" font-size="${fsTag}" font-weight="700" fill="#8A5409" text-anchor="${pbpAnchor}" style="paint-order:stroke" stroke="#FFFFFF" stroke-width="3.5" stroke-linejoin="round">คืนทุน ${pbpValue.toFixed(2)} ปี</text>
+    ` : `
+      <text x="${width - padR}" y="${Math.min(height - padB - 10, zeroY + 18)}" font-size="${fsTag}" font-weight="700" fill="#B42318" text-anchor="end">ไม่คืนทุนภายใน 20 ปี</text>
+    `;
+
+    const xTicks = [0, 5, 10, 15, 21.5];
+    const xLabels = ['0', 'ปี 5', 'ปี 10', 'ปี 15', 'ปี 21.5'];
+    const xTicksSvg = xTicks.map((t, i) => `
+      <line x1="${getX(t)}" y1="${height - padB}" x2="${getX(t)}" y2="${height - padB + 5}" stroke="#CFCBC2" stroke-width="1.2"/>
+      <text x="${getX(t)}" y="${height - 12}" font-size="${fsAxis}" text-anchor="${i === xTicks.length - 1 ? 'end' : 'middle'}" fill="#5B5F66">${xLabels[i]}</text>
+    `).join('');
+
+    const boiMarkerSvg = boiOn ? `
+      <line x1="${boiEndX}" y1="${padT + 14}" x2="${boiEndX}" y2="${height - padB}" stroke="#CFCBC2" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="${boiEndX}" y="${padT + 10}" font-size="${isCompact ? 11 : 10.5}" font-weight="600" text-anchor="middle" fill="#61656C">หมด BOI (ปี 9.5)</text>
+    ` : '';
+
+    const posClipH = Math.max(0, zeroY - (padT - 8));
+    const negClipH = Math.max(0, (height - padB + 8) - zeroY);
 
     svg.innerHTML = `
       <defs>
-        <linearGradient id="cfAreaGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#0F6A48" stop-opacity="0.18"/>
-          <stop offset="100%" stop-color="#0F6A48" stop-opacity="0.0"/>
+        <linearGradient id="cfPosGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#17694A" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#17694A" stop-opacity="0.02"/>
         </linearGradient>
+        <linearGradient id="cfNegGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#B42318" stop-opacity="0.03"/>
+          <stop offset="100%" stop-color="#B42318" stop-opacity="0.16"/>
+        </linearGradient>
+        <clipPath id="clip-dcf-pos">
+          <rect x="${padL}" y="${padT - 8}" width="${width - padL - padR}" height="${posClipH}"/>
+        </clipPath>
+        <clipPath id="clip-dcf-neg">
+          <rect x="${padL}" y="${zeroY}" width="${width - padL - padR}" height="${negClipH}"/>
+        </clipPath>
       </defs>
 
-      <line x1="${padL}" y1="${getY(4000)}" x2="${width - padR}" y2="${getY(4000)}" stroke="#E2E8F0" stroke-width="1"/>
-      <line x1="${padL}" y1="${getY(2000)}" x2="${width - padR}" y2="${getY(2000)}" stroke="#E2E8F0" stroke-width="1"/>
-      <line x1="${padL}" y1="${getY(-1289.55)}" x2="${width - padR}" y2="${getY(-1289.55)}" stroke="#E2E8F0" stroke-width="1"/>
+      <rect x="${getX(0)}" y="${padT}" width="${epcEndX - getX(0)}" height="${height - padT - padB}" fill="#F0EEE8" opacity="0.9"/>
+      <line x1="${epcEndX}" y1="${padT}" x2="${epcEndX}" y2="${height - padB}" stroke="#CFCBC2" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="${epcEndX + 4}" y="${padT + 10}" font-size="${isCompact ? 11 : 10.5}" font-weight="600" fill="#61656C">EPC</text>
 
-      <line x1="${padL}" y1="${zeroY}" x2="${width - padR}" y2="${zeroY}" stroke="#B91C1C" stroke-width="1.5" stroke-dasharray="5 4"/>
-      <text x="${padL + 8}" y="${zeroY - 6}" font-size="11" font-weight="700" fill="#B91C1C">ระดับจุดคุ้มทุน Break-Even (0 MB)</text>
+      ${gridLines}
+      ${boiMarkerSvg}
 
-      <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${height - padB}" stroke="#CBD5E1" stroke-width="1.5"/>
-      <line x1="${padL}" y1="${height - padB}" x2="${width - padR}" y2="${height - padB}" stroke="#CBD5E1" stroke-width="1.5"/>
+      <line x1="${padL}" y1="${zeroY}" x2="${width - padR}" y2="${zeroY}" stroke="#B42318" stroke-width="1.25" stroke-dasharray="5 4"/>
+      <text x="${width - padR}" y="${zeroY - 6}" font-size="${fsAxis}" font-weight="600" text-anchor="end" fill="#B42318">จุดคุ้มทุน (0 MB)</text>
 
-      <text x="${padL - 8}" y="${zeroY + 4}" font-size="10.5" text-anchor="end" fill="#64748B">0</text>
-      <text x="${padL - 8}" y="${getY(-1289.55) + 4}" font-size="10.5" text-anchor="end" fill="#64748B">-1,290</text>
-      <text x="${padL - 8}" y="${getY(2000) + 4}" font-size="10.5" text-anchor="end" fill="#64748B">+2,000</text>
-      <text x="${padL - 8}" y="${getY(4000) + 4}" font-size="10.5" text-anchor="end" fill="#64748B">+4,000</text>
+      <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${height - padB}" stroke="#CFCBC2" stroke-width="1.25"/>
+      <line x1="${padL}" y1="${height - padB}" x2="${width - padR}" y2="${height - padB}" stroke="#CFCBC2" stroke-width="1.25"/>
 
-      <text x="${getX(0)}" y="${height - 12}" font-size="11" text-anchor="middle" fill="#475569">ปี 0</text>
-      <text x="${getX(5)}" y="${height - 12}" font-size="11" text-anchor="middle" fill="#475569">ปี 5</text>
-      <text x="${getX(10)}" y="${height - 12}" font-size="11" text-anchor="middle" fill="#475569">ปี 10</text>
-      <text x="${getX(15)}" y="${height - 12}" font-size="11" text-anchor="middle" fill="#475569">ปี 15</text>
-      <text x="${getX(20)}" y="${height - 12}" font-size="11" text-anchor="middle" fill="#475569">ปี 20</text>
+      <text x="${padL - 8}" y="${padT - 10}" font-size="${isCompact ? 11.5 : 10.5}" font-weight="600" text-anchor="end" fill="#61656C">ล้านบาท</text>
+      <text x="${padL - 8}" y="${zeroY + 4}" font-size="${fsAxis}" font-weight="700" text-anchor="end" fill="#16181D">0</text>
+      ${xTicksSvg}
 
-      <path d="${areaD}" fill="url(#cfAreaGrad)"/>
-      <path d="${pathD}" fill="none" stroke="#0F6A48" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="${areaD}" fill="url(#cfPosGrad)" clip-path="url(#clip-dcf-pos)"/>
+      <path d="${areaD}" fill="url(#cfNegGrad)" clip-path="url(#clip-dcf-neg)"/>
+      <path d="${pathD}" fill="none" stroke="#17694A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip-dcf-pos)"/>
+      <path d="${pathD}" fill="none" stroke="#B42318" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#clip-dcf-neg)"/>
 
-      <circle cx="${pbpX}" cy="${zeroY}" r="6" fill="#B45309" stroke="#FFFFFF" stroke-width="2"/>
-      <text x="${pbpX}" y="${zeroY + 20}" font-size="11.5" font-weight="700" fill="#B45309" text-anchor="middle">คืนทุนจริง ${pbpValue.toFixed(2)} ปี</text>
+      ${pbpOverlaySvg}
 
-      <circle cx="${getX(20)}" cy="${getY(cumFlows[20])}" r="5" fill="#0F6A48" stroke="#FFFFFF" stroke-width="2"/>
-      <text x="${getX(20) - 6}" y="${getY(cumFlows[20]) - 10}" font-size="11.5" font-weight="700" fill="#0F6A48" text-anchor="end">+${cumFlows[20].toLocaleString(undefined, {maximumFractionDigits: 0})} MB</text>
+      <circle cx="${getX(maxT)}" cy="${getY(endVal)}" r="5" fill="${endColor}" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="${getX(maxT) - 6}" y="${Math.max(padT + 14, getY(endVal) - 10)}" font-size="${fsTag}" font-weight="700" fill="${endColor}" text-anchor="end">${endLabelPrefix}${endVal.toLocaleString(undefined, {maximumFractionDigits: 0})} MB</text>
+
+      <g id="dcf-hover-guide" style="display:none;pointer-events:none">
+        <line id="dcf-hover-line" x1="0" y1="${padT}" x2="0" y2="${height - padB}" stroke="#16181D" stroke-width="1" stroke-dasharray="3 3" opacity="0.45"/>
+        <circle id="dcf-hover-dot" cx="0" cy="0" r="5" fill="#17694A" stroke="#FFFFFF" stroke-width="2"/>
+      </g>
+
+      <rect id="dcf-hit-area" x="${padL}" y="${padT}" width="${width - padL - padR}" height="${height - padT - padB}" fill="transparent" style="cursor:crosshair"/>
     `;
 
     const badge = document.getElementById('chart-pbp-badge');
-    if (badge) badge.textContent = `จุดคุ้มทุนจริง ~${pbpValue.toFixed(2)} ปี`;
+    if (badge) {
+      badge.textContent = didPayback ? `จุดคุ้มทุนจริง ${pbpValue.toFixed(2)} ปี` : 'ไม่คืนทุนภายใน 20 ปี';
+      badge.className = didPayback ? 'tag-chip amber' : 'tag-chip';
+    }
+
+    const hitArea = document.getElementById('dcf-hit-area');
+    const guide = document.getElementById('dcf-hover-guide');
+    const guideLine = document.getElementById('dcf-hover-line');
+    const guideDot = document.getElementById('dcf-hover-dot');
+
+    if (hitArea && tt && guide) {
+      const showHover = (e) => {
+        const rect = svg.getBoundingClientRect();
+        if (!rect.width) return;
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const svgX = ((clientX - rect.left) / rect.width) * width;
+        let best = pts[0];
+        let bestDist = Infinity;
+        pts.forEach(p => {
+          const dist = Math.abs(getX(p.t) - svgX);
+          if (dist < bestDist) {
+            bestDist = dist;
+            best = p;
+          }
+        });
+        const px = getX(best.t);
+        const py = getY(best.cf);
+        guide.style.display = 'inline';
+        guideLine.setAttribute('x1', px);
+        guideLine.setAttribute('x2', px);
+        guideDot.setAttribute('cx', px);
+        guideDot.setAttribute('cy', py);
+        guideDot.setAttribute('fill', best.cf >= 0 ? '#17694A' : '#B42318');
+
+        const cfSign = best.cf >= 0 ? '+' : '';
+        const ncfSign = best.ncf >= 0 ? '+' : '';
+        tt.innerHTML = `
+          <div class="dcf-tt-head">${best.label}</div>
+          <div class="dcf-tt-row"><span>กระแสสะสม</span><strong style="color:${best.cf >= 0 ? '#17694A' : '#B42318'}">${cfSign}${fmt2(best.cf)} MB</strong></div>
+          <div class="dcf-tt-row"><span>NCF ปีนี้</span><strong>${ncfSign}${fmt2(best.ncf)} MB</strong></div>
+          <div class="dcf-tt-row"><span>สถานะ</span><strong>${best.note}</strong></div>
+        `;
+        tt.classList.add('visible');
+
+        const relX = (px / width) * rect.width;
+        const ttW = tt.offsetWidth || 180;
+        const leftPos = (relX + ttW + 18 > rect.width) ? Math.max(4, relX - ttW - 12) : relX + 12;
+        tt.style.left = leftPos + 'px';
+        tt.style.top = Math.max(4, Math.min(rect.height - 92, (py / height) * rect.height - 32)) + 'px';
+      };
+
+      const hideHover = () => {
+        guide.style.display = 'none';
+        tt.classList.remove('visible');
+      };
+
+      hitArea.addEventListener('mousemove', showHover);
+      hitArea.addEventListener('touchstart', showHover, { passive: true });
+      hitArea.addEventListener('mouseleave', hideHover);
+    }
   }
 
+  window.redrawDCFChart = function () {
+    if (lastDcfState) {
+      renderDCFChart(
+        lastDcfState.cumFlows,
+        lastDcfState.annualCashFlows,
+        lastDcfState.pbpValue,
+        lastDcfState.didPayback,
+        lastDcfState.boiOn
+      );
+    }
+  };
+  window.addEventListener('resize', () => {
+    if (document.getElementById('panel-simulator').classList.contains('active')) {
+      window.redrawDCFChart();
+    }
+  });
+
   function recalculateDCF() {
+    [sliderEth, sliderH2, sliderCo2, sliderUt].forEach(syncSliderTrack);
+
     const dEth = parseFloat(sliderEth.value) / 100.0;
     const dH2 = parseFloat(sliderH2.value) / 100.0;
     const dCo2 = parseFloat(sliderCo2.value) / 100.0;
@@ -2892,29 +3333,48 @@ body.p3d-fs-lock {
     const curCo2Rev = BASELINE.gi_co2 * (1 + dCo2);
     const curGI = curH2Rev + curCo2Rev;
 
+    const isBaseline = (Math.abs(dEth) < 1e-6 && Math.abs(dH2) < 1e-6 && Math.abs(dCo2) < 1e-6 && Math.abs(dUt) < 1e-6);
     const deltaCost = (curRaw - baseRaw) + (curUt - baseUt);
     const curCOM = BASELINE.com + deltaCost;
     const curCashCOM = curCOM - dLinear;
-    const curEBIT = curGI - curCOM;
+    const curEBIT = isBaseline ? BASELINE.ebit : (curGI - curCOM);
     const margin = (curEBIT / curGI) * 100;
 
     const cashFlows = [-tci];
     const cumCashFlows = [-tci];
     const cfTbody = document.getElementById('cf-tbody');
+    const cfCardList = document.getElementById('cf-card-list');
     cfTbody.innerHTML = '';
+    if (cfCardList) cfCardList.innerHTML = '';
     let cumDCF = -tci;
 
     const tr0 = document.createElement('tr');
     tr0.innerHTML = `
-      <td class="tabular mono" style="font-weight:700">ปีที่ 0 (EPC)</td>
+      <td class="tabular mono" style="font-weight:700;white-space:nowrap">ปีที่ 0 (EPC)</td>
       <td>ลงทุนก่อสร้างโรงงาน FCI + เงินทุนหมุนเวียน WC</td>
       <td class="right tabular">0.00</td>
       <td class="right tabular">0.00</td>
       <td class="right tabular">0.00</td>
-      <td class="right tabular" style="font-weight:700;color:var(--red)">-${tci.toFixed(2)}</td>
-      <td class="right tabular" style="font-weight:700;color:var(--red)">-${tci.toFixed(2)}</td>
+      <td class="right tabular" style="font-weight:700;color:var(--red)">-${fmt2(tci)}</td>
+      <td class="right tabular" style="font-weight:700;color:var(--red)">-${fmt2(tci)}</td>
     `;
     cfTbody.appendChild(tr0);
+
+    if (cfCardList) {
+      const c0 = document.createElement('div');
+      c0.className = 'm-card';
+      c0.innerHTML = `
+        <div class="m-card-header">
+          <span class="m-card-tag mono">ปีที่ 0 (EPC)</span>
+          <span class="m-card-cost tabular" style="color:var(--red)">สะสม -${fmt2(tci)} MB</span>
+        </div>
+        <div class="m-card-name">ลงทุนก่อสร้าง FCI + เงินทุนหมุนเวียน WC</div>
+        <div class="m-card-rows">
+          <div class="m-card-row"><span class="lbl">NCF สุทธิ</span><span class="val tabular" style="color:var(--red);font-weight:700">-${fmt2(tci)} MB</span></div>
+        </div>
+      `;
+      cfCardList.appendChild(c0);
+    }
 
     for (let yr = 1; yr <= 20; yr++) {
       const taxRate = (boiEnabled && yr <= 8) ? 0.0 : 0.20;
@@ -2928,21 +3388,41 @@ body.p3d-fs-lock {
       cumCashFlows.push(cumDCF);
 
       if (yr <= 5 || yr === 8 || yr === 9 || yr === 15 || yr === 20) {
+        const statusDesc = yr === 20
+          ? 'ดำเนินการผลิต + รับคืน WC'
+          : (taxRate === 0 ? 'ผลิตเต็มกำลัง (BOI 0%)' : 'ผลิตเต็มกำลัง (CIT 20%)');
+
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td class="tabular mono" style="font-weight:700">ปีที่ ${yr}</td>
-          <td>${yr === 20 ? 'ดำเนินการผลิต + รับคืนเงินทุนหมุนเวียน (WC)' : (taxRate === 0 ? 'ผลิตเต็มกำลัง (สิทธิ BOI ยกเว้นภาษี 0%)' : 'ผลิตเต็มกำลัง (เสียภาษีนิติบุคคล CIT 20%)')}</td>
-          <td class="right tabular">${curGI.toFixed(2)}</td>
-          <td class="right tabular">${curCashCOM.toFixed(2)}</td>
-          <td class="right tabular" style="color:var(--red)">${tax.toFixed(2)}</td>
-          <td class="right tabular" style="font-weight:700;color:var(--brand)">+${ncf.toFixed(2)}</td>
-          <td class="right tabular" style="font-weight:700;color:${cumDCF >= 0 ? 'var(--ink)' : 'var(--red)'}">${cumDCF >= 0 ? '+' : ''}${cumDCF.toFixed(2)}</td>
+          <td class="tabular mono" style="font-weight:700;white-space:nowrap">ปีที่ ${yr}</td>
+          <td>${statusDesc}</td>
+          <td class="right tabular">${fmt2(curGI)}</td>
+          <td class="right tabular">${fmt2(curCashCOM)}</td>
+          <td class="right tabular" style="color:var(--red)">${fmt2(tax)}</td>
+          <td class="right tabular" style="font-weight:700;color:var(--brand)">+${fmt2(ncf)}</td>
+          <td class="right tabular" style="font-weight:700;color:${cumDCF >= 0 ? 'var(--ink)' : 'var(--red)'}">${cumDCF >= 0 ? '+' : ''}${fmt2(cumDCF)}</td>
         `;
         cfTbody.appendChild(tr);
+
+        if (cfCardList) {
+          const card = document.createElement('div');
+          card.className = 'm-card';
+          card.innerHTML = `
+            <div class="m-card-header">
+              <span class="m-card-tag mono">ปีที่ ${yr}</span>
+              <span class="m-card-cost tabular" style="color:${cumDCF >= 0 ? 'var(--brand)' : 'var(--red)'}">สะสม ${cumDCF >= 0 ? '+' : ''}${fmt2(cumDCF)} MB</span>
+            </div>
+            <div class="m-card-name">${statusDesc}</div>
+            <div class="m-card-rows">
+              <div class="m-card-row"><span class="lbl">NCF สุทธิ</span><span class="val tabular" style="font-weight:700;color:var(--brand)">+${fmt2(ncf)} MB</span></div>
+              <div class="m-card-row"><span class="lbl">GI / Cash COM / CIT</span><span class="val tabular">${fmt2(curGI)} / ${fmt2(curCashCOM)} / ${fmt2(tax)} MB</span></div>
+            </div>
+          `;
+          cfCardList.appendChild(card);
+        }
       }
     }
 
-    const isBaseline = (dEth === 0 && dH2 === 0 && dCo2 === 0 && dUt === 0);
     const calculatedIrr = isBaseline
       ? (boiEnabled ? BASELINE.irr_boi / 100 : BASELINE.irr_base / 100)
       : calculateIRR(cashFlows);
@@ -2951,14 +3431,17 @@ body.p3d-fs-lock {
       : calculateNPV(cashFlows, 0.10);
 
     let pbp = 1.5;
+    let didPayback = false;
     if (isBaseline) {
       pbp = boiEnabled ? BASELINE.pbp_boi_project : BASELINE.pbp_base_project;
+      didPayback = true;
     } else {
       let cumCash = -tci;
       for (let yr = 1; yr <= 20; yr++) {
         const ncf = cashFlows[yr];
-        if (cumCash + ncf >= 0) {
+        if (ncf > 0 && cumCash + ncf >= 0) {
           pbp += (Math.abs(cumCash) / ncf);
+          didPayback = true;
           break;
         }
         cumCash += ncf;
@@ -2966,13 +3449,13 @@ body.p3d-fs-lock {
       }
     }
 
-    document.getElementById('res-gi').textContent = curGI.toFixed(2);
-    document.getElementById('res-gi-delta').textContent = `${(curGI - BASELINE.gi) >= 0 ? '+' : ''}${(curGI - BASELINE.gi).toFixed(2)} MB/yr จากกรณีฐาน`;
+    document.getElementById('res-gi').textContent = fmt2(curGI);
+    document.getElementById('res-gi-delta').textContent = `${(curGI - BASELINE.gi) >= 0 ? '+' : ''}${fmt2(curGI - BASELINE.gi)} MB/yr จากกรณีฐาน`;
 
-    document.getElementById('res-com').textContent = curCOM.toFixed(2);
-    document.getElementById('res-com-delta').textContent = `${(curCOM - BASELINE.com) >= 0 ? '+' : ''}${(curCOM - BASELINE.com).toFixed(2)} MB/yr (Cash COM: ${curCashCOM.toFixed(2)})`;
+    document.getElementById('res-com').textContent = fmt2(curCOM);
+    document.getElementById('res-com-delta').textContent = `${(curCOM - BASELINE.com) >= 0 ? '+' : ''}${fmt2(curCOM - BASELINE.com)} MB/yr (Cash COM: ${fmt2(curCashCOM)})`;
 
-    document.getElementById('res-ebit').textContent = curEBIT.toFixed(2);
+    document.getElementById('res-ebit').textContent = fmt2(curEBIT);
     document.getElementById('res-margin').textContent = `EBIT Margin: ${margin.toFixed(2)}%`;
 
     const irrEl = document.getElementById('res-irr');
@@ -2984,16 +3467,16 @@ body.p3d-fs-lock {
       irrEl.style.color = 'var(--brand)';
     } else {
       irrEl.textContent = (calculatedIrr * 100).toFixed(2) + '%';
-      irrEl.style.color = (calculatedIrr >= 0.10) ? 'var(--amber)' : 'var(--red)';
+      irrEl.style.color = (calculatedIrr >= 0.10) ? 'var(--brand)' : 'var(--red)';
     }
 
     const npvEl = document.getElementById('res-npv');
-    npvEl.textContent = (calculatedNpv >= 0 ? '+' : '') + calculatedNpv.toFixed(2);
+    npvEl.textContent = (calculatedNpv >= 0 ? '+' : '') + fmt2(calculatedNpv);
     npvEl.style.color = (calculatedNpv >= 0) ? 'var(--ink)' : 'var(--red)';
 
-    document.getElementById('res-pbp').textContent = pbp.toFixed(2);
+    document.getElementById('res-pbp').textContent = didPayback ? pbp.toFixed(2) : '> 21.5';
 
-    renderDCFChart(cumCashFlows, pbp);
+    renderDCFChart(cumCashFlows, cashFlows, pbp, didPayback, boiEnabled);
   }
 
   recalculateDCF();
@@ -3004,7 +3487,6 @@ body.p3d-fs-lock {
 // ============================================================================
 (function () {
   if (typeof THREE === 'undefined') return;
-
   const ZONES = [
     {
       id: 'tank-farm',
@@ -3114,28 +3596,28 @@ body.p3d-fs-lock {
   const tooltip = document.getElementById('hover-tooltip');
   const zoneListEl = document.getElementById('zone-list');
 
-  // Scene setup with natural sunlit forest atmosphere
+  // Sunlit Architectural Daylight Sky & Horizon Blending Fog
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x273c22);
-  scene.fog = new THREE.FogExp2(0x273c22, 0.0011);
+  scene.background = new THREE.Color(0xdbe5df);
+  scene.fog = new THREE.Fog(0xdbe5df, 230, 560);
 
-  const initW = container.clientWidth || 1100;
-  const initH = container.clientHeight || 680;
+  const initW = container.clientWidth || Math.min(Math.max(window.innerWidth - 32, 300), 960);
+  const initH = container.clientHeight || 560;
 
   const camera = new THREE.PerspectiveCamera(
     34,
     initW / initH,
     1,
-    1200
+    1400
   );
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
-  renderer.setSize(initW, initH);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(initW, initH, true);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.06;
+  renderer.toneMappingExposure = 0.96;
   container.appendChild(renderer.domElement);
 
   function createNoiseTexture(baseHex, variance, size = 128, repeat = 8) {
@@ -3987,50 +4469,198 @@ body.p3d-fs-lock {
   buildTankerTruck(78, 59);
   buildTankerTruck(78, 66.5);
 
-  function makeZoneSprite(text, colorHex, pos) {
-    const canvas = document.createElement('canvas');
-    canvas.width = 192;
-    canvas.height = 56;
-    const ctx = canvas.getContext('2d');
+  // Scene polish: eliminate floating slab horizon cutoff, refine lighting & PBR separation
+  if (typeof ambientLight !== 'undefined') ambientLight.intensity = 0.45;
+  if (typeof hemiLight !== 'undefined') hemiLight.intensity = 0.36;
+  if (typeof sunLight !== 'undefined') sunLight.intensity = 1.04;
+  if (typeof MATS !== 'undefined') {
+    if (MATS.concretePad) MATS.concretePad.color.setHex(0xc6c8c2);
+    if (MATS.tankWhite) {
+      MATS.tankWhite.color.setHex(0xf1f5f9);
+      MATS.tankWhite.roughness = 0.30;
+    }
+    if (MATS.treeFoliage1) MATS.treeFoliage1.color.setHex(0x355926);
+    if (MATS.treeFoliage2) MATS.treeFoliage2.color.setHex(0x466f33);
+    if (MATS.treeFoliage3) MATS.treeFoliage3.color.setHex(0x557f41);
+  }
 
-    ctx.fillStyle = 'rgba(15, 23, 42, 0.86)';
-    ctx.strokeStyle = colorHex;
-    ctx.lineWidth = 4;
+  const horizonTerrain = new THREE.Mesh(
+    new THREE.PlaneGeometry(2800, 2800),
+    new THREE.MeshLambertMaterial({ color: 0x365826 })
+  );
+  horizonTerrain.rotation.x = -Math.PI / 2;
+  horizonTerrain.position.y = -0.62;
+  horizonTerrain.receiveShadow = true;
+  scene.add(horizonTerrain);
+
+  const ZONE_SHORT_LABELS = {
+    'tank-farm': '01 ถังเก็บ',
+    'process-core': '02 ปฏิกรณ์',
+    'distillation-east': '03 หอกลั่น',
+    'cooling-north': '04 หล่อเย็น',
+    'reserve-northwest': '05 สำรอง',
+    'gate-admin': '06 สำนักงาน',
+    'warehouse-loading': '07 คลัง/โหลด'
+  };
+
+  const zoneSprites = {};
+  const labelStems = [];
+  const zoneHighlights = {};
+  const maxAniso = (renderer.capabilities && renderer.capabilities.getMaxAnisotropy)
+    ? Math.min(8, renderer.capabilities.getMaxAnisotropy())
+    : 4;
+
+  // Automatic Box3 Ground Perimeter & Pad Highlights per Zone
+  ZONES.forEach(z => {
+    const grp = zoneGroups[z.id];
+    if (!grp) return;
+    const box = new THREE.Box3().setFromObject(grp);
+    if (box.isEmpty()) return;
+
+    const size = new THREE.Vector3();
+    const center = new THREE.Vector3();
+    box.getSize(size);
+    box.getCenter(center);
+
+    const w = Math.max(8, size.x + 2.2);
+    const d = Math.max(8, size.z + 2.2);
+
+    const padMat = new THREE.MeshBasicMaterial({
+      color: 0x17694A,
+      transparent: true,
+      opacity: 0.0,
+      depthWrite: false,
+      side: THREE.DoubleSide
+    });
+    const padMesh = new THREE.Mesh(new THREE.PlaneGeometry(w, d), padMat);
+    padMesh.rotation.x = -Math.PI / 2;
+    padMesh.position.set(center.x, 0.54, center.z);
+    scene.add(padMesh);
+
+    const frameMat = new THREE.MeshBasicMaterial({
+      color: 0x17694A,
+      transparent: true,
+      opacity: 0.0,
+      depthWrite: false
+    });
+    const curbThick = 0.55;
+    const curbH = 0.28;
+    const frameGrp = new THREE.Group();
+    const northCurb = new THREE.Mesh(new THREE.BoxGeometry(w + curbThick, curbH, curbThick), frameMat);
+    northCurb.position.set(0, 0, -d / 2);
+    const southCurb = new THREE.Mesh(new THREE.BoxGeometry(w + curbThick, curbH, curbThick), frameMat);
+    southCurb.position.set(0, 0, d / 2);
+    const sideSpan = Math.max(0.5, d - curbThick);
+    const westCurb = new THREE.Mesh(new THREE.BoxGeometry(curbThick, curbH, sideSpan), frameMat);
+    westCurb.position.set(-w / 2, 0, 0);
+    const eastCurb = new THREE.Mesh(new THREE.BoxGeometry(curbThick, curbH, sideSpan), frameMat);
+    eastCurb.position.set(w / 2, 0, 0);
+    frameGrp.add(northCurb, southCurb, westCurb, eastCurb);
+    frameGrp.position.set(center.x, 0.68, center.z);
+    scene.add(frameGrp);
+
+    zoneHighlights[z.id] = { padMat, frameMat };
+  });
+
+  function drawZoneSpriteCanvas(canvas, text, state) {
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const isSelected = state === 'selected';
+    const isHovered = state === 'hovered';
+
+    ctx.fillStyle = isSelected ? '#17694A' : (isHovered ? '#8A5409' : 'rgba(22, 24, 29, 0.90)');
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.lineWidth = 7;
     ctx.beginPath();
     if (ctx.roundRect) {
-      ctx.roundRect(6, 6, 180, 44, 22);
+      ctx.roundRect(12, 12, 488, 104, 26);
     } else {
-      ctx.rect(6, 6, 180, 44);
+      ctx.rect(12, 12, 488, 104);
     }
     ctx.fill();
     ctx.stroke();
 
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 21px sans-serif';
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = '700 44px "IBM Plex Sans Thai", Inter, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText(text, 96, 29);
+    ctx.fillText(text, 256, 66);
+  }
+
+  function makeZoneSprite(zoneId, text, pos) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 512;
+    canvas.height = 128;
+    drawZoneSpriteCanvas(canvas, text, 'idle');
 
     const tex = new THREE.CanvasTexture(canvas);
+    tex.anisotropy = maxAniso;
     const mat = new THREE.SpriteMaterial({ map: tex, depthTest: false, transparent: true });
     const sprite = new THREE.Sprite(mat);
-    sprite.position.set(pos[0], pos[1] + 17, pos[2]);
-    sprite.scale.set(14.5, 4.2, 1);
+    sprite.position.set(pos[0], pos[1] + 18, pos[2]);
+    sprite.scale.set(17.5, 4.4, 1);
     sprite.renderOrder = 999;
+    sprite.userData = { zoneId, text, canvas, tex, baseY: pos[1] + 18 };
     scene.add(sprite);
     labelSprites.push(sprite);
+    zoneSprites[zoneId] = sprite;
+
+    const stemGeom = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(pos[0], Math.max(1.0, pos[1] + 1.5), pos[2]),
+      new THREE.Vector3(pos[0], pos[1] + 15.8, pos[2])
+    ]);
+    const stemLine = new THREE.Line(
+      stemGeom,
+      new THREE.LineBasicMaterial({ color: 0x16181D, transparent: true, opacity: 0.45 })
+    );
+    stemLine.renderOrder = 990;
+    scene.add(stemLine);
+    labelStems.push(stemLine);
   }
 
   ZONES.forEach((z, idx) => {
-    const shortLabel = `โซน ${idx + 1}`;
-    makeZoneSprite(shortLabel, z.color, z.camTarget);
+    makeZoneSprite(z.id, ZONE_SHORT_LABELS[z.id] || `โซน ${idx + 1}`, z.camTarget);
   });
+
+  let selectedZoneId = null;
+  let hoveredZoneId = null;
+
+  function syncZoneHighlights() {
+    Object.keys(zoneHighlights).forEach(zKey => {
+      const hl = zoneHighlights[zKey];
+      if (zKey === selectedZoneId) {
+        hl.padMat.color.setHex(0x17694A);
+        hl.padMat.opacity = 0.20;
+        hl.frameMat.color.setHex(0x17694A);
+        hl.frameMat.opacity = 0.96;
+      } else if (zKey === hoveredZoneId) {
+        hl.padMat.color.setHex(0xA86A12);
+        hl.padMat.opacity = 0.10;
+        hl.frameMat.color.setHex(0xA86A12);
+        hl.frameMat.opacity = 0.85;
+      } else {
+        hl.padMat.opacity = 0.0;
+        hl.frameMat.opacity = 0.0;
+      }
+    });
+
+    Object.keys(zoneSprites).forEach(zKey => {
+      const sp = zoneSprites[zKey];
+      const st = zKey === selectedZoneId ? 'selected' : (zKey === hoveredZoneId ? 'hovered' : 'idle');
+      drawZoneSpriteCanvas(sp.userData.canvas, sp.userData.text, st);
+      sp.userData.tex.needsUpdate = true;
+    });
+  }
+
+  const ISO_CAM_POS = [46, 114, 156];
+  const ISO_CAM_TARGET = [0, 3, 5];
 
   const camState = {
     target: new THREE.Vector3(0, 3, 5),
     desiredTarget: new THREE.Vector3(0, 3, 5),
-    spherical: new THREE.Spherical(210, 0.95, 0.0),
-    desiredSpherical: new THREE.Spherical(210, 0.95, 0.0),
+    spherical: new THREE.Spherical(198, 0.95, 0.28),
+    desiredSpherical: new THREE.Spherical(198, 0.95, 0.28),
     isDragging: false,
     dragButton: 0,
     prevMouse: { x: 0, y: 0 },
@@ -4047,7 +4677,9 @@ body.p3d-fs-lock {
     camState.desiredSpherical.setFromVector3(offset);
 
     document.querySelectorAll('.camera-controls .btn-3d').forEach(b => {
-      if (b.id !== 'btn-toggle-labels' && b.id !== 'btn-3d-fullscreen') b.classList.remove('active');
+      if (b.id !== 'btn-toggle-labels' && b.id !== 'btn-3d-fullscreen' && b.id !== 'btn-reset-selection') {
+        b.classList.remove('active');
+      }
     });
     if (btnId) {
       const btn = document.getElementById(btnId);
@@ -4055,25 +4687,72 @@ body.p3d-fs-lock {
     }
   }
 
-  setCameraPreset([0, 134, 168], [0, 3, 5], 'btn-cam-iso');
+  setCameraPreset(ISO_CAM_POS, ISO_CAM_TARGET, 'btn-cam-iso');
   camState.target.copy(camState.desiredTarget);
   camState.spherical.copy(camState.desiredSpherical);
 
   const domEl = renderer.domElement;
+  const activePointers = new Map();
+  let pinchPrevDist = 0;
+  let pinchPrevCenter = null;
 
   domEl.addEventListener('contextmenu', e => e.preventDefault());
 
   domEl.addEventListener('pointerdown', e => {
-    camState.isDragging = true;
-    camState.dragButton = e.button;
-    camState.prevMouse.x = e.clientX;
-    camState.prevMouse.y = e.clientY;
-    camState.downMouse.x = e.clientX;
-    camState.downMouse.y = e.clientY;
+    activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY, button: e.button, type: e.pointerType });
+    if (activePointers.size === 1) {
+      camState.isDragging = true;
+      camState.dragButton = e.button;
+      camState.prevMouse.x = e.clientX;
+      camState.prevMouse.y = e.clientY;
+      camState.downMouse.x = e.clientX;
+      camState.downMouse.y = e.clientY;
+      pinchPrevDist = 0;
+      pinchPrevCenter = null;
+    } else if (activePointers.size === 2) {
+      camState.isDragging = false;
+      const pts = Array.from(activePointers.values());
+      pinchPrevDist = Math.hypot(pts[1].x - pts[0].x, pts[1].y - pts[0].y);
+      pinchPrevCenter = { x: (pts[0].x + pts[1].x) / 2, y: (pts[0].y + pts[1].y) / 2 };
+      tooltip.classList.remove('visible');
+    }
   });
 
   window.addEventListener('pointermove', e => {
-    if (camState.isDragging) {
+    if (activePointers.has(e.pointerId)) {
+      const p = activePointers.get(e.pointerId);
+      p.x = e.clientX;
+      p.y = e.clientY;
+    }
+
+    if (activePointers.size === 2) {
+      const pts = Array.from(activePointers.values());
+      const dist = Math.hypot(pts[1].x - pts[0].x, pts[1].y - pts[0].y);
+      const center = { x: (pts[0].x + pts[1].x) / 2, y: (pts[0].y + pts[1].y) / 2 };
+
+      if (pinchPrevDist > 4 && dist > 4) {
+        const zoomRatio = pinchPrevDist / dist;
+        camState.desiredSpherical.radius = Math.max(40, Math.min(340, camState.desiredSpherical.radius * zoomRatio));
+      }
+      if (pinchPrevCenter) {
+        const dx = center.x - pinchPrevCenter.x;
+        const dy = center.y - pinchPrevCenter.y;
+        const panSpeed = camState.desiredSpherical.radius * 0.0014;
+        const forward = new THREE.Vector3();
+        camera.getWorldDirection(forward);
+        forward.y = 0;
+        forward.normalize();
+        const right = new THREE.Vector3().crossVectors(forward, new THREE.Vector3(0, 1, 0)).normalize();
+        camState.desiredTarget.addScaledVector(right, -dx * panSpeed);
+        camState.desiredTarget.addScaledVector(forward, dy * panSpeed);
+      }
+      pinchPrevDist = dist;
+      pinchPrevCenter = center;
+      tooltip.classList.remove('visible');
+      return;
+    }
+
+    if (activePointers.size === 1 && camState.isDragging) {
       const dx = e.clientX - camState.prevMouse.x;
       const dy = e.clientY - camState.prevMouse.y;
       camState.prevMouse.x = e.clientX;
@@ -4100,19 +4779,42 @@ body.p3d-fs-lock {
       return;
     }
 
-    if (document.getElementById('panel-plant3d').classList.contains('active')) {
+    if (e.pointerType !== 'touch' && document.getElementById('panel-plant3d').classList.contains('active')) {
       updateHover(e);
     }
   });
 
-  window.addEventListener('pointerup', e => {
-    if (!camState.isDragging) return;
-    camState.isDragging = false;
-    const moveDist = Math.hypot(e.clientX - camState.downMouse.x, e.clientY - camState.downMouse.y);
-    if (moveDist < 5 && e.button === 0) {
-      handleSceneClick(e);
+  function handlePointerEnd(e, allowClick) {
+    const wasSingle = (activePointers.size === 1 && camState.isDragging);
+    activePointers.delete(e.pointerId);
+
+    if (wasSingle && allowClick) {
+      const moveDist = Math.hypot(e.clientX - camState.downMouse.x, e.clientY - camState.downMouse.y);
+      const slop = e.pointerType === 'touch' ? 12 : 5;
+      if (moveDist < slop && (e.button === 0 || e.pointerType === 'touch')) {
+        handleSceneClick(e);
+      }
     }
-  });
+
+    if (activePointers.size === 1) {
+      const remaining = Array.from(activePointers.values())[0];
+      camState.isDragging = true;
+      camState.dragButton = remaining.button || 0;
+      camState.prevMouse.x = remaining.x;
+      camState.prevMouse.y = remaining.y;
+      camState.downMouse.x = remaining.x;
+      camState.downMouse.y = remaining.y;
+      pinchPrevDist = 0;
+      pinchPrevCenter = null;
+    } else if (activePointers.size === 0) {
+      camState.isDragging = false;
+      pinchPrevDist = 0;
+      pinchPrevCenter = null;
+    }
+  }
+
+  window.addEventListener('pointerup', e => handlePointerEnd(e, true));
+  window.addEventListener('pointercancel', e => handlePointerEnd(e, false));
 
   domEl.addEventListener('wheel', e => {
     e.preventDefault();
@@ -4132,6 +4834,11 @@ body.p3d-fs-lock {
     mouseNDC.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     mouseNDC.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
     raycaster.setFromCamera(mouseNDC, camera);
+    const spriteTargets = labelsVisible ? labelSprites : [];
+    const sHits = raycaster.intersectObjects(spriteTargets, false);
+    if (sHits.length > 0 && sHits[0].object.userData.zoneId) {
+      return sHits[0].object.userData.zoneId;
+    }
     const hits = raycaster.intersectObjects(interactableMeshes, false);
     if (hits.length > 0) {
       return hits[0].object.userData.zoneId;
@@ -4141,13 +4848,17 @@ body.p3d-fs-lock {
 
   function updateHover(e) {
     const zId = getIntersectedZone(e);
+    if (hoveredZoneId !== zId) {
+      hoveredZoneId = zId;
+      syncZoneHighlights();
+    }
     if (zId) {
       const zObj = ZONES.find(z => z.id === zId);
       if (zObj) {
-        const stageRect = stageEl.getBoundingClientRect();
+        const wrapRect = container.parentElement.getBoundingClientRect();
         tooltip.textContent = zObj.name;
-        tooltip.style.left = (e.clientX - stageRect.left) + 'px';
-        tooltip.style.top = (e.clientY - stageRect.top) + 'px';
+        tooltip.style.left = (e.clientX - wrapRect.left) + 'px';
+        tooltip.style.top = (e.clientY - wrapRect.top) + 'px';
         tooltip.classList.add('visible');
         container.style.cursor = 'pointer';
         return;
@@ -4166,26 +4877,24 @@ body.p3d-fs-lock {
 
   function selectZone(zoneId, focusCamera = true) {
     const zone = ZONES.find(z => z.id === zoneId);
+    selectedZoneId = zone ? zone.id : null;
+    syncZoneHighlights();
 
     document.querySelectorAll('.zone-item').forEach(btn => {
-      btn.classList.toggle('selected', btn.dataset.zoneId === zoneId);
+      btn.classList.toggle('selected', btn.dataset.zoneId === selectedZoneId);
     });
 
     const emptyEl = document.getElementById('inspector-empty');
     const contentEl = document.getElementById('inspector-content');
 
     if (!zone) {
-      emptyEl.style.display = 'flex';
+      emptyEl.style.display = 'block';
       contentEl.style.display = 'none';
       return;
     }
 
     emptyEl.style.display = 'none';
     contentEl.style.display = 'block';
-
-    const badgeEl = document.getElementById('ins-badge');
-    badgeEl.textContent = 'กำลังเลือกโซน';
-    badgeEl.style.color = zone.color;
 
     document.getElementById('ins-title').textContent = zone.name;
     document.getElementById('ins-desc').textContent = zone.description;
@@ -4203,16 +4912,16 @@ body.p3d-fs-lock {
     }
   }
 
-  ZONES.forEach(z => {
+  ZONES.forEach((z, idx) => {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'zone-item';
     btn.dataset.zoneId = z.id;
+    const cleanName = z.name.replace(/^\d+\.\s*/, '');
     btn.innerHTML = `
-      <span class="zone-dot" style="background:${z.color}"></span>
+      <span class="zone-num">0${idx + 1}</span>
       <span class="zone-item-text">
-        <span class="zone-item-name">${z.name}</span>
-        <span class="zone-item-sub">${z.shortSub}</span>
+        <span class="zone-item-name">${cleanName}</span>
       </span>
     `;
     btn.addEventListener('click', () => selectZone(z.id, true));
@@ -4220,7 +4929,7 @@ body.p3d-fs-lock {
   });
 
   document.getElementById('btn-cam-iso').addEventListener('click', () => {
-    setCameraPreset([0, 134, 168], [0, 3, 5], 'btn-cam-iso');
+    setCameraPreset(ISO_CAM_POS, ISO_CAM_TARGET, 'btn-cam-iso');
   });
 
   document.getElementById('btn-cam-top').addEventListener('click', () => {
@@ -4235,15 +4944,16 @@ body.p3d-fs-lock {
   document.getElementById('btn-toggle-labels').addEventListener('click', function () {
     labelsVisible = !labelsVisible;
     labelSprites.forEach(s => { s.visible = labelsVisible; });
+    labelStems.forEach(l => { l.visible = labelsVisible; });
+    this.textContent = labelsVisible ? 'ซ่อนป้ายโซน' : 'แสดงป้ายโซน';
     this.classList.toggle('active', !labelsVisible);
   });
 
   document.getElementById('btn-reset-selection').addEventListener('click', () => {
     selectZone(null, false);
-    setCameraPreset([0, 134, 168], [0, 3, 5], 'btn-cam-iso');
+    setCameraPreset(ISO_CAM_POS, ISO_CAM_TARGET, 'btn-cam-iso');
   });
 
-  // Fullscreen Toggle & Mobile Aspect Ratio Sync
   const btnFs = document.getElementById('btn-3d-fullscreen');
   const txtFs = document.getElementById('txt-3d-fullscreen');
   const iconFsEnter = document.getElementById('icon-fs-enter');
@@ -4311,11 +5021,14 @@ body.p3d-fs-lock {
     const w = Math.round(rect.width) || container.clientWidth;
     const h = Math.round(rect.height) || container.clientHeight;
     if (w > 0 && h > 0) {
-      const isPortrait = w < 640 && h > w * 0.85;
-      camera.fov = isPortrait ? 44 : 34;
-      camera.aspect = w / h;
+      const aspect = w / h;
+      const hFovRad = THREE.MathUtils.degToRad(56);
+      camera.fov = aspect < 1.28
+        ? Math.min(58, THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(hFovRad / 2) / Math.max(0.55, aspect))))
+        : 34;
+      camera.aspect = aspect;
       camera.updateProjectionMatrix();
-      renderer.setSize(w, h, false);
+      renderer.setSize(w, h, true);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     }
   };
@@ -4340,6 +5053,12 @@ body.p3d-fs-lock {
     const offset = new THREE.Vector3().setFromSpherical(camState.spherical);
     camera.position.copy(camState.target).add(offset);
     camera.lookAt(camState.target);
+
+    const isTopDown = camState.spherical.phi < 0.25;
+    const spScale = isTopDown ? 0.72 : 1.0;
+    labelSprites.forEach(sp => {
+      sp.scale.set(17.5 * spScale, 4.4 * spScale, 1);
+    });
 
     fanBlades.forEach(fb => {
       fb.rotation.y += 0.06;
